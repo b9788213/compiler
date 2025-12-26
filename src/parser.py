@@ -54,7 +54,7 @@ class Parser:
         f = Func(self.expect("ID").value, [], [])
 
         if self.match("LPAR"):
-            #TODO parse args
+            f.args = self.parse_list(lambda: self.expect("ID").value)
             self.expect("RPAR")
 
         self.expect("COLON")
@@ -72,14 +72,11 @@ class Parser:
 
             #call
             if self.match("LPAR"):
-                #TODO parse call
-                self.expect("RPAR")
+                return self.parse_call(name)
 
             #assign and declaration
             if self.match("EQ"):
                 return Assign(name, self.compare())
-
-            pass
 
         #Static decleration
         if self.match("STATIC"):
@@ -124,15 +121,7 @@ class Parser:
             self.expect("RPAR")
             return node
 
-        if self.match("MINUS"):
-            f = self.factor()
-
-            if isinstance(f, Int): return Int(-1 * f.value)
-            if isinstance(f, Float): return Float(-1 * f.value)
-
-            return Neg(f)
-
-        if self.check("ID"): return Id(self.pop().value)
+        if self.match("MINUS"): return Neg(self.factor())
 
         if self.check("INT"): return Int(int(self.pop().value))
 
@@ -140,11 +129,30 @@ class Parser:
 
         if self.check("STR"): return String(self.pop().value)
 
+        if self.check("ID"):
+            name = self.pop().value
+            if self.match("LPAR"): return self.parse_call(name)
+            return Id(name)
+
         self.error()
 
     #-----call-----
-    def parse_call(self):
-        pass
+    def parse_call(self, name: str):
+        args = self.parse_list(self.compare)
+        self.expect("RPAR")
+        return Call(name, args)
+
+    #-----list-----
+    def parse_list(self, parser_f):
+        elements = []
+
+        if self.check("RPAR"): return elements
+
+        elements.append(parser_f())
+
+        while self.match("COMMA"): elements.append(parser_f())
+
+        return elements
 
     def handle_import(self, name: str):
         pass
