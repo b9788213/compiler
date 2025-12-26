@@ -21,9 +21,9 @@ token_specification = [
     ('GLOBAL', r'\bglobal\b'),
 
     ('EQEQ', r'=='),
-    ('NE', r'!='),
-    ('LE', r'<='),
-    ('GE', r'=>'),
+    ('NEQ', r'!='),
+    ('LEQ', r'<='),
+    ('GEQ', r'=>'),
     ('LT', r'<'),
     ('GT', r'>'),
 

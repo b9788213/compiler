@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47ccd383-0ffc-45de-ba5c-7694ccaa559a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/debug/tokens.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/debug/tokens.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +121,8 @@
       <workItem from="1766760783856" duration="8430000" />
       <workItem from="1766769651922" duration="2210000" />
       <workItem from="1766772022789" duration="639000" />
-      <workItem from="1766774751157" duration="2991000" />
+      <workItem from="1766774751157" duration="4479000" />
+      <workItem from="1766781104828" duration="325000" />
     </task>
     <servers />
   </component>

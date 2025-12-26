@@ -1,5 +1,4 @@
 from typing import NoReturn
-
 from node import *
 from lexer import Token
 
@@ -33,7 +32,7 @@ class Parser:
         return False
 
     def error(self) -> NoReturn:
-        raise SyntaxError(f"Bad Token at line {self.peek().line}, column {self.peek().column}")
+        raise SyntaxError(f"Bad Token {self.peek()} at line {self.peek().line}, column {self.peek().column}")
 
     #-----entry-----
     def parse(self):
@@ -50,9 +49,9 @@ class Parser:
 
             self.error()
 
+    #-----func-----
     def parse_func(self) -> Func:
         f = Func(self.expect("ID").value, [], [])
-        self.p.funcs.append(f)
 
         if self.match("LPAR"):
             #TODO parse args
@@ -65,6 +64,7 @@ class Parser:
 
         return f
 
+    #-----stmt-----
     def parse_stmt(self):
 
         if self.check("ID"):
@@ -77,8 +77,7 @@ class Parser:
 
             #assign and declaration
             if self.match("EQ"):
-                #TODO parse exp
-                pass
+                return Assign(name, self.compare())
 
             pass
 
@@ -87,22 +86,51 @@ class Parser:
             name = self.expect("ID").value
             self.p.statics.append(name)
             self.expect("EQ")
-            #TODO parse exp
+            return Assign(name, self.compare())
 
         if self.match("RET"):
-            #TODO parse exp
-            pass
+            return Ret(self.compare())
 
         self.error()
 
     #-----presedence-----
+    def compare(self):
+        node = self.expr()
+
+        while self.peek().type in ("EQEQ", "NEQ", "LEQ", "GEQ", "LT", "GT"):
+            op = self.pop().type
+            node = Comp(op, node, self.expr())
+        return node
+
+    def expr(self):
+        node = self.term()
+
+        while self.peek().type in ("PLUS", "MINUS"):
+            op = self.pop().type
+            node =  BinOp(op, node, self.term())
+        return node
+
     def term(self):
         node = self.factor()
 
-        #while
+        while self.peek().type in ("MUL", "DIV"):
+            op = self.pop().type
+            node = BinOp(op, node, self.factor())
+        return node
 
     def factor(self):
-        if self.match("MINUS"): return Neg(self.factor())
+        if self.match("LPAR"):
+            node = self.compare()  # En başa dön!
+            self.expect("RPAR")
+            return node
+
+        if self.match("MINUS"):
+            f = self.factor()
+
+            if isinstance(f, Int): return Int(-1 * f.value)
+            if isinstance(f, Float): return Float(-1 * f.value)
+
+            return Neg(f)
 
         if self.check("ID"): return Id(self.pop().value)
 
@@ -113,6 +141,10 @@ class Parser:
         if self.check("STR"): return String(self.pop().value)
 
         self.error()
+
+    #-----call-----
+    def parse_call(self):
+        pass
 
     def handle_import(self, name: str):
         pass

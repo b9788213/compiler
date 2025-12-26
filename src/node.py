@@ -33,6 +33,9 @@ class Call(NamedTuple):
     name: str
     args: list
 
+class Ret(NamedTuple):
+    value: Any
+
 class Program(NamedTuple):
     funcs: list[Func]
     statics: list
