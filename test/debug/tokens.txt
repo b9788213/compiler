@@ -1,24 +1,25 @@
-IMPORT import
-ID stdlib
-FN fn
-ID main
-LPAR (
-ID x
-COMMA ,
-ID y
-RPAR )
-COLON :
-INDENT  
-ID x
-ASSIGN =
-STRING "3+5"
-INDENT  
-STRING "merhaba"
-INDENT  
-STRING "merhaba"
-DEDENT 
-DEDENT 
-ID x
-ASSIGN =
-NUMBER 0
-DEDENT 
+Token(IMPORT, 'import', line=1, col=1)
+Token(ID, 'stdlib', line=1, col=8)
+Token(FN, 'fn', line=3, col=1)
+Token(ID, 'main', line=3, col=4)
+Token(LPAR, '(', line=3, col=8)
+Token(ID, 'x', line=3, col=9)
+Token(COMMA, ',', line=3, col=10)
+Token(ID, 'y', line=3, col=12)
+Token(RPAR, ')', line=3, col=13)
+Token(COLON, ':', line=3, col=14)
+Token(INDENT, '4', line=4, col=1)
+Token(ID, 'x', line=4, col=5)
+Token(EQ, '=', line=4, col=7)
+Token(STRING, '"3+5"', line=4, col=9)
+Token(INDENT, '8', line=5, col=1)
+Token(STRING, '"merhaba"', line=5, col=9)
+Token(INDENT, '12', line=7, col=1)
+Token(STRING, '"merhaba"', line=7, col=13)
+Token(DEDENT, '', line=9, col=1)
+Token(DEDENT, '', line=9, col=1)
+Token(ID, 'x', line=9, col=5)
+Token(EQ, '=', line=9, col=7)
+Token(INT, '0', line=9, col=9)
+Token(DEDENT, '', line=9, col=1)
+Token(EOF, '', line=9, col=1)

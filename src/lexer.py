@@ -1,5 +1,6 @@
 import re
-from typing import NamedTuple
+from typing import NamedTuple, Iterator
+
 
 class Token(NamedTuple):
     type: str
@@ -7,89 +8,99 @@ class Token(NamedTuple):
     line: int
     column: int
 
-    __str__ = lambda self: f"{self.type} {self.value}"
+    def __str__(self):
+        return f"Token({self.type}, '{self.value}', line={self.line}, col={self.column})"
 
-token_specification = (
-    ('STRING',      r'".*?"'),             # stringler
 
-    ('FN',          r'\bfn\b'),            # Fonksiyon tanımı
-    ('RET',         r'\breturn\b'),        # Geri dönüş değeri
-    ('IMPORT',      r'\bimport\b'),        # Kütüphane ekleme
-    ('STATIC',      r'\bglobal\b'),         # static değişken
+token_specification = [
+    ('STR', r'".*?"'),
 
-    ('EQ',          r'=='),                # Eşittir
-    ('NE',          r'!='),                # Eşit Değildir
-    ('LE',          r'<='),                # Küçük Eşittir
-    ('GE',          r'=>'),                # Büyük Eşittir
-    ('LT',          r'<'),                 # Küçüktür
-    ('GT',          r'>'),                 # Büyüktür
+    ('FN', r'\bfn\b'),
+    ('RET', r'\breturn\b'),
+    ('IMPORT', r'\bimport\b'),
+    ('GLOBAL', r'\bglobal\b'),
 
-    ('COLON',       r':'),
-    ('COMMA',       r','),
-    ('LPAR',        r'\('),                # Kaçış karakteri eklendi
-    ('RPAR',        r'\)'),                # Kaçış karakteri eklendi
+    ('EQEQ', r'=='),
+    ('NE', r'!='),
+    ('LE', r'<='),
+    ('GE', r'=>'),
+    ('LT', r'<'),
+    ('GT', r'>'),
 
-    ('NUMBER',      r'\d+(\.\d+)?'),       # .5 gibi hatalı sayıları önlemek için + kullanıldı
-    ('ASSIGN',      r'='),
-    ('ID',          r'[A-Za-z_]\w*'),      # Değişken isimleri
-    ('OP',          r'[+\-*/]'),           # Operatörler
+    ('COLON', r':'),
+    ('COMMA', r','),
+    ('LPAR', r'\('),
+    ('RPAR', r'\)'),
 
-    ('NEWLINE',     r'\n'),                # Satır sonu
-    ('SKIP',        r'[ \t]+'),            # Sadece satır içi boşluklar
-    ('MISMATCH',    r'.'),                 # Beklenmeyen karakterler
-)
+    ('FLOAT', r'\d+\.\d+'),
+    ('INT', r'\d+'),
+    ('EQ', r'='),
+    ('ID', r'[A-Za-z_]\w*'),
+
+    ('PLUS',        r'\+'),
+    ('MINUS',       r'-'),
+    ('MUL',         r'\*'),
+    ('DIV',         r'/'),
+
+    ('NEWLINE', r'\n'),
+    ('SKIP', r'[ \t]+'),
+    ('MISMATCH', r'.'),
+]
 
 tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
 
 
-def lex(code):
+def lex(code: str) -> Iterator[Token]:
     line_num = 1
     line_start = 0
     indent_stack = [0]
-    at_line_start = True
+    at_line_start = True     # Bir satırın başında mıyız? (Girinti kontrolü için)
 
     for mo in re.finditer(tok_regex, code):
         kind = mo.lastgroup
         value = mo.group()
-        # Sütun hesabı her zaman o anki eşleşmenin (mo) başladığı yere göre yapılmalı
         column = mo.start() - line_start + 1
 
-        if kind == "NEWLINE":
+        if kind == 'NEWLINE':
             line_start = mo.end()
             line_num += 1
             at_line_start = True
             continue
 
+        if kind == 'SKIP':
+            if not at_line_start:
+                continue  # Satır ortasındaki boşlukları geç
+            # Satır başındaki boşluklar girinti hesaplaması için aşağıda işlenecek
+
         if at_line_start:
-            # Satırın tamamen boş olup olmadığını (veya sadece yorum olduğunu) kontrol et
-            remaining = code[mo.start():].split('\n')[0]
-            if not remaining.strip(): continue
+            # Mevcut satırdaki girinti miktarını bul
+            indent_level = len(value) if kind == 'SKIP' else 0
 
+            # Eğer satır tamamen boşsa (sadece newline'a gidiyorsa) girintiyi önemseme
+            next_newline = code.find('\n', mo.start())
+            line_content = code[mo.start():next_newline] if next_newline != -1 else code[mo.start():]
 
-            # Girinti miktarını hesapla
-            current_indent = len(value) if kind == 'SKIP' else 0
+            if line_content.strip():  # Satırda gerçek bir içerik varsa
+                if indent_level > indent_stack[-1]:
+                    indent_stack.append(indent_level)
+                    yield Token('INDENT', str(indent_level), line_num, column)
 
-            # INDENT / DEDENT üretimi
-            if current_indent > indent_stack[-1]:
-                indent_stack.append(current_indent)
-                yield Token('INDENT', " ", line_num, column)
+                while indent_level < indent_stack[-1]:
+                    indent_stack.pop()
+                    yield Token('DEDENT', '', line_num, column)
 
-            while current_indent < indent_stack[-1]:
-                indent_stack.pop()
-                yield Token('DEDENT', '', line_num, column)
+                at_line_start = False
 
-            at_line_start = False
-            # Eğer bu bir SKIP tokenı ise (boşluk), onu yield etmiyoruz ama sütun bilgisini tüketmiş olduk.
             if kind == 'SKIP': continue
 
-            # Normal tokenları işle
-        if kind == "SKIP" or kind == "NEWLINE": continue
-
-        if kind == "MISMATCH": raise RuntimeError(f'{value!r} beklenmeyen karakter. Satır: {line_num}, Sütun: {column}')
+        if kind == 'MISMATCH':
+            raise RuntimeError(f'Hata: {value!r} geçersiz karakter (Satır {line_num}, Sütun {column})')
 
         yield Token(kind, value, line_num, column)
 
-    # Dosya sonu temizliği
+    # Dosya bittiğinde açık kalan girintileri kapat
     while len(indent_stack) > 1:
         indent_stack.pop()
         yield Token('DEDENT', '', line_num, 1)
+
+    yield Token('EOF', '', line_num, 1)
