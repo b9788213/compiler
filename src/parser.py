@@ -53,9 +53,9 @@ class Parser:
     def parse_func(self) -> Func:
         f = Func(self.expect("ID").value, [], [])
 
-        if self.match("LPAR"):
-            f.args = self.parse_list(lambda: self.expect("ID").value)
-            self.expect("RPAR")
+        self.expect("LPAR")
+        f.args = self.parse_list(lambda: self.expect("ID").value)
+        self.expect("RPAR")
 
         self.expect("COLON")
         self.expect("INDENT")
