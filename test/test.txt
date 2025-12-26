@@ -1,0 +1,9 @@
+import stdlib
+
+fn main(x, y):
+    x = "3+5"
+        "merhaba"
+
+            "merhaba"
+
+    x = 0

@@ -1,0 +1,24 @@
+IMPORT import
+ID stdlib
+FN fn
+ID main
+LPAR (
+ID x
+COMMA ,
+ID y
+RPAR )
+COLON :
+INDENT  
+ID x
+ASSIGN =
+STRING "3+5"
+INDENT  
+STRING "merhaba"
+INDENT  
+STRING "merhaba"
+DEDENT 
+DEDENT 
+ID x
+ASSIGN =
+NUMBER 0
+DEDENT 
