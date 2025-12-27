@@ -58,6 +58,23 @@ xor rax, rax
 .exit:
 leave
 ret
+alloc:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+mov rsi, rdi
+mov rax, 9
+xor rdi, rdi
+mov rdx, 0x1 | 0x2
+mov r10, 0x02 | 0x20
+mov r8, -1
+mov r9, 0
+syscall
+xor rax, rax
+.exit:
+leave
+ret
 section .data
 section .rodata
 label_1: db 109, 101, 114, 104, 97, 98, 97, 32, 10, 0

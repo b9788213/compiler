@@ -93,12 +93,11 @@ def lex(code: str) -> Iterator[Token]:
             at_line_start = False
             if kind == 'SKIP': continue
 
-        # Normal boşlukları atla
-        if kind == 'SKIP':
-            continue
-
         if kind == 'MISMATCH':
             raise RuntimeError(f'Hata: {value!r} geçersiz karakter (Satır {line_num}, Sütun {column})')
+
+        if kind == 'SKIP': # Normal boşlukları atla
+            continue
 
         if kind == 'STR':
             value = value[1:-1].encode('utf-8').decode('unicode_escape') #tırnakları at, escape karakterlerini çöz

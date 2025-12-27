@@ -14,3 +14,13 @@ fn len(s):
     asm "je .exit"
     asm "inc rax"
     asm "jmp .loop"
+
+fn alloc(i):
+    asm "mov rsi, rdi"
+    asm "mov rax, 9"
+    asm "xor rdi, rdi"
+    asm "mov rdx, 0x1 | 0x2"
+    asm "mov r10, 0x02 | 0x20"
+    asm "mov r8, -1"
+    asm "mov r9, 0"
+    asm "syscall"
