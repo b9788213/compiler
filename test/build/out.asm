@@ -44,7 +44,17 @@ push rax
 mov rax, [rbp -8]
 pop rbx
 add rax, rbx
-jmp .exit
+push rax
+pop rdi
+push 0
+call itoa
+add rsp, 8
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+xor rax, rax
 .exit:
 leave
 ret
@@ -123,7 +133,6 @@ sub rsp, 16
 mov [rbp -8], rdi
 xor rax, rax
 xor rcx, rcx
-.check_sign:
 movzx rdx, byte [rdi]
 cmp dl, '-'
 je .prepare_negative
@@ -162,6 +171,42 @@ imul rax, 10
 add rax, rdx
 inc rcx
 jmp .atoi_loop
+xor rax, rax
+.exit:
+leave
+ret
+itoa:
+push rbp
+mov rbp, rsp
+sub rsp, 0
+mov rdi, 32
+call alloc
+mov rsi, rax
+add rsi, 31
+mov byte [rsi], 0
+mov rax, [rbp-8]
+mov r8, 0
+test rax, rax
+jge .start_div
+mov r8, 1
+neg rax
+.start_div:
+mov rbx, 10
+.loop:
+xor rdx, rdx
+div rbx
+add dl, 48
+dec rsi
+mov [rsi], dl
+test rax, rax
+jnz .loop
+cmp r8, 1
+jne .exit_final
+dec rsi
+mov byte [rsi], 45
+.exit_final:
+mov rax, rsi
+jmp .exit
 xor rax, rax
 .exit:
 leave

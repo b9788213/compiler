@@ -1,7 +1,6 @@
 fn atoi(s):
     asm "xor rax, rax"
     asm "xor rcx, rcx"
-    asm ".check_sign:"
     asm "movzx rdx, byte [rdi]"
     asm "cmp dl, '-'"
     asm "je .prepare_negative"
