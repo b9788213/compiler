@@ -108,7 +108,7 @@ class CodeGen:
             self.emit(f"mov rax, {expr.value}")
 
         elif isinstance(expr, Float):
-            pass
+            raise NotImplementedError("not implemented float")
 
         elif isinstance(expr, String):
             label = self.getlabel()
