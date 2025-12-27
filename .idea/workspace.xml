@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47ccd383-0ffc-45de-ba5c-7694ccaa559a" name="Changes" comment="alloc">
+    <list default="true" id="47ccd383-0ffc-45de-ba5c-7694ccaa559a" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/test/build/out" beforeDir="false" afterPath="$PROJECT_DIR$/test/build/out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/build/out.asm" beforeDir="false" afterPath="$PROJECT_DIR$/test/build/out.asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/build/out.o" beforeDir="false" afterPath="$PROJECT_DIR$/test/build/out.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/debug/ast.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/debug/ast.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/debug/tokens.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/debug/tokens.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/stdlib.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/stdlib.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -394,7 +393,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766861660472</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary=".">
+      <option name="closed" value="true" />
+      <created>1766863399971</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1766863399971</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +413,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ast debug" />
     <MESSAGE value="lexer" />
-    <MESSAGE value="." />
     <MESSAGE value="aritmatik" />
     <MESSAGE value="default rel" />
     <MESSAGE value="vars" />
@@ -422,10 +428,11 @@
     <MESSAGE value="printast" />
     <MESSAGE value="escape" />
     <MESSAGE value="alloc" />
-    <option name="LAST_COMMIT_MESSAGE" value="alloc" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonProject$main.coverage" NAME="main Coverage Results" MODIFIED="1766863327893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PythonProject$main.coverage" NAME="main Coverage Results" MODIFIED="1766863494822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1766855700100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

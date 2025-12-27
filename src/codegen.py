@@ -166,9 +166,11 @@ class CodeGen:
             self.emitstack(f"pop {rev[i]}")
 
         if not self.isaligned:
-            self.emitstack("push 0") # şimdi hizalı
-
-        self.emitstack(f"call {c.name}") # 8 byte return adress
+            self.emitstack("push 0")  # şimdi hizalı
+            self.emitstack(f"call {c.name}")  # 8 byte return adress
+            self.emitstack("add rsp, 8")
+        else:
+            self.emitstack(f"call {c.name}")
 
 def stack(f: Func) -> int:
     offset = 0

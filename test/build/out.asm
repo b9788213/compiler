@@ -16,12 +16,13 @@ push rax
 pop rdi
 push 0
 call print
-push 0
+add rsp, 8
 call input
 push rax
 pop rdi
 push 0
 call print
+add rsp, 8
 xor rax, rax
 .exit:
 leave
@@ -31,10 +32,11 @@ push rbp
 mov rbp, rsp
 sub rsp, 16
 mov [rbp -8], rdi
+push rdi
 call len
 mov rdx, rax
+pop rsi
 mov rax, 1
-mov rsi, rdi
 mov rdi, 1
 syscall
 jmp .exit
@@ -46,13 +48,15 @@ input:
 push rbp
 mov rbp, rsp
 sub rsp, 0
-mov rdi, 4096 ;bufsize
-call alloc ;ptr rax'ta
-mov rsi, rax; buffer
-xor rax, rax ;write
-xor rdi, rdi ;stdin
-mov rdx, 4096 ;bufsize
+mov rdi, 4096
+call alloc
+mov rsi, rax
+xor rax, rax
+xor rdi, rdi
+mov rdx, 4096
 syscall
+mov byte [rsi + rax - 1], 0
+mov rax, rsi
 jmp .exit
 xor rax, rax
 .exit:
@@ -81,8 +85,8 @@ mov [rbp -8], rdi
 mov rsi, rdi
 mov rax, 9
 xor rdi, rdi
-mov rdx, 0x1 | 0x2
-mov r10, 0x02 | 0x20
+mov rdx, 0x3
+mov r10, 0x22
 mov r8, -1
 mov r9, 0
 syscall
