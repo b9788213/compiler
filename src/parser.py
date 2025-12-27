@@ -49,6 +49,8 @@ class Parser:
 
             self.error()
 
+        return self.p
+
     #-----func-----
     def parse_func(self) -> Func:
         f = Func(self.expect("ID").value, [], [])
@@ -143,7 +145,7 @@ class Parser:
         return Call(name, args)
 
     #-----list-----
-    def parse_list(self, parser_f):
+    def parse_list(self, parser_f) -> list:
         elements = []
 
         if self.check("RPAR"): return elements

@@ -1,46 +1,60 @@
-from typing import NamedTuple, Any
+from dataclasses import dataclass
+from typing import Any
 
-class Id(NamedTuple):
+
+@dataclass()
+class Id:
     name: str
 
-class Int(NamedTuple):
+@dataclass()
+class Int:
     value: int
 
-class Float(NamedTuple):
+@dataclass()
+class Float:
     value: float
 
-class String(NamedTuple):
+@dataclass()
+class String:
     value: str
 
-class Assign(NamedTuple):
+@dataclass()
+class Assign:
     name: str
     value: Any
 
-class BinOp(NamedTuple):
+@dataclass()
+class BinOp:
     op: str
     left: Any
     right: Any
 
-class Neg(NamedTuple):
+@dataclass()
+class Neg:
     value: Any
 
-class Comp(NamedTuple):
+@dataclass()
+class Comp:
     op: str
     left: Any
     right: Any
 
-class Call(NamedTuple):
+@dataclass()
+class Call:
     name: str
     args: list
 
-class Ret(NamedTuple):
+@dataclass()
+class Ret:
     value: Any
 
-class Program(NamedTuple):
+@dataclass()
+class Program:
     funcs: list[Func]
-    statics: list
+    statics: list[str]
 
-class Func(NamedTuple):
+@dataclass()
+class Func:
     name: str
     args: list
     body: list

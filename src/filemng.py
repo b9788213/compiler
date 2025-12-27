@@ -11,5 +11,6 @@ build_dir.mkdir(parents=True, exist_ok=True)
 
 outfile = build_dir / "out.asm"
 tokenfile = debug_dir / "tokens.txt"
+astfile = debug_dir / "ast.txt"
 
 with open(infile) as f: src = f.read()

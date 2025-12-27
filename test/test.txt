@@ -1,9 +1,11 @@
-import stdlib
+import test
 
-fn main(x, y):
-    x = "3+5"
-        "merhaba"
+fn hesapla(r, carpant):
+    sonuc = PI * r * r * -5
+    return sonuc * carpant + "merhaba"
 
-            "merhaba"
-
-    x = 0
+fn main():
+    yari_cap = 10
+    merhaba(1+2, 3-4)
+    final = hesapla(yari_cap, 2.7 + 3)
+    return final

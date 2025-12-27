@@ -1,7 +1,12 @@
-from src.lexer import lex
-from src.fileman import tokenfile, src
+from filemng import tokenfile, astfile, src
+from lexer import lex
+from parser import Parser
+from printast import get_ast
 
 tokens = list(lex(src))
 
+ast = Parser(tokens).parse()
+
 with open(tokenfile, "w") as f: f.write("\n".join(str(t) for t in tokens))
+with open(astfile, "w", encoding="utf-8") as f: f.write(get_ast(ast))
 #with open(outfile, 'w') as f: f.write()
