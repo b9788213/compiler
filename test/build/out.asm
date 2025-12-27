@@ -123,8 +123,36 @@ sub rsp, 16
 mov [rbp -8], rdi
 xor rax, rax
 xor rcx, rcx
+.check_sign:
+movzx rdx, byte [rdi]
+cmp dl, '-'
+je .prepare_negative
+cmp dl, '+'
+jne .atoi_loop
+inc rcx
+jmp .atoi_loop
+.prepare_negative:
+inc rcx
+.neg_loop:
+movzx rdx, byte [rdi + rcx]
+test dl, dl
+jz .apply_neg
+cmp dl, '0'
+jl .apply_neg
+cmp dl, '9'
+jg .apply_neg
+sub dl, '0'
+imul rax, 10
+add rax, rdx
+inc rcx
+jmp .neg_loop
+.apply_neg:
+neg rax
+jmp .exit
 .atoi_loop:
 movzx rdx, byte [rdi + rcx]
+test dl, dl
+jz .exit
 cmp dl, '0'
 jl .exit
 cmp dl, '9'
