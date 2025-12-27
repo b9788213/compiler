@@ -64,7 +64,7 @@ class Parser:
         self.expect("COLON")
         self.expect("INDENT")
 
-        while not self.match("DEDENT"): f.body.append(self.parse_stmt())
+        while not self.match("DEDENT"): f.body.code.append(self.parse_stmt())
 
         return f
 

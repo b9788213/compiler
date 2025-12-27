@@ -41,7 +41,7 @@ def get_ast(node, indent=0, markers=None):
         children.extend(node.funcs)
         children.extend(node.statics)
     elif isinstance(node, Func):
-        children.extend(node.body)
+        children.extend(node.body.code)
     elif isinstance(node, (BinOp, Comp)):
         children.append(node.left)
         children.append(node.right)

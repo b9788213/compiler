@@ -49,6 +49,10 @@ class Ret:
     value: Any
 
 @dataclass()
+class Body:
+    code: list = field(default_factory=list)
+
+@dataclass()
 class Program:
     funcs: list[Func]  = field(default_factory=list)
     statics: list[Id]  = field(default_factory=list)
@@ -57,5 +61,5 @@ class Program:
 class Func:
     name: str
     args: list[str]  = field(default_factory=list)
-    body: list  = field(default_factory=list)
+    body: Body = field(default_factory=Body)
     vars: dict[str, int] = field(default_factory=dict)

@@ -43,10 +43,28 @@ class CodeGen:
         for i, var in enumerate(f.args): #parametreleri kaydet
             self.emit(f"mov [rbp {f.vars[var]:+d}], {regs[i]}")
 
-        #body
+        self.gen_body(f.body)
 
+        self.emit(".exit:")
         self.emit("leave")
         self.emit("ret")
+
+    def gen_body(self, b: Body):
+        for ast in b.code:
+
+            if isinstance(ast, Assign):
+                continue
+
+            if isinstance(ast, Call):
+                continue
+
+            if isinstance(ast, Ret):
+                self.gen_expr(ast.value)
+                self.emit("jmp .exit")
+                break # gereksiz kısımları üretmez
+
+    def gen_expr(self, expr):
+        pass
 
 def stack(f: Func) -> int:
     offset = 0
