@@ -128,13 +128,10 @@ class CodeGen:
                 self.emit("sub rax, rbx")
             elif expr.op == "MUL":
                 self.emit("imul rax, rbx")
-            elif expr.op == "DIV":
+            elif expr.op in ("DIV", "MOD"):
                 self.emit("cqo")
                 self.emit("idiv rbx")
-            elif expr.op == "MOD":
-                self.emit("cqo")
-                self.emit("idiv rbx")
-                self.emit("mov rax, rdx")
+                if expr.op == "MOD": self.emit("mov rax, rdx")
 
         elif isinstance(expr, Comp):
             self.ready(expr)
