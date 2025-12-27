@@ -152,11 +152,11 @@ STR, movzx rdx, byte [rdi + rcx], at line 5, column 9
 ASM, asm, at line 6, column 5
 STR, cmp dl, '0', at line 6, column 9
 ASM, asm, at line 7, column 5
-STR, jl .done, at line 7, column 9
+STR, jl .exit, at line 7, column 9
 ASM, asm, at line 8, column 5
 STR, cmp dl, '9', at line 8, column 9
 ASM, asm, at line 9, column 5
-STR, jg .done, at line 9, column 9
+STR, jg .exit, at line 9, column 9
 ASM, asm, at line 10, column 5
 STR, sub dl, '0', at line 10, column 9
 ASM, asm, at line 11, column 5
@@ -167,9 +167,5 @@ ASM, asm, at line 13, column 5
 STR, inc rcx, at line 13, column 9
 ASM, asm, at line 14, column 5
 STR, jmp .atoi_loop, at line 14, column 9
-ASM, asm, at line 15, column 5
-STR, .done:, at line 15, column 9
-ASM, asm, at line 16, column 5
-STR, jmp .exit, at line 16, column 9
-DEDENT, , at line 16, column 1
-EOF, , at line 16, column 1
+DEDENT, , at line 14, column 1
+EOF, , at line 14, column 1

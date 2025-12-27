@@ -126,16 +126,14 @@ xor rcx, rcx
 .atoi_loop:
 movzx rdx, byte [rdi + rcx]
 cmp dl, '0'
-jl .done
+jl .exit
 cmp dl, '9'
-jg .done
+jg .exit
 sub dl, '0'
 imul rax, 10
 add rax, rdx
 inc rcx
 jmp .atoi_loop
-.done:
-jmp .exit
 xor rax, rax
 .exit:
 leave
