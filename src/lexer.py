@@ -1,4 +1,3 @@
-import ast
 import re
 from typing import NamedTuple, Iterator
 
