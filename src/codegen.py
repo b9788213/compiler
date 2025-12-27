@@ -26,6 +26,8 @@ class CodeGen:
         for s in self.p.statics: #staticleri kaydet
             self.data[s.name] = self.getlabel()
 
+        self.emit("bits 64")
+        self.emit("default rel")
         self.emit("section .text")
         self.emit("global _start")
         self.emit("_start:")
