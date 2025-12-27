@@ -15,6 +15,7 @@ fn input():
     asm "xor rdi, rdi ;stdin"
     asm "mov rdx, 4096 ;bufsize"
     asm "syscall"
+    asm "jmp .exit"
 
 fn len(s):
     asm "xor rax, rax"
@@ -33,3 +34,4 @@ fn alloc(i):
     asm "mov r8, -1"
     asm "mov r9, 0"
     asm "syscall"
+    asm "jmp .exit"

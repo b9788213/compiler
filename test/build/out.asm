@@ -16,6 +16,12 @@ push rax
 pop rdi
 push 0
 call print
+push 0
+call input
+push rax
+pop rdi
+push 0
+call print
 xor rax, rax
 .exit:
 leave
@@ -47,6 +53,7 @@ xor rax, rax ;write
 xor rdi, rdi ;stdin
 mov rdx, 4096 ;bufsize
 syscall
+jmp .exit
 xor rax, rax
 .exit:
 leave
@@ -79,6 +86,7 @@ mov r10, 0x02 | 0x20
 mov r8, -1
 mov r9, 0
 syscall
+jmp .exit
 xor rax, rax
 .exit:
 leave
