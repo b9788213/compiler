@@ -12,8 +12,9 @@ class CodeGen:
     def __init__(self, p: Program):
         self.p = p
         self.asm: list[str] = []
-        self.data: dict[str, str] = {}
+        self.data: dict[str, str] = {} #değişken ismi, label
         self.currentf: Func =  None
+        self.strings: dict[str, str] = {} # string, label
         self.rand = 0
 
     def emit(self, s: str):
@@ -40,10 +41,16 @@ class CodeGen:
         for f in self.p.funcs:
             self.gen_func(f)
 
+        self.emit("section .rodata")
+        for s, l in self.strings.items():
+            bytes_val = s.encode('utf-8')
+            ascii_val = ", ".join(str(b) for b in bytes_val)
+            self.emit(f"{l}: db {ascii_val}, 0")
+
         return "\n".join(self.asm)
 
     def gen_func(self, f: Func):
-        f.vars.update(dict.fromkeys(f.args, 0)) #parametreleri değişken yap
+        f.vars.update(dict.fromkeys(f.args)) #parametreleri değişken yap
         self.currentf = f
 
         self.emit(f"{f.name}:")
