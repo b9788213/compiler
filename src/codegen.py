@@ -11,13 +11,20 @@ class CodeGen:
     def __init__(self, p: Program):
         self.p = p
         self.asm: list[str] = []
-        self.data = []
+        self.data: dict[str, str] = {}
+        self.currentf: Func =  None
+        self.rand = 0
 
     def emit(self, s: str):
         self.asm.append(s)
 
+    def getlabel(self):
+        self.rand += 1
+        return f"label_{self.rand}"
+
     def gen(self):
-        for s in self.p.statics: self.data.append(s)
+        for s in self.p.statics: #staticleri kaydet
+            self.data[s.name] = self.getlabel()
 
         self.emit("section .text")
         self.emit("global _start")
@@ -34,6 +41,7 @@ class CodeGen:
 
     def gen_func(self, f: Func):
         f.vars.update(dict.fromkeys(f.args, 0)) #parametreleri değişken yap
+        self.currentf = f
 
         self.emit(f"{f.name}:")
         self.emit("push rbp")
@@ -69,7 +77,11 @@ class CodeGen:
             pass
 
         elif isinstance(expr, Id):
-            pass
+            if expr.name in self.data.keys():
+                self.emit(f"mov rax, [{self.data[expr.name]}]")
+            else:
+                try: self.emit(f"mov rax, [{self.currentf.vars[expr.name]}]")
+                except: raise RuntimeError(f"Cant find local variable {expr.name}")
 
         elif isinstance(expr, Int):
             self.emit(f"mov rax, {expr.value}")
