@@ -58,7 +58,7 @@ class Program:
 
 class Vars(dict[str, int]):
     def __getitem__(self, item):
-        try: super().__getitem__(item)
+        try: return super().__getitem__(item)
         except Exception: raise KeyError(f"Cant find local variable {item}")
 
 @dataclass()
@@ -66,4 +66,4 @@ class Func:
     name: str
     args: list[str]  = field(default_factory=list)
     body: Body = field(default_factory=Body)
-    vars: dict[str, int] = field(default_factory=dict)
+    vars: Vars= field(default_factory=Vars)

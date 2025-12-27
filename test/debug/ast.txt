@@ -4,7 +4,7 @@ Program
 │   │   └── BinOp(op='MUL')
 │   │       ├── BinOp(op='MUL')
 │   │       │   ├── BinOp(op='MUL')
-│   │       │   │   ├── Id(PI)
+│   │       │   │   ├── Int(5)
 │   │       │   │   └── Id(r)
 │   │       │   └── Id(r)
 │   │       └── Neg(-)
