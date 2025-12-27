@@ -14,7 +14,7 @@ class CodeGen:
         self.asm: list[str] = []
         self.data: dict[str, str] = {} #değişken ismi, label
         self.currentf: Func =  None
-        self.strings: dict[str, str] = {} # string, label
+        self.strings: dict[str, str] = {} # label, string
         self.rand = 0
 
     def emit(self, s: str):
@@ -42,7 +42,7 @@ class CodeGen:
             self.gen_func(f)
 
         self.emit("section .rodata")
-        for s, l in self.strings.items():
+        for l, s in self.strings.items():
             bytes_val = s.encode('utf-8')
             ascii_val = ", ".join(str(b) for b in bytes_val)
             self.emit(f"{l}: db {ascii_val}, 0")
@@ -106,7 +106,9 @@ class CodeGen:
             pass
 
         elif isinstance(expr, String):
-            pass
+            label = self.getlabel()
+            self.strings[label] = expr.value
+            self.emit(f"mov rax, {label}")
 
         elif isinstance(expr, Neg):
             self.gen_expr(expr.value)
