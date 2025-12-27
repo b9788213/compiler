@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-
 @dataclass()
 class Id:
     name: str
@@ -56,6 +55,11 @@ class Body:
 class Program:
     funcs: list[Func]  = field(default_factory=list)
     statics: list[Id]  = field(default_factory=list)
+
+class Vars(dict[str, int]):
+    def __getitem__(self, item):
+        try: super().__getitem__(item)
+        except Exception: raise KeyError(f"Cant find local variable {item}")
 
 @dataclass()
 class Func:

@@ -63,15 +63,18 @@ class CodeGen:
         for ast in b.code:
 
             if isinstance(ast, Assign):
-                continue
+                self.gen_expr(ast.value)
+                #TODO
 
-            if isinstance(ast, Call):
-                continue
+            elif isinstance(ast, Call):
+                pass
 
-            if isinstance(ast, Ret):
+            elif isinstance(ast, Ret):
                 self.gen_expr(ast.value)
                 self.emit("jmp .exit")
-                break # gereksiz kısımları üretmez
+                break # gereksiz kısımları üretme
+
+            self.emit("xor rax, rax") # yanlış değer dönmemesi için raxı sıfırla
 
     def gen_expr(self, expr):
 
