@@ -1,11 +1,12 @@
 Program
 ├── Func(name='main', args=[])
+│   ├── Assign(name='x')
+│   │   └── String(merhaba 
+)
 │   ├── Call(name='print')
-│   │   └── String(merhaba )
-│   ├── Call(name='print')
-│   │   └── String(merhaba )
-│   └── Ret
-│       └── Int(0)
+│   │   └── Id(x)
+│   └── Call(name='print')
+│       └── Id(x)
 ├── Func(name='print', args=['s'])
 │   ├── Asm(call len)
 │   ├── Asm(mov rdx, rax)

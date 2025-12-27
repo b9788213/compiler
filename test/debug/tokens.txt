@@ -6,16 +6,18 @@ LPAR, (, at line 3, column 8
 RPAR, ), at line 3, column 9
 COLON, :, at line 3, column 10
 INDENT, 4, at line 4, column 1
-ID, print, at line 4, column 5
-LPAR, (, at line 4, column 10
-STR, merhaba , at line 4, column 11
-RPAR, ), at line 4, column 21
+ID, x, at line 4, column 5
+EQ, =, at line 4, column 7
+STR, merhaba 
+, at line 4, column 9
 ID, print, at line 5, column 5
 LPAR, (, at line 5, column 10
-STR, merhaba , at line 5, column 11
-RPAR, ), at line 5, column 21
-RET, return, at line 6, column 5
-INT, 0, at line 6, column 12
+ID, x, at line 5, column 11
+RPAR, ), at line 5, column 12
+ID, print, at line 6, column 5
+LPAR, (, at line 6, column 10
+ID, x, at line 6, column 11
+RPAR, ), at line 6, column 12
 DEDENT, , at line 6, column 1
 FN, fn, at line 1, column 1
 ID, print, at line 1, column 4

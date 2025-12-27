@@ -1,3 +1,4 @@
+import ast
 import re
 from typing import NamedTuple, Iterator
 
@@ -13,7 +14,7 @@ class Token(NamedTuple):
 
 
 token_specification = (
-    ('STR', r'".*?"'),
+    ('STR', r'"(?:\\.|[^"\\])*"'),
 
     ('ASM', r'\basm\b'),
     ('FN', r'\bfn\b'),
@@ -101,7 +102,7 @@ def lex(code: str) -> Iterator[Token]:
             raise RuntimeError(f'Hata: {value!r} geçersiz karakter (Satır {line_num}, Sütun {column})')
 
         if kind == 'STR':
-            value = value[1:-1] #tırnakları temizliyoruz
+            value = value[1:-1].encode('utf-8').decode('unicode_escape')
 
         yield Token(kind, value, line_num, column)
 

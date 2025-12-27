@@ -10,19 +10,20 @@ syscall
 main:
 push rbp
 mov rbp, rsp
-sub rsp, 0
+sub rsp, 16
 mov rax, label_1
+mov [rbp -8], rax 
+mov rax, [rbp -8]
 push rax
 pop rdi
 push 0
 call print
-mov rax, label_2
+mov rax, [rbp -8]
 push rax
 pop rdi
 push 0
 call print
-mov rax, 0
-jmp .exit
+xor rax, rax
 .exit:
 leave
 ret
@@ -59,5 +60,4 @@ leave
 ret
 section .data
 section .rodata
-label_1: db 109, 101, 114, 104, 97, 98, 97, 32, 0
-label_2: db 109, 101, 114, 104, 97, 98, 97, 32, 0
+label_1: db 109, 101, 114, 104, 97, 98, 97, 32, 10, 0
