@@ -1,7 +1,7 @@
 import test
 
 fn hesapla(r, carpant):
-    sonuc = PI * r * r * -5
+    sonuc = carpant * r * r * -5
     return sonuc * carpant + "merhaba"
 
 fn main():

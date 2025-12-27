@@ -2,10 +2,11 @@ from node import *
 
 class Reg(tuple):
     def __getitem__(self, i):
-        try: super().__getitem__(i)
+        try: return super().__getitem__(i)
         except Exception: raise NotImplementedError("cant send More Than 6 parameters")
 
 regs = Reg(("rdi", "rsi", "rdx", "rcx", "r8", "r9"))
+revregs = Reg(regs[::-1])
 
 class CodeGen:
     def __init__(self, p: Program):
@@ -64,10 +65,14 @@ class CodeGen:
 
             if isinstance(ast, Assign):
                 self.gen_expr(ast.value)
-                #TODO
+
+                if ast.name in self.data.keys():
+                    self.emit(f"mov [{self.data[ast.name]}], rax")
+                else:
+                    self.emit(f"mov [rbp {self.currentf.vars[ast.name]:+d}], rax ")
 
             elif isinstance(ast, Call):
-                pass
+                self.call(ast)
 
             elif isinstance(ast, Ret):
                 self.gen_expr(ast.value)
@@ -79,7 +84,7 @@ class CodeGen:
     def gen_expr(self, expr):
 
         if isinstance(expr, Call):
-            pass
+            self.call(expr)
 
         elif isinstance(expr, Id):
             if expr.name in self.data.keys():
@@ -132,13 +137,22 @@ class CodeGen:
         self.gen_expr(expr.left)
         self.emit("pop rbx")
 
+    def call(self, ast):
+        for arg in ast.args:
+            self.gen_expr(arg)
+            self.emit("push rax")
+
+        for i in range(len(ast.args)):
+            self.emit(f"pop {revregs[i]}")
+
+        self.emit(f"call {ast.name}")
+
 def stack(f: Func) -> int:
     offset = 0
     size = len(f.vars) * 8
-    remainder = size % 16
 
     for var in f.vars:
         offset -= 8
         f.vars[var] = offset
 
-    return remainder + size
+    return (size + 15) & ~15

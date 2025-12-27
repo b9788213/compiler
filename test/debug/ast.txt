@@ -4,7 +4,7 @@ Program
 │   │   └── BinOp(op='MUL')
 │   │       ├── BinOp(op='MUL')
 │   │       │   ├── BinOp(op='MUL')
-│   │       │   │   ├── Int(5)
+│   │       │   │   ├── Id(carpant)
 │   │       │   │   └── Id(r)
 │   │       │   └── Id(r)
 │   │       └── Neg(-)
