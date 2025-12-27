@@ -14,7 +14,7 @@ Program
 │           ├── BinOp(op='MUL')
 │           │   ├── Id(sonuc)
 │           │   └── Id(carpant)
-│           └── String("merhaba")
+│           └── String(merhaba)
 └── Func(name='main', args=[])
     ├── Assign(name='yari_cap')
     │   └── Int(10)
