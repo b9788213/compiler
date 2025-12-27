@@ -20,6 +20,7 @@ def get_ast(node, indent=0, markers=None):
 
     # Düğüm tipine göre içeriği belirle
     def get_node_info(n):
+        if isinstance(n, Asm): return f"Asm({n.value})"
         if isinstance(n, Program): return "Program"
         if isinstance(n, Func): return f"Func(name='{n.name}', args={n.args})"
         if isinstance(n, BinOp): return f"BinOp(op='{n.op}')"
