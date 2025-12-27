@@ -6,19 +6,11 @@ LPAR, (, at line 3, column 8
 RPAR, ), at line 3, column 9
 COLON, :, at line 3, column 10
 INDENT, 4, at line 4, column 1
-ID, x, at line 4, column 5
-EQ, =, at line 4, column 7
-STR, merhaba 
-, at line 4, column 9
-ID, print, at line 5, column 5
-LPAR, (, at line 5, column 10
-ID, x, at line 5, column 11
-RPAR, ), at line 5, column 12
-ID, print, at line 6, column 5
-LPAR, (, at line 6, column 10
-ID, x, at line 6, column 11
-RPAR, ), at line 6, column 12
-DEDENT, , at line 6, column 1
+ID, print, at line 4, column 5
+LPAR, (, at line 4, column 10
+STR, bir şey girin :, at line 4, column 11
+RPAR, ), at line 4, column 28
+DEDENT, , at line 4, column 1
 FN, fn, at line 1, column 1
 ID, print, at line 1, column 4
 LPAR, (, at line 1, column 9
@@ -42,47 +34,68 @@ ASM, asm, at line 8, column 5
 STR, jmp .exit, at line 8, column 9
 DEDENT, , at line 10, column 1
 FN, fn, at line 10, column 1
-ID, len, at line 10, column 4
-LPAR, (, at line 10, column 7
-ID, s, at line 10, column 8
-RPAR, ), at line 10, column 9
-COLON, :, at line 10, column 10
+ID, input, at line 10, column 4
+LPAR, (, at line 10, column 9
+RPAR, ), at line 10, column 10
+COLON, :, at line 10, column 11
 INDENT, 4, at line 11, column 1
 ASM, asm, at line 11, column 5
-STR, xor rax, rax, at line 11, column 9
+STR, mov rdi, 4096 ;bufsize, at line 11, column 9
 ASM, asm, at line 12, column 5
-STR, .loop:, at line 12, column 9
+STR, call alloc ;ptr rax'ta, at line 12, column 9
 ASM, asm, at line 13, column 5
-STR, cmp byte [rdi + rax], 0, at line 13, column 9
+STR, mov rsi, rax; buffer, at line 13, column 9
 ASM, asm, at line 14, column 5
-STR, je .exit, at line 14, column 9
+STR, xor rax, rax ;write, at line 14, column 9
 ASM, asm, at line 15, column 5
-STR, inc rax, at line 15, column 9
+STR, xor rdi, rdi ;stdin, at line 15, column 9
 ASM, asm, at line 16, column 5
-STR, jmp .loop, at line 16, column 9
-DEDENT, , at line 18, column 1
-FN, fn, at line 18, column 1
-ID, alloc, at line 18, column 4
-LPAR, (, at line 18, column 9
-ID, i, at line 18, column 10
-RPAR, ), at line 18, column 11
-COLON, :, at line 18, column 12
-INDENT, 4, at line 19, column 1
-ASM, asm, at line 19, column 5
-STR, mov rsi, rdi, at line 19, column 9
+STR, mov rdx, 4096 ;bufsize, at line 16, column 9
+ASM, asm, at line 17, column 5
+STR, syscall, at line 17, column 9
+DEDENT, , at line 19, column 1
+FN, fn, at line 19, column 1
+ID, len, at line 19, column 4
+LPAR, (, at line 19, column 7
+ID, s, at line 19, column 8
+RPAR, ), at line 19, column 9
+COLON, :, at line 19, column 10
+INDENT, 4, at line 20, column 1
 ASM, asm, at line 20, column 5
-STR, mov rax, 9, at line 20, column 9
+STR, xor rax, rax, at line 20, column 9
 ASM, asm, at line 21, column 5
-STR, xor rdi, rdi, at line 21, column 9
+STR, .loop:, at line 21, column 9
 ASM, asm, at line 22, column 5
-STR, mov rdx, 0x1 | 0x2, at line 22, column 9
+STR, cmp byte [rdi + rax], 0, at line 22, column 9
 ASM, asm, at line 23, column 5
-STR, mov r10, 0x02 | 0x20, at line 23, column 9
+STR, je .exit, at line 23, column 9
 ASM, asm, at line 24, column 5
-STR, mov r8, -1, at line 24, column 9
+STR, inc rax, at line 24, column 9
 ASM, asm, at line 25, column 5
-STR, mov r9, 0, at line 25, column 9
-ASM, asm, at line 26, column 5
-STR, syscall, at line 26, column 9
-DEDENT, , at line 26, column 1
-EOF, , at line 26, column 1
+STR, jmp .loop, at line 25, column 9
+DEDENT, , at line 27, column 1
+FN, fn, at line 27, column 1
+ID, alloc, at line 27, column 4
+LPAR, (, at line 27, column 9
+ID, i, at line 27, column 10
+RPAR, ), at line 27, column 11
+COLON, :, at line 27, column 12
+INDENT, 4, at line 28, column 1
+ASM, asm, at line 28, column 5
+STR, mov rsi, rdi, at line 28, column 9
+ASM, asm, at line 29, column 5
+STR, mov rax, 9, at line 29, column 9
+ASM, asm, at line 30, column 5
+STR, xor rdi, rdi, at line 30, column 9
+ASM, asm, at line 31, column 5
+STR, mov rdx, 0x1 | 0x2, at line 31, column 9
+ASM, asm, at line 32, column 5
+STR, mov r10, 0x02 | 0x20, at line 32, column 9
+ASM, asm, at line 33, column 5
+STR, mov r8, -1, at line 33, column 9
+ASM, asm, at line 34, column 5
+STR, mov r9, 0, at line 34, column 9
+ASM, asm, at line 35, column 5
+STR, syscall, at line 35, column 9
+DEDENT, , at line 35, column 1
+EOF, , at line 35, column 1

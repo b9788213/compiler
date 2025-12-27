@@ -100,7 +100,7 @@ def lex(code: str) -> Iterator[Token]:
             continue
 
         if kind == 'STR':
-            value = value[1:-1].encode('utf-8').decode('unicode_escape') #tırnakları at, escape karakterlerini çöz
+            value = value[1:-1].encode('utf-8').decode('unicode_escape').encode('latin-1').decode('utf-8') # tırnakları at, escapeleri çöz
 
         yield Token(kind, value, line_num, column)
 

@@ -7,6 +7,15 @@ fn print(s):
     asm "syscall"
     asm "jmp .exit"
 
+fn input():
+    asm "mov rdi, 4096 ;bufsize"
+    asm "call alloc ;ptr rax'ta"
+    asm "mov rsi, rax; buffer"
+    asm "xor rax, rax ;write"
+    asm "xor rdi, rdi ;stdin"
+    asm "mov rdx, 4096 ;bufsize"
+    asm "syscall"
+
 fn len(s):
     asm "xor rax, rax"
     asm ".loop:"

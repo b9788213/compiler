@@ -10,15 +10,8 @@ syscall
 main:
 push rbp
 mov rbp, rsp
-sub rsp, 16
+sub rsp, 0
 mov rax, label_1
-mov [rbp -8], rax 
-mov rax, [rbp -8]
-push rax
-pop rdi
-push 0
-call print
-mov rax, [rbp -8]
 push rax
 pop rdi
 push 0
@@ -39,6 +32,21 @@ mov rsi, rdi
 mov rdi, 1
 syscall
 jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
+input:
+push rbp
+mov rbp, rsp
+sub rsp, 0
+mov rdi, 4096 ;bufsize
+call alloc ;ptr rax'ta
+mov rsi, rax; buffer
+xor rax, rax ;write
+xor rdi, rdi ;stdin
+mov rdx, 4096 ;bufsize
+syscall
 xor rax, rax
 .exit:
 leave
@@ -77,4 +85,4 @@ leave
 ret
 section .data
 section .rodata
-label_1: db 109, 101, 114, 104, 97, 98, 97, 32, 10, 0
+label_1: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 32, 58, 0

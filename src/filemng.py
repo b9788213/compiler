@@ -15,12 +15,12 @@ outfile = build_dir / "out.asm"
 tokenfile = debug_dir / "tokens.txt"
 astfile = debug_dir / "ast.txt"
 
-with open(infile) as f: src = f.read()
+with open(infile, encoding="utf-8") as f: src = f.read()
 
 def save(tokens, ast, asm):
-    with open(tokenfile, "w") as f: f.write("\n".join(str(t) for t in tokens))
+    with open(tokenfile, "w", encoding="utf-8") as f: f.write("\n".join(str(t) for t in tokens))
     with open(astfile, "w", encoding="utf-8") as f: f.write(get_ast(ast))
-    with open(outfile, 'w') as f: f.write(asm)
+    with open(outfile, 'w', encoding="utf-8") as f: f.write(asm)
 
 def get_import(name: str) -> str:
     return (parent / name).with_suffix(".txt").read_text()
