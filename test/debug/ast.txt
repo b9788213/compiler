@@ -29,8 +29,10 @@ Program
 │   │   └── Call(name='hesapla')
 │   │       ├── Id(yari_cap)
 │   │       └── BinOp(op='PLUS')
-│   │           ├── Float(2.7)
-│   │           └── Int(3)
+│   │           ├── Int(2)
+│   │           └── BinOp(op='MOD')
+│   │               ├── Int(3)
+│   │               └── Int(4)
 │   ├── Ret
 │   │   └── Id(final)
 │   └── Ret

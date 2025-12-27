@@ -115,7 +115,7 @@ class Parser:
     def term(self):
         node = self.factor()
 
-        while self.peek().type in ("MUL", "DIV"):
+        while self.peek().type in ("MUL", "DIV", "MOD"):
             op = self.pop().type
             node = BinOp(op, node, self.factor())
         return node

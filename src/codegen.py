@@ -131,6 +131,10 @@ class CodeGen:
             elif expr.op == "DIV":
                 self.emit("cqo")
                 self.emit("idiv rbx")
+            elif expr.op == "MOD":
+                self.emit("cqo")
+                self.emit("idiv rbx")
+                self.emit("mov rax, rdx")
 
         elif isinstance(expr, Comp):
             self.ready(expr)

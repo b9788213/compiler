@@ -12,7 +12,7 @@ class Token(NamedTuple):
         return f"{self.type}, {self.value}, at line {self.line}, column {self.column}"
 
 
-token_specification = [
+token_specification = (
     ('STR', r'".*?"'),
 
     ('FN', r'\bfn\b'),
@@ -41,11 +41,12 @@ token_specification = [
     ('MINUS',       r'-'),
     ('MUL',         r'\*'),
     ('DIV',         r'/'),
+    ('MOD',         r'%'),
 
     ('NEWLINE', r'\n'),
     ('SKIP', r'[ \t]+'),
     ('MISMATCH', r'.'),
-]
+)
 
 tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
 
