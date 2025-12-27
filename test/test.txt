@@ -1,5 +1,6 @@
 import stdlib
 
 fn main():
-    print("bir şey girin :")
+    print("bir şey girin: ")
     print(input())
+    print("\n")

@@ -23,6 +23,10 @@ pop rdi
 push 0
 call print
 add rsp, 8
+mov rax, label_2
+push rax
+pop rdi
+call print
 xor rax, rax
 .exit:
 leave
@@ -97,4 +101,5 @@ leave
 ret
 section .data
 section .rodata
-label_1: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 32, 58, 0
+label_1: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 58, 32, 0
+label_2: db 10, 0

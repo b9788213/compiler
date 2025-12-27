@@ -1,9 +1,12 @@
 Program
 ├── Func(name='main', args=[])
 │   ├── Call(name='print')
-│   │   └── String(bir şey girin :)
+│   │   └── String(bir şey girin: )
+│   ├── Call(name='print')
+│   │   └── Call(name='input')
 │   └── Call(name='print')
-│       └── Call(name='input')
+│       └── String(
+)
 ├── Func(name='print', args=['s'])
 │   ├── Asm(push rdi)
 │   ├── Asm(call len)
