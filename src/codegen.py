@@ -15,10 +15,15 @@ class CodeGen:
         self.data: dict[str, str] = {} #değişken ismi, label
         self.currentf: Func =  None
         self.strings: dict[str, str] = {} # label, string
+        self.isaligned: bool = True
         self.rand = 0
 
     def emit(self, s: str):
         self.asm.append(s)
+
+    def emitstack(self, s):
+        self.emit(s)
+        self.isaligned = not self.isaligned
 
     def getlabel(self):
         self.rand += 1
@@ -54,7 +59,7 @@ class CodeGen:
         self.currentf = f
 
         self.emit(f"{f.name}:")
-        self.emit("push rbp")
+        self.emitstack("push rbp") # rbp + return adress zaten 16 byte
         self.emit("mov rbp, rsp")
         self.emit(f"sub rsp, {stack(f)}")
 
@@ -68,21 +73,21 @@ class CodeGen:
         self.emit("ret")
 
     def gen_body(self, b: Body):
-        for ast in b.code:
+        for stmt in b.code:
 
-            if isinstance(ast, Assign):
-                self.gen_expr(ast.value)
+            if isinstance(stmt, Assign):
+                self.gen_expr(stmt.value)
 
-                if ast.name in self.data.keys():
-                    self.emit(f"mov [{self.data[ast.name]}], rax")
+                if stmt.name in self.data.keys():
+                    self.emit(f"mov [{self.data[stmt.name]}], rax")
                 else:
-                    self.emit(f"mov [rbp {self.currentf.vars[ast.name]:+d}], rax ")
+                    self.emit(f"mov [rbp {self.currentf.vars[stmt.name]:+d}], rax ")
 
-            elif isinstance(ast, Call):
-                self.call(ast)
+            elif isinstance(stmt, Call):
+                self.call(stmt)
 
-            elif isinstance(ast, Ret):
-                self.gen_expr(ast.value)
+            elif isinstance(stmt, Ret):
+                self.gen_expr(stmt.value)
                 self.emit("jmp .exit")
                 break # gereksiz kısımları üretme
 
@@ -142,19 +147,22 @@ class CodeGen:
 
     def ready(self, expr):
         self.gen_expr(expr.right)
-        self.emit("push rax")
+        self.emitstack("push rax")
         self.gen_expr(expr.left)
-        self.emit("pop rbx")
+        self.emitstack("pop rbx")
 
-    def call(self, ast):
-        for arg in ast.args:
+    def call(self, c: Call):
+        for arg in c.args:
             self.gen_expr(arg)
-            self.emit("push rax")
+            self.emitstack("push rax")
 
-        for i in range(len(ast.args)):
-            self.emit(f"pop {revregs[i]}")
+        for i in range(len(c.args)):
+            self.emitstack(f"pop {revregs[i]}")
 
-        self.emit(f"call {ast.name}")
+        if not self.isaligned:
+            self.emitstack("push 0") # şimdi hizalı
+
+        self.emitstack(f"call {c.name}") # 8 byte return adress
 
 def stack(f: Func) -> int:
     offset = 0
