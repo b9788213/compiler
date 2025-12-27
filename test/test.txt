@@ -1,12 +1,4 @@
 import test
 
-fn hesapla(r, carpant):
-    sonuc = carpant * r * r * -5
-    return sonuc * carpant + "merhaba"
-
 fn main():
-    global yari_cap = 10
-    merhaba(1+2, 3-4)
-    global final = hesapla(yari_cap, 2 + 3%4)
-    return final
-    return 1 == 3
+    return 0
