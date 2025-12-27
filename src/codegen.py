@@ -85,8 +85,7 @@ class CodeGen:
             if expr.name in self.data.keys():
                 self.emit(f"mov rax, [{self.data[expr.name]}]")
             else:
-                try: self.emit(f"mov rax, [rbp {self.currentf.vars[expr.name]:+d}]")
-                except: raise RuntimeError(f"Cant find local variable {expr.name}")
+                self.emit(f"mov rax, [rbp {self.currentf.vars[expr.name]:+d}]")
 
         elif isinstance(expr, Int):
             self.emit(f"mov rax, {expr.value}")
