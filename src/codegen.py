@@ -1,5 +1,3 @@
-from operator import add
-
 from node import *
 
 class Reg(tuple):
@@ -83,30 +81,40 @@ class CodeGen:
             pass
 
         elif isinstance(expr, Neg):
-            pass
+            self.gen_expr(expr.value)
+            self.emit("neg rax")
 
         elif isinstance(expr, BinOp):
-            self.gen_expr(expr.right)
-            self.emit("push rax")
-            self.gen_expr(expr.left)
-            self.emit("pop rbx")
+            self.ready(expr)
 
             if expr.op == "PLUS":
                 self.emit("add rax, rbx")
-
             elif expr.op == "MINUS":
                 self.emit("sub rax, rbx")
-
             elif expr.op == "MUL":
                 self.emit("imul rax, rbx")
-
             elif expr.op == "DIV":
                 self.emit("cqo")
                 self.emit("idiv rbx")
 
         elif isinstance(expr, Comp):
-            pass
+            self.ready(expr)
+            self.emit("cmp rax, rbx")
 
+            if expr.op == "EQEQ": self.emit("sete al")
+            if expr.op == "NEQ": self.emit("setne al")
+            if expr.op == "LEQ": self.emit("setle al")
+            if expr.op == "GEQ": self.emit("setge al")
+            if expr.op == "LT": self.emit("setl al")
+            if expr.op == "GT": self.emit("setg al")
+
+            self.emit("movzx rax, al")
+
+    def ready(self, expr):
+        self.gen_expr(expr.right)
+        self.emit("push rax")
+        self.gen_expr(expr.left)
+        self.emit("pop rbx")
 
 def stack(f: Func) -> int:
     offset = 0
