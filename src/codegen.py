@@ -33,12 +33,28 @@ class CodeGen:
         return "\n".join(self.asm)
 
     def gen_func(self, f: Func):
+        f.vars.update(dict.fromkeys(f.args, 0)) #parametreleri değişken yap
+
         self.emit(f"{f.name}:")
         self.emit("push rbp")
         self.emit("mov rbp, rsp")
+        self.emit(f"sub rsp, {stack(f)}")
 
-        for i in range(len(f.args)):
-            self.emit(f"push {regs[i]}")
+        for i, var in enumerate(f.args): #parametreleri kaydet
+            self.emit(f"mov [rbp {f.vars[var]:+d}], {regs[i]}")
+
+        #body
 
         self.emit("leave")
         self.emit("ret")
+
+def stack(f: Func) -> int:
+    offset = 0
+    size = len(f.vars) * 8
+    remainder = size % 16
+
+    for var in f.vars:
+        offset -= 8
+        f.vars[var] = offset
+
+    return remainder + size

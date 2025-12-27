@@ -6,7 +6,8 @@ class Parser:
     def __init__(self, tokens: list[Token]):
         self.tokens = tokens
         self.index: int = 0
-        self.p = Program([], [])
+        self.p = Program()
+        self.currentf: Func = None
 
     #-----Helpers-----
     def peek(self, n=0):
@@ -53,7 +54,8 @@ class Parser:
 
     #-----func-----
     def parse_func(self) -> Func:
-        f = Func(self.expect("ID").value, [], [])
+        f = Func(self.expect("ID").value)
+        self.currentf = f
 
         self.expect("LPAR")
         f.args = self.parse_list(lambda: self.expect("ID").value)
@@ -78,6 +80,7 @@ class Parser:
 
             #assign and declaration
             if self.match("EQ"):
+                self.currentf.vars[name] = 0
                 return Assign(name, self.compare())
 
         #Static decleration

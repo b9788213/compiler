@@ -49,18 +49,13 @@ class Ret:
     value: Any
 
 @dataclass()
-class Var:
-    name: str
-    offset: int
-
-@dataclass()
 class Program:
-    funcs: list[Func]
-    statics: list[Id]
+    funcs: list[Func]  = field(default_factory=list)
+    statics: list[Id]  = field(default_factory=list)
 
 @dataclass()
 class Func:
     name: str
-    args: list[str]
-    body: list
-    vars: list[Var] = field(default_factory=list[Var])
+    args: list[str]  = field(default_factory=list)
+    body: list  = field(default_factory=list)
+    vars: dict[str, int] = field(default_factory=dict)
