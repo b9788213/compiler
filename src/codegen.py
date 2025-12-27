@@ -46,6 +46,10 @@ class CodeGen:
         for f in self.p.funcs:
             self.gen_func(f)
 
+        self.emit("section .data")
+        for l in self.data.values():
+            self.emit(f"{l}: dq 0")
+
         self.emit("section .rodata")
         for l, s in self.strings.items():
             bytes_val = s.encode('utf-8')
