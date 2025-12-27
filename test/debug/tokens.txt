@@ -10,113 +10,166 @@ ID, print, at line 4, column 5
 LPAR, (, at line 4, column 10
 STR, bir şey girin: , at line 4, column 11
 RPAR, ), at line 4, column 28
-ID, print, at line 5, column 5
-LPAR, (, at line 5, column 10
-ID, input, at line 5, column 11
-LPAR, (, at line 5, column 16
-RPAR, ), at line 5, column 17
-RPAR, ), at line 5, column 18
+ID, n1, at line 5, column 5
+EQ, =, at line 5, column 8
+ID, atoi, at line 5, column 10
+LPAR, (, at line 5, column 14
+ID, input, at line 5, column 15
+LPAR, (, at line 5, column 20
+RPAR, ), at line 5, column 21
+RPAR, ), at line 5, column 22
 ID, print, at line 6, column 5
 LPAR, (, at line 6, column 10
-STR, 
-, at line 6, column 11
-RPAR, ), at line 6, column 15
-DEDENT, , at line 6, column 1
+STR, bir şey girin: , at line 6, column 11
+RPAR, ), at line 6, column 28
+ID, n2, at line 7, column 5
+EQ, =, at line 7, column 8
+ID, atoi, at line 7, column 10
+LPAR, (, at line 7, column 14
+ID, input, at line 7, column 15
+LPAR, (, at line 7, column 20
+RPAR, ), at line 7, column 21
+RPAR, ), at line 7, column 22
+RET, return, at line 9, column 5
+ID, n1, at line 9, column 12
+PLUS, +, at line 9, column 15
+ID, n2, at line 9, column 17
+DEDENT, , at line 9, column 1
+IMPORT, import, at line 1, column 1
+STR, stdlib/casting, at line 1, column 8
+FN, fn, at line 3, column 1
+ID, print, at line 3, column 4
+LPAR, (, at line 3, column 9
+ID, s, at line 3, column 10
+RPAR, ), at line 3, column 11
+COLON, :, at line 3, column 12
+INDENT, 4, at line 4, column 1
+ASM, asm, at line 4, column 5
+STR, push rdi, at line 4, column 9
+ASM, asm, at line 5, column 5
+STR, call len, at line 5, column 9
+ASM, asm, at line 6, column 5
+STR, mov rdx, rax, at line 6, column 9
+ASM, asm, at line 7, column 5
+STR, pop rsi, at line 7, column 9
+ASM, asm, at line 8, column 5
+STR, mov rax, 1, at line 8, column 9
+ASM, asm, at line 9, column 5
+STR, mov rdi, 1, at line 9, column 9
+ASM, asm, at line 10, column 5
+STR, syscall, at line 10, column 9
+ASM, asm, at line 11, column 5
+STR, jmp .exit, at line 11, column 9
+DEDENT, , at line 13, column 1
+FN, fn, at line 13, column 1
+ID, input, at line 13, column 4
+LPAR, (, at line 13, column 9
+RPAR, ), at line 13, column 10
+COLON, :, at line 13, column 11
+INDENT, 4, at line 14, column 1
+ASM, asm, at line 14, column 5
+STR, mov rdi, 4096, at line 14, column 9
+ASM, asm, at line 15, column 5
+STR, call alloc, at line 15, column 9
+ASM, asm, at line 16, column 5
+STR, mov rsi, rax, at line 16, column 9
+ASM, asm, at line 17, column 5
+STR, xor rax, rax, at line 17, column 9
+ASM, asm, at line 18, column 5
+STR, xor rdi, rdi, at line 18, column 9
+ASM, asm, at line 19, column 5
+STR, mov rdx, 4096, at line 19, column 9
+ASM, asm, at line 20, column 5
+STR, syscall, at line 20, column 9
+ASM, asm, at line 21, column 5
+STR, mov byte [rsi + rax - 1], 0, at line 21, column 9
+ASM, asm, at line 22, column 5
+STR, mov rax, rsi, at line 22, column 9
+ASM, asm, at line 23, column 5
+STR, jmp .exit, at line 23, column 9
+DEDENT, , at line 25, column 1
+FN, fn, at line 25, column 1
+ID, len, at line 25, column 4
+LPAR, (, at line 25, column 7
+ID, s, at line 25, column 8
+RPAR, ), at line 25, column 9
+COLON, :, at line 25, column 10
+INDENT, 4, at line 26, column 1
+ASM, asm, at line 26, column 5
+STR, xor rax, rax, at line 26, column 9
+ASM, asm, at line 27, column 5
+STR, .loop:, at line 27, column 9
+ASM, asm, at line 28, column 5
+STR, cmp byte [rdi + rax], 0, at line 28, column 9
+ASM, asm, at line 29, column 5
+STR, je .exit, at line 29, column 9
+ASM, asm, at line 30, column 5
+STR, inc rax, at line 30, column 9
+ASM, asm, at line 31, column 5
+STR, jmp .loop, at line 31, column 9
+DEDENT, , at line 33, column 1
+FN, fn, at line 33, column 1
+ID, alloc, at line 33, column 4
+LPAR, (, at line 33, column 9
+ID, i, at line 33, column 10
+RPAR, ), at line 33, column 11
+COLON, :, at line 33, column 12
+INDENT, 4, at line 34, column 1
+ASM, asm, at line 34, column 5
+STR, mov rsi, rdi, at line 34, column 9
+ASM, asm, at line 35, column 5
+STR, mov rax, 9, at line 35, column 9
+ASM, asm, at line 36, column 5
+STR, xor rdi, rdi, at line 36, column 9
+ASM, asm, at line 37, column 5
+STR, mov rdx, 0x3, at line 37, column 9
+ASM, asm, at line 38, column 5
+STR, mov r10, 0x22, at line 38, column 9
+ASM, asm, at line 39, column 5
+STR, mov r8, -1, at line 39, column 9
+ASM, asm, at line 40, column 5
+STR, mov r9, 0, at line 40, column 9
+ASM, asm, at line 41, column 5
+STR, syscall, at line 41, column 9
+ASM, asm, at line 42, column 5
+STR, jmp .exit, at line 42, column 9
+DEDENT, , at line 42, column 1
 FN, fn, at line 1, column 1
-ID, print, at line 1, column 4
-LPAR, (, at line 1, column 9
-ID, s, at line 1, column 10
-RPAR, ), at line 1, column 11
-COLON, :, at line 1, column 12
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
 INDENT, 4, at line 2, column 1
 ASM, asm, at line 2, column 5
-STR, push rdi, at line 2, column 9
+STR, xor rax, rax, at line 2, column 9
 ASM, asm, at line 3, column 5
-STR, call len, at line 3, column 9
+STR, xor rcx, rcx, at line 3, column 9
 ASM, asm, at line 4, column 5
-STR, mov rdx, rax, at line 4, column 9
+STR, .atoi_loop:, at line 4, column 9
 ASM, asm, at line 5, column 5
-STR, pop rsi, at line 5, column 9
+STR, movzx rdx, byte [rdi + rcx], at line 5, column 9
 ASM, asm, at line 6, column 5
-STR, mov rax, 1, at line 6, column 9
+STR, cmp dl, '0', at line 6, column 9
 ASM, asm, at line 7, column 5
-STR, mov rdi, 1, at line 7, column 9
+STR, jl .done, at line 7, column 9
 ASM, asm, at line 8, column 5
-STR, syscall, at line 8, column 9
+STR, cmp dl, '9', at line 8, column 9
 ASM, asm, at line 9, column 5
-STR, jmp .exit, at line 9, column 9
-DEDENT, , at line 11, column 1
-FN, fn, at line 11, column 1
-ID, input, at line 11, column 4
-LPAR, (, at line 11, column 9
-RPAR, ), at line 11, column 10
-COLON, :, at line 11, column 11
-INDENT, 4, at line 12, column 1
+STR, jg .done, at line 9, column 9
+ASM, asm, at line 10, column 5
+STR, sub dl, '0', at line 10, column 9
+ASM, asm, at line 11, column 5
+STR, imul rax, 10, at line 11, column 9
 ASM, asm, at line 12, column 5
-STR, mov rdi, 4096, at line 12, column 9
+STR, add rax, rdx, at line 12, column 9
 ASM, asm, at line 13, column 5
-STR, call alloc, at line 13, column 9
+STR, inc rcx, at line 13, column 9
 ASM, asm, at line 14, column 5
-STR, mov rsi, rax, at line 14, column 9
+STR, jmp .atoi_loop, at line 14, column 9
 ASM, asm, at line 15, column 5
-STR, xor rax, rax, at line 15, column 9
+STR, .done:, at line 15, column 9
 ASM, asm, at line 16, column 5
-STR, xor rdi, rdi, at line 16, column 9
-ASM, asm, at line 17, column 5
-STR, mov rdx, 4096, at line 17, column 9
-ASM, asm, at line 18, column 5
-STR, syscall, at line 18, column 9
-ASM, asm, at line 19, column 5
-STR, mov byte [rsi + rax - 1], 0, at line 19, column 9
-ASM, asm, at line 20, column 5
-STR, mov rax, rsi, at line 20, column 9
-ASM, asm, at line 21, column 5
-STR, jmp .exit, at line 21, column 9
-DEDENT, , at line 23, column 1
-FN, fn, at line 23, column 1
-ID, len, at line 23, column 4
-LPAR, (, at line 23, column 7
-ID, s, at line 23, column 8
-RPAR, ), at line 23, column 9
-COLON, :, at line 23, column 10
-INDENT, 4, at line 24, column 1
-ASM, asm, at line 24, column 5
-STR, xor rax, rax, at line 24, column 9
-ASM, asm, at line 25, column 5
-STR, .loop:, at line 25, column 9
-ASM, asm, at line 26, column 5
-STR, cmp byte [rdi + rax], 0, at line 26, column 9
-ASM, asm, at line 27, column 5
-STR, je .exit, at line 27, column 9
-ASM, asm, at line 28, column 5
-STR, inc rax, at line 28, column 9
-ASM, asm, at line 29, column 5
-STR, jmp .loop, at line 29, column 9
-DEDENT, , at line 31, column 1
-FN, fn, at line 31, column 1
-ID, alloc, at line 31, column 4
-LPAR, (, at line 31, column 9
-ID, i, at line 31, column 10
-RPAR, ), at line 31, column 11
-COLON, :, at line 31, column 12
-INDENT, 4, at line 32, column 1
-ASM, asm, at line 32, column 5
-STR, mov rsi, rdi, at line 32, column 9
-ASM, asm, at line 33, column 5
-STR, mov rax, 9, at line 33, column 9
-ASM, asm, at line 34, column 5
-STR, xor rdi, rdi, at line 34, column 9
-ASM, asm, at line 35, column 5
-STR, mov rdx, 0x3, at line 35, column 9
-ASM, asm, at line 36, column 5
-STR, mov r10, 0x22, at line 36, column 9
-ASM, asm, at line 37, column 5
-STR, mov r8, -1, at line 37, column 9
-ASM, asm, at line 38, column 5
-STR, mov r9, 0, at line 38, column 9
-ASM, asm, at line 39, column 5
-STR, syscall, at line 39, column 9
-ASM, asm, at line 40, column 5
-STR, jmp .exit, at line 40, column 9
-DEDENT, , at line 40, column 1
-EOF, , at line 40, column 1
+STR, jmp .exit, at line 16, column 9
+DEDENT, , at line 16, column 1
+EOF, , at line 16, column 1

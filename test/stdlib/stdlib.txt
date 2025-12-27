@@ -1,3 +1,5 @@
+import "stdlib/casting"
+
 fn print(s):
     asm "push rdi"
     asm "call len"

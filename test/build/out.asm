@@ -10,24 +10,41 @@ syscall
 main:
 push rbp
 mov rbp, rsp
-sub rsp, 0
+sub rsp, 16
 mov rax, label_1
 push rax
 pop rdi
-push 0
 call print
-add rsp, 8
+push 0
 call input
+add rsp, 8
 push rax
 pop rdi
 push 0
-call print
+call atoi
 add rsp, 8
+mov [rbp -8], rax 
 mov rax, label_2
 push rax
 pop rdi
+push 0
 call print
-xor rax, rax
+add rsp, 8
+push 0
+call input
+add rsp, 8
+push rax
+pop rdi
+push 0
+call atoi
+add rsp, 8
+mov [rbp -16], rax 
+mov rax, [rbp -16]
+push rax
+mov rax, [rbp -8]
+pop rbx
+add rax, rbx
+jmp .exit
 .exit:
 leave
 ret
@@ -99,7 +116,31 @@ xor rax, rax
 .exit:
 leave
 ret
+atoi:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+xor rax, rax
+xor rcx, rcx
+.atoi_loop:
+movzx rdx, byte [rdi + rcx]
+cmp dl, '0'
+jl .done
+cmp dl, '9'
+jg .done
+sub dl, '0'
+imul rax, 10
+add rax, rdx
+inc rcx
+jmp .atoi_loop
+.done:
+jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
 section .data
 section .rodata
 label_1: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 58, 32, 0
-label_2: db 10, 0
+label_2: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 58, 32, 0

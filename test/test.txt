@@ -2,5 +2,8 @@ import "stdlib/stdlib"
 
 fn main():
     print("bir şey girin: ")
-    print(input())
-    print("\n")
+    n1 = atoi(input())
+    print("bir şey girin: ")
+    n2 = atoi(input())
+
+    return n1 + n2

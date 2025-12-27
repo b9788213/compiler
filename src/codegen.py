@@ -57,7 +57,7 @@ class CodeGen:
         self.currentf = f
 
         self.emit(f"{f.name}:")
-        self.emitstack("push rbp") # rbp + return adress zaten 16 byte
+        self.emit("push rbp") # rbp + return adress zaten 16 byte
         self.emit("mov rbp, rsp")
         self.emit(f"sub rsp, {stack(f)}")
 
@@ -167,7 +167,7 @@ class CodeGen:
 
         if not self.isaligned:
             self.emitstack("push 0")  # şimdi hizalı
-            self.emitstack(f"call {c.name}")  # 8 byte return adress
+            self.emit(f"call {c.name}")  # 8 byte return adress
             self.emitstack("add rsp, 8")
         else:
             self.emitstack(f"call {c.name}")
