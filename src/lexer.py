@@ -15,6 +15,7 @@ class Token(NamedTuple):
 token_specification = (
     ('STR', r'".*?"'),
 
+    ('ASM', r'\basm\b'),
     ('FN', r'\bfn\b'),
     ('RET', r'\breturn\b'),
     ('IMPORT', r'\bimport\b'),

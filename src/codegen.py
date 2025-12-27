@@ -1,12 +1,6 @@
 from node import *
 
-class Reg(tuple):
-    def __getitem__(self, i):
-        try: return super().__getitem__(i)
-        except Exception: raise NotImplementedError("cant send More Than 6 parameters")
-
-regs = Reg(("rdi", "rsi", "rdx", "rcx", "r8", "r9"))
-revregs = Reg(regs[::-1])
+regs = ("rdi", "rsi", "rdx", "rcx", "r8", "r9")
 
 class CodeGen:
     def __init__(self, p: Program):
@@ -79,7 +73,11 @@ class CodeGen:
     def gen_body(self, b: Body):
         for stmt in b.code:
 
-            if isinstance(stmt, Assign):
+            if isinstance(stmt, Asm):
+                self.emit(stmt.value)
+                continue
+
+            elif isinstance(stmt, Assign):
                 self.gen_expr(stmt.value)
 
                 if stmt.name in self.data.keys():
@@ -157,12 +155,15 @@ class CodeGen:
         self.emitstack("pop rbx")
 
     def call(self, c: Call):
+        needed = regs[:len(c.args)]
+        rev = needed[::-1]
+
         for arg in c.args:
             self.gen_expr(arg)
             self.emitstack("push rax")
 
         for i in range(len(c.args)):
-            self.emitstack(f"pop {revregs[i]}")
+            self.emitstack(f"pop {rev[i]}")
 
         if not self.isaligned:
             self.emitstack("push 0") # şimdi hizalı

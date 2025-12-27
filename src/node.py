@@ -67,3 +67,7 @@ class Func:
     args: list[str]  = field(default_factory=list)
     body: Body = field(default_factory=Body)
     vars: Vars= field(default_factory=Vars)
+
+@dataclass()
+class Asm:
+    value: str

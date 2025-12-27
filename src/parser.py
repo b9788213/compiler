@@ -72,6 +72,9 @@ class Parser:
     #-----stmt-----
     def parse_stmt(self):
 
+        if self.match("ASM"):
+            return Asm(self.expect("STR").value)
+
         if self.check("ID"):
             name = self.pop().value
 

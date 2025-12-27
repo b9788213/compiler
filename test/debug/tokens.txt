@@ -1,14 +1,52 @@
 FN, fn, at line 1, column 1
-ID, main, at line 1, column 4
-LPAR, (, at line 1, column 8
-RPAR, ), at line 1, column 9
-COLON, :, at line 1, column 10
+ID, print, at line 1, column 4
+LPAR, (, at line 1, column 9
+ID, s, at line 1, column 10
+RPAR, ), at line 1, column 11
+COLON, :, at line 1, column 12
 INDENT, 4, at line 2, column 1
-RET, return, at line 2, column 5
-INT, 1, at line 2, column 12
-PLUS, +, at line 2, column 14
-INT, 2, at line 2, column 16
-MUL, *, at line 2, column 18
-INT, 3, at line 2, column 20
-DEDENT, , at line 2, column 1
-EOF, , at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, call len, at line 2, column 9
+ASM, asm, at line 3, column 5
+STR, mov rdx, rax, at line 3, column 9
+ASM, asm, at line 4, column 5
+STR, mov rax, 1, at line 4, column 9
+ASM, asm, at line 5, column 5
+STR, mov rsi, rdi, at line 5, column 9
+ASM, asm, at line 6, column 5
+STR, mov rdi, 1, at line 6, column 9
+ASM, asm, at line 7, column 5
+STR, syscall, at line 7, column 9
+DEDENT, , at line 9, column 1
+FN, fn, at line 9, column 1
+ID, len, at line 9, column 4
+LPAR, (, at line 9, column 7
+ID, s, at line 9, column 8
+RPAR, ), at line 9, column 9
+COLON, :, at line 9, column 10
+INDENT, 4, at line 10, column 1
+ASM, asm, at line 10, column 5
+STR, xor rax, rax, at line 10, column 9
+ASM, asm, at line 11, column 5
+STR, .loop:, at line 11, column 9
+ASM, asm, at line 12, column 5
+STR, cmp byte [rdi + rax], 0, at line 12, column 9
+ASM, asm, at line 13, column 5
+STR, je .exit, at line 13, column 9
+ASM, asm, at line 14, column 5
+STR, inc rax, at line 14, column 9
+ASM, asm, at line 15, column 5
+STR, jmp .loop, at line 15, column 9
+DEDENT, , at line 17, column 1
+FN, fn, at line 17, column 1
+ID, main, at line 17, column 4
+LPAR, (, at line 17, column 8
+RPAR, ), at line 17, column 9
+COLON, :, at line 17, column 10
+INDENT, 4, at line 18, column 1
+ID, print, at line 18, column 5
+LPAR, (, at line 18, column 10
+STR, merhaba, at line 18, column 11
+RPAR, ), at line 18, column 20
+DEDENT, , at line 18, column 1
+EOF, , at line 18, column 1
