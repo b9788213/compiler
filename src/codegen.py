@@ -1,3 +1,5 @@
+from operator import add
+
 from node import *
 
 class Reg(tuple):
@@ -64,7 +66,47 @@ class CodeGen:
                 break # gereksiz kısımları üretmez
 
     def gen_expr(self, expr):
-        pass
+
+        if isinstance(expr, Call):
+            pass
+
+        elif isinstance(expr, Id):
+            pass
+
+        elif isinstance(expr, Int):
+            self.emit(f"mov rax, {expr.value}")
+
+        elif isinstance(expr, Float):
+            pass
+
+        elif isinstance(expr, String):
+            pass
+
+        elif isinstance(expr, Neg):
+            pass
+
+        elif isinstance(expr, BinOp):
+            self.gen_expr(expr.right)
+            self.emit("push rax")
+            self.gen_expr(expr.left)
+            self.emit("pop rbx")
+
+            if expr.op == "PLUS":
+                self.emit("add rax, rbx")
+
+            elif expr.op == "MINUS":
+                self.emit("sub rax, rbx")
+
+            elif expr.op == "MUL":
+                self.emit("imul rax, rbx")
+
+            elif expr.op == "DIV":
+                self.emit("cqo")
+                self.emit("idiv rbx")
+
+        elif isinstance(expr, Comp):
+            pass
+
 
 def stack(f: Func) -> int:
     offset = 0
