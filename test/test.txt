@@ -1,4 +1,4 @@
-import stdlib
+import "stdlib/stdlib"
 
 fn main():
     print("bir şey girin: ")

@@ -41,7 +41,7 @@ class Parser:
         while not self.match('EOF'):
 
             if self.match("IMPORT"):
-                self.handle_import(self.expect("ID").value)
+                self.handle_import(self.expect("STR").value)
                 continue
 
             if self.match("FN"):
