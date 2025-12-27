@@ -9,7 +9,7 @@ class Token(NamedTuple):
     column: int
 
     def __str__(self):
-        return f"{self.type}, {self.value}, {self.line}, {self.column}"
+        return f"{self.type}, {self.value}, at line {self.line}, column {self.column}"
 
 
 token_specification = [

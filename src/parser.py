@@ -19,7 +19,7 @@ class Parser:
 
     def expect(self, s):
         t = self.pop()
-        if t.type != s: raise SyntaxError(f"Expected {s}, but got {t}. at line {t.line}, column {t.column}")
+        if t.type != s: raise SyntaxError(f"Expected {s}, but got ({t}).")
         return t
 
     def check(self, s) -> bool:
@@ -32,7 +32,7 @@ class Parser:
         return False
 
     def error(self) -> NoReturn:
-        raise SyntaxError(f"Bad Token {self.peek()} at line {self.peek().line}, column {self.peek().column}")
+        raise SyntaxError(f"Bad Token ({self.peek()})")
 
     #-----entry-----
     def parse(self):

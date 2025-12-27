@@ -9,3 +9,4 @@ fn main():
     merhaba(1+2, 3-4)
     final = hesapla(yari_cap, 2.7 + 3)
     return final
+    return 1 == 3
