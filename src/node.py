@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -49,12 +49,18 @@ class Ret:
     value: Any
 
 @dataclass()
+class Var:
+    name: str
+    offset: int
+
+@dataclass()
 class Program:
     funcs: list[Func]
-    statics: list[str]
+    statics: list[Id]
 
 @dataclass()
 class Func:
     name: str
-    args: list
+    args: list[str]
     body: list
+    vars: list[Var] = field(default_factory=list[Var])

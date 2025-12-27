@@ -18,7 +18,7 @@ token_specification = [
     ('FN', r'\bfn\b'),
     ('RET', r'\breturn\b'),
     ('IMPORT', r'\bimport\b'),
-    ('GLOBAL', r'\bglobal\b'),
+    ('STATIC', r'\bglobal\b'),
 
     ('EQEQ', r'=='),
     ('NEQ', r'!='),

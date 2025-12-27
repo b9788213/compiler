@@ -5,8 +5,8 @@ fn hesapla(r, carpant):
     return sonuc * carpant + "merhaba"
 
 fn main():
-    yari_cap = 10
+    global yari_cap = 10
     merhaba(1+2, 3-4)
-    final = hesapla(yari_cap, 2.7 + 3)
+    global final = hesapla(yari_cap, 2.7 + 3)
     return final
     return 1 == 3

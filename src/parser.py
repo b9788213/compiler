@@ -83,7 +83,7 @@ class Parser:
         #Static decleration
         if self.match("STATIC"):
             name = self.expect("ID").value
-            self.p.statics.append(name)
+            self.p.statics.append(Id(name))
             self.expect("EQ")
             return Assign(name, self.compare())
 
