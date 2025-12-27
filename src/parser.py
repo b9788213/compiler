@@ -1,6 +1,7 @@
 from typing import NoReturn
 from node import *
-from lexer import Token
+from lexer import Token, lex
+from filemng import get_import
 
 class Parser:
     def __init__(self, tokens: list[Token]):
@@ -160,4 +161,5 @@ class Parser:
         return elements
 
     def handle_import(self, name: str):
-        pass
+        file = get_import(name)
+        self.tokens.extend(lex(file))

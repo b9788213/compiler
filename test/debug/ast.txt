@@ -1,4 +1,8 @@
 Program
 └── Func(name='main', args=[])
     └── Ret
-        └── Int(0)
+        └── BinOp(op='PLUS')
+            ├── Int(1)
+            └── BinOp(op='MUL')
+                ├── Int(2)
+                └── Int(3)

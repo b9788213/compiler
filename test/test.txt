@@ -1,4 +1,2 @@
-import test
-
 fn main():
-    return 0
+    return 1 + 2 * 3
