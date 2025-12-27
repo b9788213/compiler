@@ -23,4 +23,4 @@ def save(tokens, ast, asm):
     with open(outfile, 'w') as f: f.write(asm)
 
 def get_import(name: str) -> str:
-    return (parent / name).read_text()
+    return (parent / name).with_suffix(".txt").read_text()

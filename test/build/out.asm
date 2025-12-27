@@ -7,6 +7,19 @@ call main
 mov rdi, rax
 mov rax, 60
 syscall
+main:
+push rbp
+mov rbp, rsp
+sub rsp, 0
+mov rax, label_1
+push rax
+pop rdi
+push 0
+call print
+xor rax, rax
+.exit:
+leave
+ret
 print:
 push rbp
 mov rbp, rsp
@@ -32,19 +45,6 @@ cmp byte [rdi + rax], 0
 je .exit
 inc rax
 jmp .loop
-.exit:
-leave
-ret
-main:
-push rbp
-mov rbp, rsp
-sub rsp, 0
-mov rax, label_1
-push rax
-pop rdi
-push 0
-call print
-xor rax, rax
 .exit:
 leave
 ret

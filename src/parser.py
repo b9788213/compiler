@@ -165,4 +165,5 @@ class Parser:
 
     def handle_import(self, name: str):
         file = get_import(name)
+        del self.tokens[-1] # EOF
         self.tokens.extend(lex(file))

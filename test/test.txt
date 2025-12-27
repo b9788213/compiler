@@ -1,18 +1,4 @@
-fn print(s):
-    asm "call len"
-    asm "mov rdx, rax"
-    asm "mov rax, 1"
-    asm "mov rsi, rdi"
-    asm "mov rdi, 1"
-    asm "syscall"
-
-fn len(s):
-    asm "xor rax, rax"
-    asm ".loop:"
-    asm "cmp byte [rdi + rax], 0"
-    asm "je .exit"
-    asm "inc rax"
-    asm "jmp .loop"
+import stdlib
 
 fn main():
     print("merhaba")

@@ -1,3 +1,16 @@
+IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+FN, fn, at line 3, column 1
+ID, main, at line 3, column 4
+LPAR, (, at line 3, column 8
+RPAR, ), at line 3, column 9
+COLON, :, at line 3, column 10
+INDENT, 4, at line 4, column 1
+ID, print, at line 4, column 5
+LPAR, (, at line 4, column 10
+STR, merhaba, at line 4, column 11
+RPAR, ), at line 4, column 20
+DEDENT, , at line 4, column 1
 FN, fn, at line 1, column 1
 ID, print, at line 1, column 4
 LPAR, (, at line 1, column 9
@@ -37,16 +50,5 @@ ASM, asm, at line 14, column 5
 STR, inc rax, at line 14, column 9
 ASM, asm, at line 15, column 5
 STR, jmp .loop, at line 15, column 9
-DEDENT, , at line 17, column 1
-FN, fn, at line 17, column 1
-ID, main, at line 17, column 4
-LPAR, (, at line 17, column 8
-RPAR, ), at line 17, column 9
-COLON, :, at line 17, column 10
-INDENT, 4, at line 18, column 1
-ID, print, at line 18, column 5
-LPAR, (, at line 18, column 10
-STR, merhaba, at line 18, column 11
-RPAR, ), at line 18, column 20
-DEDENT, , at line 18, column 1
-EOF, , at line 18, column 1
+DEDENT, , at line 16, column 1
+EOF, , at line 16, column 1
