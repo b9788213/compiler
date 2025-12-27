@@ -1,8 +1,13 @@
 Program
 ├── Func(name='main', args=[])
-│   └── Call(name='print')
-│       └── String(merhaba)
+│   ├── Call(name='print')
+│   │   └── String(merhaba )
+│   ├── Call(name='print')
+│   │   └── String(merhaba )
+│   └── Ret
+│       └── Int(0)
 ├── Func(name='print', args=['s'])
+│   ├── Unknown(Asm)
 │   ├── Unknown(Asm)
 │   ├── Unknown(Asm)
 │   ├── Unknown(Asm)

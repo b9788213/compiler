@@ -75,7 +75,6 @@ class CodeGen:
 
             if isinstance(stmt, Asm):
                 self.emit(stmt.value)
-                continue
 
             elif isinstance(stmt, Assign):
                 self.gen_expr(stmt.value)
@@ -93,6 +92,7 @@ class CodeGen:
                 self.emit("jmp .exit")
                 break # gereksiz kısımları üretme
 
+        else: # ret olmadan çıkılırsa
             self.emit("xor rax, rax") # yanlış değer dönmemesi için raxı sıfırla
 
     def gen_expr(self, expr):

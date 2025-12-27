@@ -1,4 +1,6 @@
 import stdlib
 
 fn main():
-    print("merhaba")
+    print("merhaba ")
+    print("merhaba ")
+    return 0

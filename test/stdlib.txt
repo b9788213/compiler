@@ -5,6 +5,7 @@ fn print(s):
     asm "mov rsi, rdi"
     asm "mov rdi, 1"
     asm "syscall"
+    asm "jmp .exit"
 
 fn len(s):
     asm "xor rax, rax"

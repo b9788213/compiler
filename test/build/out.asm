@@ -16,7 +16,13 @@ push rax
 pop rdi
 push 0
 call print
-xor rax, rax
+mov rax, label_2
+push rax
+pop rdi
+push 0
+call print
+mov rax, 0
+jmp .exit
 .exit:
 leave
 ret
@@ -31,6 +37,8 @@ mov rax, 1
 mov rsi, rdi
 mov rdi, 1
 syscall
+jmp .exit
+xor rax, rax
 .exit:
 leave
 ret
@@ -45,9 +53,11 @@ cmp byte [rdi + rax], 0
 je .exit
 inc rax
 jmp .loop
+xor rax, rax
 .exit:
 leave
 ret
 section .data
 section .rodata
-label_1: db 109, 101, 114, 104, 97, 98, 97, 0
+label_1: db 109, 101, 114, 104, 97, 98, 97, 32, 0
+label_2: db 109, 101, 114, 104, 97, 98, 97, 32, 0
