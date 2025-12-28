@@ -1,4 +1,28 @@
 import "stdlib/stdlib"
 
 fn main():
-    print("merhaba\n")
+    print("bir sayı girin: ")
+    n1 = atoi(input())
+    print("bir sayı girin: ")
+    n2 = atoi(input())
+
+    print("bir operatör girin(1, 2, 3, 4): ")
+    o = atoi(input())
+
+    if o == 1:
+        print("toplamı: ")
+        print(itoa(n1 + n2))
+
+    elif o == 2:
+        print("farkı: ")
+        print(itoa(n1 - n2))
+
+    elif o == 3:
+        print("çarpımı: ")
+        print(itoa(n1 * n2))
+
+    else:
+        print("bölümü: ")
+        print(itoa(n1 / n2))
+
+    print("\n")
