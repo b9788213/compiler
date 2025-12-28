@@ -39,6 +39,91 @@ push 0
 call atoi
 add rsp, 8
 mov [rbp -16], rax 
+mov rax, [rbp -16]
+push rax
+mov rax, [rbp -8]
+pop rbx
+add rax, rbx
+push rax
+pop rdi
+push 0
+call itoa
+add rsp, 8
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, label_3
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, [rbp -16]
+push rax
+mov rax, [rbp -8]
+pop rbx
+sub rax, rbx
+push rax
+pop rdi
+push 0
+call itoa
+add rsp, 8
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, label_4
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, [rbp -16]
+push rax
+mov rax, [rbp -8]
+pop rbx
+imul rax, rbx
+push rax
+pop rdi
+push 0
+call itoa
+add rsp, 8
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, label_5
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, [rbp -16]
+push rax
+mov rax, [rbp -8]
+pop rbx
+cqo
+idiv rbx
+push rax
+pop rdi
+push 0
+call itoa
+add rsp, 8
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
+mov rax, label_6
+push rax
+pop rdi
+push 0
+call print
+add rsp, 8
 xor rax, rax
 .exit:
 leave
@@ -165,22 +250,48 @@ push rbp
 mov rbp, rsp
 sub rsp, 16
 mov [rbp -8], rdi
-mov rax, rdi
-mov rbx, 10
-cmp rax, 0
-jg .loop
-push '-'
+push rdi
+mov rdi, 4096
+call alloc 
+pop rdi
+ mov r8, rax
+ mov r12, rax
+ mov rax, rdi
+ mov rbx, 10
+ xor rcx, rcx
+ cmp rax, 0
+jge .is_zero
 neg rax
+mov byte [r8], '-'
+inc r8
+.is_zero:
+test rax, rax
+jnz .loop
+mov rdx, '0'
+push rdx
+inc rcx
+jmp .write_to_buffer
 .loop:
 test rax, rax
+jz .write_to_buffer
 cqo
 idiv rbx
-jz .end
 add rdx, '0'
 push rdx
+inc rcx
 jmp .loop
-.end:
-pop 
+.write_to_buffer:
+test rcx, rcx
+jz .done
+pop rdx
+mov [r8], dl
+inc r8
+dec rcx
+jmp .write_to_buffer
+.done:
+mov byte [r8], 0
+mov rax, r12
+jmp .exit
 xor rax, rax
 .exit:
 leave
@@ -189,3 +300,7 @@ section .data
 section .rodata
 label_1: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 58, 32, 0
 label_2: db 98, 105, 114, 32, 197, 159, 101, 121, 32, 103, 105, 114, 105, 110, 58, 32, 0
+label_3: db 10, 0
+label_4: db 10, 0
+label_5: db 10, 0
+label_6: db 10, 0

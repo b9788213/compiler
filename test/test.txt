@@ -5,3 +5,12 @@ fn main():
     n1 = atoi(input())
     print("bir şey girin: ")
     n2 = atoi(input())
+
+    print(itoa(n1+n2))
+    print("\n")
+    print(itoa(n1-n2))
+    print("\n")
+    print(itoa(n1*n2))
+    print("\n")
+    print(itoa(n1/n2))
+    print("\n")
