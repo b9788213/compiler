@@ -6,7 +6,7 @@ fn main():
     print("bir sayı girin: ")
     n2 = atoi(input())
 
-    print("bir operatör girin(1, 2, 3, 4): ")
+    print("bir operatör girin: ")
     o = atoi(input())
 
     if o == 1:
@@ -21,8 +21,12 @@ fn main():
         print("çarpımı: ")
         print(itoa(n1 * n2))
 
-    else:
+    elif o == 4:
         print("bölümü: ")
         print(itoa(n1 / n2))
+
+    else:
+        print("modu: ")
+        print(itoa(n1 % n2))
 
     print("\n")

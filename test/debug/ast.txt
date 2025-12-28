@@ -11,7 +11,7 @@ Program
 │   │   └── Call(name='atoi')
 │   │       └── Call(name='input')
 │   ├── Call(name='print')
-│   │   └── String(bir operatör girin(1, 2, 3, 4): )
+│   │   └── String(bir operatör girin: )
 │   ├── Assign(name='o')
 │   │   └── Call(name='atoi')
 │   │       └── Call(name='input')

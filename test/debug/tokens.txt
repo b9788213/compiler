@@ -32,8 +32,8 @@ RPAR, ), at line 7, column 21
 RPAR, ), at line 7, column 22
 ID, print, at line 9, column 5
 LPAR, (, at line 9, column 10
-STR, bir operatör girin(1, 2, 3, 4): , at line 9, column 11
-RPAR, ), at line 9, column 45
+STR, bir operatör girin: , at line 9, column 11
+RPAR, ), at line 9, column 33
 ID, o, at line 10, column 5
 EQ, =, at line 10, column 7
 ID, atoi, at line 10, column 9
@@ -102,8 +102,11 @@ ID, n2, at line 22, column 25
 RPAR, ), at line 22, column 27
 RPAR, ), at line 22, column 28
 DEDENT, , at line 24, column 1
-ELSE, else, at line 24, column 5
-COLON, :, at line 24, column 9
+ELIF, elif, at line 24, column 5
+ID, o, at line 24, column 10
+EQEQ, ==, at line 24, column 12
+INT, 4, at line 24, column 15
+COLON, :, at line 24, column 16
 INDENT, 8, at line 25, column 1
 ID, print, at line 25, column 9
 LPAR, (, at line 25, column 14
@@ -119,12 +122,29 @@ ID, n2, at line 26, column 25
 RPAR, ), at line 26, column 27
 RPAR, ), at line 26, column 28
 DEDENT, , at line 28, column 1
-ID, print, at line 28, column 5
-LPAR, (, at line 28, column 10
+ELSE, else, at line 28, column 5
+COLON, :, at line 28, column 9
+INDENT, 8, at line 29, column 1
+ID, print, at line 29, column 9
+LPAR, (, at line 29, column 14
+STR, modu: , at line 29, column 15
+RPAR, ), at line 29, column 23
+ID, print, at line 30, column 9
+LPAR, (, at line 30, column 14
+ID, itoa, at line 30, column 15
+LPAR, (, at line 30, column 19
+ID, n1, at line 30, column 20
+MOD, %, at line 30, column 23
+ID, n2, at line 30, column 25
+RPAR, ), at line 30, column 27
+RPAR, ), at line 30, column 28
+DEDENT, , at line 32, column 1
+ID, print, at line 32, column 5
+LPAR, (, at line 32, column 10
 STR, 
-, at line 28, column 11
-RPAR, ), at line 28, column 15
-DEDENT, , at line 28, column 1
+, at line 32, column 11
+RPAR, ), at line 32, column 15
+DEDENT, , at line 32, column 1
 IMPORT, import, at line 1, column 1
 STR, stdlib/casting, at line 1, column 8
 FN, fn, at line 3, column 1
