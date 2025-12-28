@@ -63,6 +63,7 @@ class CodeGen:
 
         self.gen_body(f.body)
 
+        self.emit("xor rax, rax") # return yoksa 0 döndür
         self.emit(".exit:")
         if f.name == "main":
             self.emit("mov rdi, rax")
@@ -122,9 +123,6 @@ class CodeGen:
                 self.gen_expr(stmt.value)
                 self.emit("jmp .exit")
                 break # gereksiz kısımları üretme
-
-        else: # ret olmadan çıkılırsa
-            self.emit("xor rax, rax") # yanlış değer dönmemesi için raxı sıfırla
 
     def gen_expr(self, expr):
 

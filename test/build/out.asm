@@ -13,7 +13,6 @@ mov rax, label_3
 push rax
 pop rdi
 call print
-xor rax, rax
 jmp .label_1
 .label_2:
 xor rax, rax
