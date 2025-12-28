@@ -45,6 +45,7 @@ class CodeGen:
             ascii_val = ", ".join(str(b) for b in bytes_val)
             self.emit(f"{l}: db {ascii_val}, 0")
 
+        self.emit("section .note.GNU-stack noalloc noexec nowrite progbits")
         return "\n".join(self.asm)
 
     def gen_func(self, f: Func):

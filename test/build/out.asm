@@ -297,3 +297,4 @@ label_3: db 10, 0
 label_4: db 10, 0
 label_5: db 10, 0
 label_6: db 10, 0
+section .note.GNU-stack noalloc noexec nowrite progbits
