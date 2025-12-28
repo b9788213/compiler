@@ -107,6 +107,17 @@ class CodeGen:
                 if stmt.elsebody: self.gen_body(stmt.elsebody)
                 self.emit(f"{endlab}:")
 
+            elif isinstance(stmt, While):
+                startlab = self.getlabel()
+                endlab = self.getlabel()
+
+                self.emit(f"{startlab}:")
+                self.gen_expr(stmt.cond)
+                self.emit(f"jz {endlab}")
+                self.gen_body(stmt.body)
+                self.emit(f"jmp {startlab}")
+                self.emit(f"{endlab}:")
+
             elif isinstance(stmt, Ret):
                 self.gen_expr(stmt.value)
                 self.emit("jmp .exit")
@@ -130,7 +141,7 @@ class CodeGen:
             self.emit(f"mov rax, {expr.value}")
 
         elif isinstance(expr, Float):
-            raise NotImplementedError("not implemented float")
+            raise NotImplementedError("Not implemented float")
 
         elif isinstance(expr, String):
             label = self.getlabel()
