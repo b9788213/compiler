@@ -90,6 +90,9 @@ class Parser:
             if elsebody: return ConditionelStruct(ifs, elsebody)
             return ConditionelStruct(ifs)
 
+        if self.match("WHILE"):
+            return While(self.compare(), self.getbody())
+
         if self.check("ID"):
             name = self.pop().value
 

@@ -81,3 +81,8 @@ class If:
 class ConditionelStruct:
     ifs: list[If]
     elsebody: Body|None = field(default_factory=None)
+
+@dataclass()
+class While:
+    cond: Comp
+    body: Body
