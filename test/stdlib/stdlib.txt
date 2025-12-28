@@ -2,10 +2,9 @@ import "stdlib/casting"
 
 fn print(s):
      asm
-     "push rdi"
      "call len"
      "mov rdx, rax"
-     "pop rsi"
+     "mov rsi, [rbp-8]"
      "mov rax, 1"
      "mov rdi, 1"
      "syscall"

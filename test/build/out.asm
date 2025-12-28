@@ -133,10 +133,9 @@ push rbp
 mov rbp, rsp
 sub rsp, 16
 mov [rbp -8], rdi
-push rdi
 call len
 mov rdx, rax
-pop rsi
+mov rsi, [rbp-8]
 mov rax, 1
 mov rdi, 1
 syscall
