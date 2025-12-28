@@ -43,123 +43,123 @@ Program
 │       └── String(
 )
 ├── Func(name='print', args=['s'])
-│   ├── Asm(push rdi)
-│   ├── Asm(call len)
-│   ├── Asm(mov rdx, rax)
-│   ├── Asm(pop rsi)
-│   ├── Asm(mov rax, 1)
-│   ├── Asm(mov rdi, 1)
-│   ├── Asm(syscall)
-│   └── Asm(jmp .exit)
+│   └── Asm(push rdi
+call len
+mov rdx, rax
+pop rsi
+mov rax, 1
+mov rdi, 1
+syscall
+jmp .exit)
 ├── Func(name='input', args=[])
-│   ├── Asm(mov rdi, 4096)
-│   ├── Asm(call alloc)
-│   ├── Asm(mov rsi, rax)
-│   ├── Asm(xor rax, rax)
-│   ├── Asm(xor rdi, rdi)
-│   ├── Asm(mov rdx, 4096)
-│   ├── Asm(syscall)
-│   ├── Asm(mov byte [rsi + rax - 1], 0)
-│   ├── Asm(mov rax, rsi)
-│   └── Asm(jmp .exit)
+│   └── Asm(mov rdi, 4096
+call alloc
+mov rsi, rax
+xor rax, rax
+xor rdi, rdi
+mov rdx, 4096
+syscall
+mov byte [rsi + rax - 1], 0
+mov rax, rsi
+jmp .exit)
 ├── Func(name='len', args=['s'])
-│   ├── Asm(xor rax, rax)
-│   ├── Asm(.loop:)
-│   ├── Asm(cmp byte [rdi + rax], 0)
-│   ├── Asm(je .exit)
-│   ├── Asm(inc rax)
-│   └── Asm(jmp .loop)
+│   └── Asm(xor rax, rax
+.loop:
+cmp byte [rdi + rax], 0
+je .exit
+inc rax
+jmp .loop)
 ├── Func(name='alloc', args=['i'])
-│   ├── Asm(mov rsi, rdi)
-│   ├── Asm(mov rax, 9)
-│   ├── Asm(xor rdi, rdi)
-│   ├── Asm(mov rdx, 0x3)
-│   ├── Asm(mov r10, 0x22)
-│   ├── Asm(mov r8, -1)
-│   ├── Asm(mov r9, 0)
-│   ├── Asm(syscall)
-│   └── Asm(jmp .exit)
+│   └── Asm(mov rsi, rdi
+mov rax, 9
+xor rdi, rdi
+mov rdx, 0x3
+mov r10, 0x22
+mov r8, -1
+mov r9, 0
+syscall
+jmp .exit)
 ├── Func(name='atoi', args=['s'])
-│   ├── Asm(xor rax, rax)
-│   ├── Asm(xor rcx, rcx)
-│   ├── Asm(movzx rdx, byte [rdi])
-│   ├── Asm(cmp dl, '-')
-│   ├── Asm(je .prepare_negative)
-│   ├── Asm(cmp dl, '+')
-│   ├── Asm(jne .atoi_loop)
-│   ├── Asm(inc rcx)
-│   ├── Asm(jmp .atoi_loop)
-│   ├── Asm(.prepare_negative:)
-│   ├── Asm(inc rcx)
-│   ├── Asm(.neg_loop:)
-│   ├── Asm(movzx rdx, byte [rdi + rcx])
-│   ├── Asm(test dl, dl)
-│   ├── Asm(jz .apply_neg)
-│   ├── Asm(cmp dl, '0')
-│   ├── Asm(jl .apply_neg)
-│   ├── Asm(cmp dl, '9')
-│   ├── Asm(jg .apply_neg)
-│   ├── Asm(sub dl, '0')
-│   ├── Asm(imul rax, 10)
-│   ├── Asm(add rax, rdx)
-│   ├── Asm(inc rcx)
-│   ├── Asm(jmp .neg_loop)
-│   ├── Asm(.apply_neg:)
-│   ├── Asm(neg rax)
-│   ├── Asm(jmp .exit)
-│   ├── Asm(.atoi_loop:)
-│   ├── Asm(movzx rdx, byte [rdi + rcx])
-│   ├── Asm(test dl, dl)
-│   ├── Asm(jz .exit)
-│   ├── Asm(cmp dl, '0')
-│   ├── Asm(jl .exit)
-│   ├── Asm(cmp dl, '9')
-│   ├── Asm(jg .exit)
-│   ├── Asm(sub dl, '0')
-│   ├── Asm(imul rax, 10)
-│   ├── Asm(add rax, rdx)
-│   ├── Asm(inc rcx)
-│   └── Asm(jmp .atoi_loop)
+│   └── Asm(xor rax, rax
+xor rcx, rcx
+movzx rdx, byte [rdi]
+cmp dl, '-'
+je .prepare_negative
+cmp dl, '+'
+jne .atoi_loop
+inc rcx
+jmp .atoi_loop
+.prepare_negative:
+inc rcx
+.neg_loop:
+movzx rdx, byte [rdi + rcx]
+test dl, dl
+jz .apply_neg
+cmp dl, '0'
+jl .apply_neg
+cmp dl, '9'
+jg .apply_neg
+sub dl, '0'
+imul rax, 10
+add rax, rdx
+inc rcx
+jmp .neg_loop
+.apply_neg:
+neg rax
+jmp .exit
+.atoi_loop:
+movzx rdx, byte [rdi + rcx]
+test dl, dl
+jz .exit
+cmp dl, '0'
+jl .exit
+cmp dl, '9'
+jg .exit
+sub dl, '0'
+imul rax, 10
+add rax, rdx
+inc rcx
+jmp .atoi_loop)
 └── Func(name='itoa', args=['i'])
-    ├── Asm(push rdi)
-    ├── Asm(mov rdi, 4096)
-    ├── Asm(call alloc )
-    ├── Asm(pop rdi)
-    ├── Asm( mov r8, rax)
-    ├── Asm( mov r12, rax)
-    ├── Asm( mov rax, rdi)
-    ├── Asm( mov rbx, 10)
-    ├── Asm( xor rcx, rcx)
-    ├── Asm( cmp rax, 0)
-    ├── Asm(jge .is_zero)
-    ├── Asm(neg rax)
-    ├── Asm(mov byte [r8], '-')
-    ├── Asm(inc r8)
-    ├── Asm(.is_zero:)
-    ├── Asm(test rax, rax)
-    ├── Asm(jnz .loop)
-    ├── Asm(mov rdx, '0')
-    ├── Asm(push rdx)
-    ├── Asm(inc rcx)
-    ├── Asm(jmp .write_to_buffer)
-    ├── Asm(.loop:)
-    ├── Asm(test rax, rax)
-    ├── Asm(jz .write_to_buffer)
-    ├── Asm(cqo)
-    ├── Asm(idiv rbx)
-    ├── Asm(add rdx, '0')
-    ├── Asm(push rdx)
-    ├── Asm(inc rcx)
-    ├── Asm(jmp .loop)
-    ├── Asm(.write_to_buffer:)
-    ├── Asm(test rcx, rcx)
-    ├── Asm(jz .done)
-    ├── Asm(pop rdx)
-    ├── Asm(mov [r8], dl)
-    ├── Asm(inc r8)
-    ├── Asm(dec rcx)
-    ├── Asm(jmp .write_to_buffer)
-    ├── Asm(.done:)
-    ├── Asm(mov byte [r8], 0)
-    ├── Asm(mov rax, r12)
-    └── Asm(jmp .exit)
+    └── Asm(push rdi
+mov rdi, 4096
+call alloc 
+pop rdi
+mov r8, rax
+mov r12, rax
+mov rax, rdi
+mov rbx, 10
+xor rcx, rcx
+cmp rax, 0
+jge .is_zero
+neg rax
+mov byte [r8], '-'
+inc r8
+.is_zero:
+test rax, rax
+jnz .loop
+mov rdx, '0'
+push rdx
+inc rcx
+jmp .write_to_buffer
+.loop:
+test rax, rax
+jz .write_to_buffer
+cqo
+idiv rbx
+add rdx, '0'
+push rdx
+inc rcx
+jmp .loop
+.write_to_buffer:
+test rcx, rcx
+jz .done
+pop rdx
+mov [r8], dl
+inc r8
+dec rcx
+jmp .write_to_buffer
+.done:
+mov byte [r8], 0
+mov rax, r12
+jmp .exit)

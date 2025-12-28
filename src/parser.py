@@ -73,7 +73,14 @@ class Parser:
     def parse_stmt(self):
 
         if self.match("ASM"):
-            return Asm(self.expect("STR").value)
+            asms = [self.expect("STR").value]
+
+            while self.peek().type == "STR":
+                asms.append(self.pop().value)
+
+            self.expect("ASM")
+
+            return Asm("\n".join(asms))
 
         if self.check("ID"):
             name = self.pop().value

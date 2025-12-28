@@ -254,12 +254,12 @@ push rdi
 mov rdi, 4096
 call alloc 
 pop rdi
- mov r8, rax
- mov r12, rax
- mov rax, rdi
- mov rbx, 10
- xor rcx, rcx
- cmp rax, 0
+mov r8, rax
+mov r12, rax
+mov rax, rdi
+mov rbx, 10
+xor rcx, rcx
+cmp rax, 0
 jge .is_zero
 neg rax
 mov byte [r8], '-'
