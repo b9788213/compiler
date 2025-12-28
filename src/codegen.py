@@ -58,7 +58,7 @@ class CodeGen:
         self.emit("mov rbp, rsp")
         self.emit(f"sub rsp, {stack(f)}")
 
-        for i, var in enumerate(f.args): #parametreleri kaydet
+        for i, var in enumerate(f.args): #parametreleri stacke koy
             self.emit(f"mov [rbp {f.vars[var]:+d}], {regs[i]}")
 
         self.gen_body(f.body)

@@ -1,16 +1,8 @@
-import "stdlib/stdlib"
-
 fn main():
-    print("bir şey girin: ")
-    n1 = atoi(input())
-    print("bir şey girin: ")
-    n2 = atoi(input())
-
-    print(itoa(n1+n2))
-    print("\n")
-    print(itoa(n1-n2))
-    print("\n")
-    print(itoa(n1*n2))
-    print("\n")
-    print(itoa(n1/n2))
-    print("\n")
+    x = "merhaba\n"
+    asm
+    "extern printf"
+    "mov rdi, [rbp-8]"
+    "mov al, 0"
+    "call printf"
+    asm
