@@ -39,12 +39,7 @@ push 0
 call atoi
 add rsp, 8
 mov [rbp -16], rax 
-mov rax, [rbp -16]
-push rax
-mov rax, [rbp -8]
-pop rbx
-add rax, rbx
-jmp .exit
+xor rax, rax
 .exit:
 leave
 ret
@@ -161,6 +156,31 @@ imul rax, 10
 add rax, rdx
 inc rcx
 jmp .atoi_loop
+xor rax, rax
+.exit:
+leave
+ret
+itoa:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+mov rax, rdi
+mov rbx, 10
+cmp rax, 0
+jg .loop
+push '-'
+neg rax
+.loop:
+test rax, rax
+cqo
+idiv rbx
+jz .end
+add rdx, '0'
+push rdx
+jmp .loop
+.end:
+pop 
 xor rax, rax
 .exit:
 leave

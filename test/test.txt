@@ -5,5 +5,3 @@ fn main():
     n1 = atoi(input())
     print("bir şey girin: ")
     n2 = atoi(input())
-
-    return n1 + n2
