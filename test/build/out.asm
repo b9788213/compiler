@@ -1,12 +1,7 @@
 bits 64
 default rel
 section .text
-global _start
-_start:
-call main
-mov rdi, rax
-mov rax, 60
-syscall
+global main
 main:
 push rbp
 mov rbp, rsp
@@ -126,8 +121,9 @@ call print
 add rsp, 8
 xor rax, rax
 .exit:
-leave
-ret
+mov rdi, rax
+mov rax, 60
+syscall
 print:
 push rbp
 mov rbp, rsp
