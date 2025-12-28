@@ -219,48 +219,46 @@ RPAR, ), at line 45, column 10
 COLON, :, at line 45, column 11
 INDENT, 5, at line 46, column 1
 ASM, asm, at line 46, column 6
-STR, push rdi, at line 47, column 6
-STR, mov rdi, 4096, at line 48, column 6
-STR, call alloc , at line 49, column 6
-STR, pop rdi, at line 50, column 6
-STR, mov r8, rax, at line 51, column 6
-STR, mov r12, rax, at line 52, column 6
-STR, mov rax, rdi, at line 53, column 6
-STR, mov rbx, 10, at line 54, column 6
-STR, xor rcx, rcx, at line 55, column 6
-STR, cmp rax, 0, at line 56, column 6
-STR, jge .is_zero, at line 57, column 6
-STR, neg rax, at line 58, column 6
-STR, mov byte [r8], '-', at line 59, column 6
-STR, inc r8, at line 60, column 6
-STR, .is_zero:, at line 61, column 6
-STR, test rax, rax, at line 62, column 6
-STR, jnz .loop, at line 63, column 6
-STR, mov rdx, '0', at line 64, column 6
-STR, push rdx, at line 65, column 6
-STR, inc rcx, at line 66, column 6
-STR, jmp .write_to_buffer, at line 67, column 6
-STR, .loop:, at line 68, column 6
-STR, test rax, rax, at line 69, column 6
-STR, jz .write_to_buffer, at line 70, column 6
-STR, cqo, at line 71, column 6
-STR, idiv rbx, at line 72, column 6
-STR, add rdx, '0', at line 73, column 6
-STR, push rdx, at line 74, column 6
-STR, inc rcx, at line 75, column 6
-STR, jmp .loop, at line 76, column 6
-STR, .write_to_buffer:, at line 77, column 6
-STR, test rcx, rcx, at line 78, column 6
-STR, jz .done, at line 79, column 6
-STR, pop rdx, at line 80, column 6
-STR, mov [r8], dl, at line 81, column 6
-STR, inc r8, at line 82, column 6
-STR, dec rcx, at line 83, column 6
-STR, jmp .write_to_buffer, at line 84, column 6
-STR, .done:, at line 85, column 6
-STR, mov byte [r8], 0, at line 86, column 6
-STR, mov rax, r12, at line 87, column 6
-STR, jmp .exit, at line 88, column 6
-ASM, asm, at line 89, column 6
-DEDENT, , at line 89, column 1
-EOF, , at line 89, column 1
+STR, mov rdi, 4096, at line 47, column 6
+STR, call alloc , at line 48, column 6
+STR, mov r8, rax, at line 49, column 6
+STR, mov r12, rax, at line 50, column 6
+STR, mov rax, [rbp-8], at line 51, column 6
+STR, mov rbx, 10, at line 52, column 6
+STR, xor rcx, rcx, at line 53, column 6
+STR, cmp rax, 0, at line 54, column 6
+STR, jge .is_zero, at line 55, column 6
+STR, neg rax, at line 56, column 6
+STR, mov byte [r8], '-', at line 57, column 6
+STR, inc r8, at line 58, column 6
+STR, .is_zero:, at line 59, column 6
+STR, test rax, rax, at line 60, column 6
+STR, jnz .loop, at line 61, column 6
+STR, mov rdx, '0', at line 62, column 6
+STR, push rdx, at line 63, column 6
+STR, inc rcx, at line 64, column 6
+STR, jmp .write_to_buffer, at line 65, column 6
+STR, .loop:, at line 66, column 6
+STR, test rax, rax, at line 67, column 6
+STR, jz .write_to_buffer, at line 68, column 6
+STR, cqo, at line 69, column 6
+STR, idiv rbx, at line 70, column 6
+STR, add rdx, '0', at line 71, column 6
+STR, push rdx, at line 72, column 6
+STR, inc rcx, at line 73, column 6
+STR, jmp .loop, at line 74, column 6
+STR, .write_to_buffer:, at line 75, column 6
+STR, test rcx, rcx, at line 76, column 6
+STR, jz .done, at line 77, column 6
+STR, pop rdx, at line 78, column 6
+STR, mov [r8], dl, at line 79, column 6
+STR, inc r8, at line 80, column 6
+STR, dec rcx, at line 81, column 6
+STR, jmp .write_to_buffer, at line 82, column 6
+STR, .done:, at line 83, column 6
+STR, mov byte [r8], 0, at line 84, column 6
+STR, mov rax, r12, at line 85, column 6
+STR, jmp .exit, at line 86, column 6
+ASM, asm, at line 87, column 6
+DEDENT, , at line 87, column 1
+EOF, , at line 87, column 1

@@ -250,13 +250,11 @@ push rbp
 mov rbp, rsp
 sub rsp, 16
 mov [rbp -8], rdi
-push rdi
 mov rdi, 4096
 call alloc 
-pop rdi
 mov r8, rax
 mov r12, rax
-mov rax, rdi
+mov rax, [rbp-8]
 mov rbx, 10
 xor rcx, rcx
 cmp rax, 0
