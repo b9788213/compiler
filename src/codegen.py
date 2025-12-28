@@ -89,6 +89,24 @@ class CodeGen:
             elif isinstance(stmt, Call):
                 self.call(stmt)
 
+            elif isinstance(stmt, ConditionelStruct):
+                labels = []
+                for _ in stmt.ifs: labels.append(self.getlabel()) # if labels
+                labels.append(self.getlabel()) # else label
+                endlab = self.getlabel()
+
+                for i, if_ in enumerate(stmt.ifs):
+                    self.emit(f"{labels[i]}:")
+                    self.gen_expr(if_.cond) # değer rax'ta
+                    self.emit("test rax, rax")
+                    self.emit(f"jz {labels[i+1]}")
+                    self.gen_body(if_.body)
+                    self.emit(f"jmp {endlab}")
+
+                self.emit(f"{labels[-1]}:")
+                if stmt.elsebody: self.gen_body(stmt.elsebody)
+                self.emit(f"{endlab}:")
+
             elif isinstance(stmt, Ret):
                 self.gen_expr(stmt.value)
                 self.emit("jmp .exit")

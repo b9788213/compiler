@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47ccd383-0ffc-45de-ba5c-7694ccaa559a" name="Changes" comment="codegen">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer.py" afterDir="false" />
+    <list default="true" id="47ccd383-0ffc-45de-ba5c-7694ccaa559a" name="Changes" comment="lexer and parser if-elif-else">
+      <change beforePath="$PROJECT_DIR$/src/codegen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/codegen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/build/out.asm" beforeDir="false" afterPath="$PROJECT_DIR$/test/build/out.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/build/out.exe" beforeDir="false" afterPath="$PROJECT_DIR$/test/build/out.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/build/out.o" beforeDir="false" afterPath="$PROJECT_DIR$/test/build/out.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/debug/ast.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/debug/ast.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/debug/tokens.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/debug/tokens.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +152,7 @@
       <workItem from="1766864830956" duration="1108000" />
       <workItem from="1766906983334" duration="2697000" />
       <workItem from="1766911273414" duration="1197000" />
-      <workItem from="1766924309365" duration="1450000" />
+      <workItem from="1766924309365" duration="2437000" />
     </task>
     <task id="LOCAL-00001" summary="ast debug">
       <option name="closed" value="true" />
@@ -506,7 +498,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766923226103</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="lexer and parser if-elif-else">
+      <option name="closed" value="true" />
+      <created>1766925784294</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1766925784294</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,10 +539,11 @@
     <MESSAGE value="asm" />
     <MESSAGE value="_start -&gt; main" />
     <MESSAGE value="codegen" />
-    <option name="LAST_COMMIT_MESSAGE" value="codegen" />
+    <MESSAGE value="lexer and parser if-elif-else" />
+    <option name="LAST_COMMIT_MESSAGE" value="lexer and parser if-elif-else" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonProject$main.coverage" NAME="main Coverage Results" MODIFIED="1766925536783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PythonProject$main.coverage" NAME="main Coverage Results" MODIFIED="1766925804058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1766925458801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
