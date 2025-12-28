@@ -55,6 +55,7 @@ class CodeGen:
     def gen_func(self, f: Func):
         f.vars.update(dict.fromkeys(f.args)) #parametreleri değişken yap
         self.currentf = f
+        self.isaligned = True
 
         self.emit(f"{f.name}:")
         self.emit("push rbp") # rbp + return adress zaten 16 byte

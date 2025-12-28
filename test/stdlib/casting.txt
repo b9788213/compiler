@@ -39,3 +39,4 @@ fn atoi(s):
     asm "add rax, rdx"
     asm "inc rcx"
     asm "jmp .atoi_loop"
+
