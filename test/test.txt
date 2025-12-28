@@ -1,8 +1,4 @@
+import "stdlib/stdlib"
+
 fn main():
-    x = "merhaba\n"
-    asm
-    "extern printf"
-    "mov rdi, [rbp-8]"
-    "mov al, 0"
-    "call printf"
-    asm
+    print("merhaba\n")

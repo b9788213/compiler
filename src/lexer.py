@@ -21,6 +21,10 @@ token_specification = (
     ('IMPORT', r'\bimport\b'),
     ('STATIC', r'\bglobal\b'),
 
+    ('ELIF', r'\belif\b'),
+    ('IF', r'\bif\b'),
+    ('ELSE', r'\belse\b'),
+
     ('EQEQ', r'=='),
     ('NEQ', r'!='),
     ('LEQ', r'<='),

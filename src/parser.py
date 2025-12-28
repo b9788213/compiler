@@ -62,10 +62,7 @@ class Parser:
         f.args = self.parse_list(lambda: self.expect("ID").value)
         self.expect("RPAR")
 
-        self.expect("COLON")
-        self.expect("INDENT")
-
-        while not self.match("DEDENT"): f.body.code.append(self.parse_stmt())
+        f.body = self.getbody()
 
         return f
 
@@ -75,12 +72,23 @@ class Parser:
         if self.match("ASM"):
             asms = [self.expect("STR").value]
 
-            while self.peek().type == "STR":
-                asms.append(self.pop().value)
+            while self.peek().type == "STR": asms.append(self.pop().value)
 
             self.expect("ASM")
-
             return Asm("\n".join(asms))
+
+        if self.match("IF"):
+            ifs = [ If(self.compare(), self.getbody()) ]
+            elsebody = None
+
+            while self.match("ELIF"):
+                ifs.append(If(self.compare(), self.getbody()))
+
+            if self.match("ELSE"):
+                elsebody = self.getbody()
+
+            if elsebody: return ConditionelStruct(ifs, elsebody)
+            return ConditionelStruct(ifs)
 
         if self.check("ID"):
             name = self.pop().value
@@ -157,6 +165,15 @@ class Parser:
         args = self.parse_list(self.compare)
         self.expect("RPAR")
         return Call(name, args)
+
+    def getbody(self) -> Body:
+        self.expect("COLON")
+        self.expect("INDENT")
+        b = Body()
+
+        while not self.match("DEDENT"): b.code.append(self.parse_stmt())
+
+        return b
 
     #-----list-----
     def parse_list(self, parser_f) -> list:

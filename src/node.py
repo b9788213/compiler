@@ -71,3 +71,13 @@ class Func:
 @dataclass()
 class Asm:
     value: str
+
+@dataclass()
+class If:
+    cond: Comp
+    body: Body = field(default_factory=Body)
+
+@dataclass()
+class ConditionelStruct:
+    ifs: list[If]
+    elsebody: Body|None = field(default_factory=None)
