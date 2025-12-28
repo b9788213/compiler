@@ -96,27 +96,27 @@ class CodeGen:
                 endlab = self.getlabel()
 
                 for i, if_ in enumerate(stmt.ifs):
-                    self.emit(f"{labels[i]}:")
+                    self.emit(f".{labels[i]}:")
                     self.gen_expr(if_.cond) # değer rax'ta
                     self.emit("test rax, rax")
-                    self.emit(f"jz {labels[i+1]}")
+                    self.emit(f"jz .{labels[i+1]}")
                     self.gen_body(if_.body)
-                    self.emit(f"jmp {endlab}")
+                    self.emit(f"jmp .{endlab}")
 
-                self.emit(f"{labels[-1]}:")
+                self.emit(f".{labels[-1]}:")
                 if stmt.elsebody: self.gen_body(stmt.elsebody)
-                self.emit(f"{endlab}:")
+                self.emit(f".{endlab}:")
 
             elif isinstance(stmt, While):
                 startlab = self.getlabel()
                 endlab = self.getlabel()
 
-                self.emit(f"{startlab}:")
+                self.emit(f".{startlab}:")
                 self.gen_expr(stmt.cond)
-                self.emit(f"jz {endlab}")
+                self.emit(f"jz .{endlab}")
                 self.gen_body(stmt.body)
-                self.emit(f"jmp {startlab}")
-                self.emit(f"{endlab}:")
+                self.emit(f"jmp .{startlab}")
+                self.emit(f".{endlab}:")
 
             elif isinstance(stmt, Ret):
                 self.gen_expr(stmt.value)

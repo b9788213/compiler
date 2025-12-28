@@ -80,7 +80,7 @@ class If:
 @dataclass()
 class ConditionelStruct:
     ifs: list[If]
-    elsebody: Body|None = field(default_factory=None)
+    elsebody: Body|None = field(default_factory=None.__class__)
 
 @dataclass()
 class While:

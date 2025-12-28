@@ -1,24 +1,6 @@
 Program
 ├── Func(name='main', args=[])
-│   ├── Call(name='print')
-│   │   └── String(bir sayı girin: )
-│   ├── Assign(name='n1')
-│   │   └── Call(name='atoi')
-│   │       └── Call(name='input')
-│   ├── Call(name='print')
-│   │   └── String(bir sayı girin: )
-│   ├── Assign(name='n2')
-│   │   └── Call(name='atoi')
-│   │       └── Call(name='input')
-│   ├── Call(name='print')
-│   │   └── String(bir operatör girin: )
-│   ├── Assign(name='o')
-│   │   └── Call(name='atoi')
-│   │       └── Call(name='input')
-│   ├── Unknown(ConditionelStruct)
-│   └── Call(name='print')
-│       └── String(
-)
+│   └── Unknown(While)
 ├── Func(name='print', args=['s'])
 │   └── Asm(call len
 mov rdx, rax
