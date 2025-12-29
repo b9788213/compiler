@@ -19,7 +19,7 @@ class String:
 
 @dataclass()
 class Assign:
-    name: str
+    name: Id
     value: Any
 
 @dataclass()
@@ -40,7 +40,7 @@ class Comp:
 
 @dataclass()
 class Call:
-    name: str
+    name: Id
     args: list
 
 @dataclass()
@@ -63,7 +63,7 @@ class Vars(dict[str, int]):
 
 @dataclass()
 class Func:
-    name: str
+    name: Id
     args: list[str]  = field(default_factory=list)
     body: Body = field(default_factory=Body)
     vars: Vars= field(default_factory=Vars)
