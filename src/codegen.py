@@ -116,6 +116,7 @@ class CodeGen:
                 self.gen_expr(stmt.cond)
                 self.emit(f"jz .{endlab}")
                 self.gen_body(stmt.body)
+                self.emit("test rax, rax")
                 self.emit(f"jmp .{startlab}")
                 self.emit(f".{endlab}:")
 
