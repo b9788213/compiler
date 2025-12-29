@@ -199,7 +199,7 @@ class CodeGen:
             self.emit(f"call {c.name}")  # 8 byte return adress
             self.emitstack("add rsp, 8")
         else:
-            self.emitstack(f"call {c.name}")
+            self.emit(f"call {c.name}")
 
 def stack(f: Func) -> int:
     offset = 0
