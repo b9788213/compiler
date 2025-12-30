@@ -1,0 +1,4 @@
+fn factorial(i):
+	if i:
+		return i * factorial(i - 1)
+	return 1

@@ -10,115 +10,98 @@ ID, print, at line 4, column 2
 LPAR, (, at line 4, column 7
 ID, itoa, at line 4, column 8
 LPAR, (, at line 4, column 12
-ID, faktor, at line 4, column 13
-LPAR, (, at line 4, column 19
-ID, atoi, at line 4, column 20
-LPAR, (, at line 4, column 24
-ID, input, at line 4, column 25
-LPAR, (, at line 4, column 30
-RPAR, ), at line 4, column 31
-RPAR, ), at line 4, column 32
-RPAR, ), at line 4, column 33
+ID, factorial, at line 4, column 13
+LPAR, (, at line 4, column 22
+ID, atoi, at line 4, column 23
+LPAR, (, at line 4, column 27
+ID, input, at line 4, column 28
+LPAR, (, at line 4, column 33
 RPAR, ), at line 4, column 34
 RPAR, ), at line 4, column 35
-DEDENT, , at line 8, column 1
-FN, fn, at line 8, column 1
-ID, faktor, at line 8, column 4
-LPAR, (, at line 8, column 10
-ID, i, at line 8, column 11
-RPAR, ), at line 8, column 12
-COLON, :, at line 8, column 13
-INDENT, 1, at line 9, column 1
-IF, if, at line 9, column 2
-ID, i, at line 9, column 5
-COLON, :, at line 9, column 6
-INDENT, 2, at line 10, column 1
-RET, return, at line 10, column 3
-ID, i, at line 10, column 10
-MUL, *, at line 10, column 12
-ID, faktor, at line 10, column 14
-LPAR, (, at line 10, column 20
-ID, i, at line 10, column 21
-MINUS, -, at line 10, column 22
-INT, 1, at line 10, column 23
-RPAR, ), at line 10, column 24
-DEDENT, , at line 11, column 1
-RET, return, at line 11, column 2
-INT, 1, at line 11, column 9
-DEDENT, , at line 12, column 1
+RPAR, ), at line 4, column 36
+RPAR, ), at line 4, column 37
+RPAR, ), at line 4, column 38
+ID, print, at line 5, column 2
+LPAR, (, at line 5, column 7
+STR, 
+, at line 5, column 8
+RPAR, ), at line 5, column 12
+DEDENT, , at line 6, column 1
 IMPORT, import, at line 1, column 1
 STR, stdlib/casting, at line 1, column 8
-FN, fn, at line 3, column 1
-ID, print, at line 3, column 4
-LPAR, (, at line 3, column 9
-ID, s, at line 3, column 10
-RPAR, ), at line 3, column 11
-COLON, :, at line 3, column 12
-INDENT, 5, at line 4, column 1
-ASM, asm, at line 4, column 6
-STR, call len, at line 5, column 6
-STR, mov rdx, rax, at line 6, column 6
-STR, mov rsi, [rbp-8], at line 7, column 6
-STR, mov rax, 1, at line 8, column 6
-STR, mov rdi, 1, at line 9, column 6
-STR, syscall, at line 10, column 6
-STR, jmp .exit, at line 11, column 6
-ASM, asm, at line 12, column 6
-DEDENT, , at line 14, column 1
-FN, fn, at line 14, column 1
-ID, input, at line 14, column 4
-LPAR, (, at line 14, column 9
-RPAR, ), at line 14, column 10
-COLON, :, at line 14, column 11
-INDENT, 4, at line 15, column 1
-ASM, asm, at line 15, column 5
-STR, mov rdi, 4096, at line 16, column 5
-STR, call alloc, at line 17, column 5
-STR, mov rsi, rax, at line 18, column 5
-STR, xor rax, rax, at line 19, column 5
-STR, xor rdi, rdi, at line 20, column 5
-STR, mov rdx, 4096, at line 21, column 5
-STR, syscall, at line 22, column 5
-STR, mov byte [rsi + rax - 1], 0, at line 23, column 5
-STR, mov rax, rsi, at line 24, column 5
-STR, jmp .exit, at line 25, column 5
-ASM, asm, at line 26, column 5
-DEDENT, , at line 28, column 1
-FN, fn, at line 28, column 1
-ID, len, at line 28, column 4
-LPAR, (, at line 28, column 7
-ID, s, at line 28, column 8
-RPAR, ), at line 28, column 9
-COLON, :, at line 28, column 10
-INDENT, 4, at line 29, column 1
-ASM, asm, at line 29, column 5
-STR, xor rax, rax, at line 30, column 5
-STR, .loop:, at line 31, column 5
-STR, cmp byte [rdi + rax], 0, at line 32, column 5
-STR, je .exit, at line 33, column 5
-STR, inc rax, at line 34, column 5
-STR, jmp .loop, at line 35, column 5
-ASM, asm, at line 36, column 5
-DEDENT, , at line 38, column 1
-FN, fn, at line 38, column 1
-ID, alloc, at line 38, column 4
-LPAR, (, at line 38, column 9
-ID, i, at line 38, column 10
-RPAR, ), at line 38, column 11
-COLON, :, at line 38, column 12
-INDENT, 4, at line 39, column 1
-ASM, asm, at line 39, column 5
-STR, mov rsi, rdi, at line 40, column 5
-STR, mov rax, 9, at line 41, column 5
-STR, xor rdi, rdi, at line 42, column 5
-STR, mov rdx, 0x3, at line 43, column 5
-STR, mov r10, 0x22, at line 44, column 5
-STR, mov r8, -1, at line 45, column 5
-STR, mov r9, 0, at line 46, column 5
-STR, syscall, at line 47, column 5
-STR, jmp .exit, at line 48, column 5
-ASM, asm, at line 49, column 5
-DEDENT, , at line 49, column 1
+IMPORT, import, at line 2, column 1
+STR, stdlib/math, at line 2, column 8
+FN, fn, at line 4, column 1
+ID, print, at line 4, column 4
+LPAR, (, at line 4, column 9
+ID, s, at line 4, column 10
+RPAR, ), at line 4, column 11
+COLON, :, at line 4, column 12
+INDENT, 5, at line 5, column 1
+ASM, asm, at line 5, column 6
+STR, call len, at line 6, column 6
+STR, mov rdx, rax, at line 7, column 6
+STR, mov rsi, [rbp-8], at line 8, column 6
+STR, mov rax, 1, at line 9, column 6
+STR, mov rdi, 1, at line 10, column 6
+STR, syscall, at line 11, column 6
+STR, jmp .exit, at line 12, column 6
+ASM, asm, at line 13, column 6
+DEDENT, , at line 15, column 1
+FN, fn, at line 15, column 1
+ID, input, at line 15, column 4
+LPAR, (, at line 15, column 9
+RPAR, ), at line 15, column 10
+COLON, :, at line 15, column 11
+INDENT, 4, at line 16, column 1
+ASM, asm, at line 16, column 5
+STR, mov rdi, 4096, at line 17, column 5
+STR, call alloc, at line 18, column 5
+STR, mov rsi, rax, at line 19, column 5
+STR, xor rax, rax, at line 20, column 5
+STR, xor rdi, rdi, at line 21, column 5
+STR, mov rdx, 4096, at line 22, column 5
+STR, syscall, at line 23, column 5
+STR, mov byte [rsi + rax - 1], 0, at line 24, column 5
+STR, mov rax, rsi, at line 25, column 5
+STR, jmp .exit, at line 26, column 5
+ASM, asm, at line 27, column 5
+DEDENT, , at line 29, column 1
+FN, fn, at line 29, column 1
+ID, len, at line 29, column 4
+LPAR, (, at line 29, column 7
+ID, s, at line 29, column 8
+RPAR, ), at line 29, column 9
+COLON, :, at line 29, column 10
+INDENT, 4, at line 30, column 1
+ASM, asm, at line 30, column 5
+STR, xor rax, rax, at line 31, column 5
+STR, .loop:, at line 32, column 5
+STR, cmp byte [rdi + rax], 0, at line 33, column 5
+STR, je .exit, at line 34, column 5
+STR, inc rax, at line 35, column 5
+STR, jmp .loop, at line 36, column 5
+ASM, asm, at line 37, column 5
+DEDENT, , at line 39, column 1
+FN, fn, at line 39, column 1
+ID, alloc, at line 39, column 4
+LPAR, (, at line 39, column 9
+ID, i, at line 39, column 10
+RPAR, ), at line 39, column 11
+COLON, :, at line 39, column 12
+INDENT, 4, at line 40, column 1
+ASM, asm, at line 40, column 5
+STR, mov rsi, rdi, at line 41, column 5
+STR, mov rax, 9, at line 42, column 5
+STR, xor rdi, rdi, at line 43, column 5
+STR, mov rdx, 0x3, at line 44, column 5
+STR, mov r10, 0x22, at line 45, column 5
+STR, mov r8, -1, at line 46, column 5
+STR, mov r9, 0, at line 47, column 5
+STR, syscall, at line 48, column 5
+STR, jmp .exit, at line 49, column 5
+ASM, asm, at line 50, column 5
+DEDENT, , at line 51, column 1
 FN, fn, at line 1, column 1
 ID, atoi, at line 1, column 4
 LPAR, (, at line 1, column 8
@@ -219,4 +202,28 @@ STR, mov rax, r12, at line 85, column 6
 STR, jmp .exit, at line 86, column 6
 ASM, asm, at line 87, column 6
 DEDENT, , at line 87, column 1
-EOF, , at line 87, column 1
+FN, fn, at line 1, column 1
+ID, factorial, at line 1, column 4
+LPAR, (, at line 1, column 13
+ID, i, at line 1, column 14
+RPAR, ), at line 1, column 15
+COLON, :, at line 1, column 16
+INDENT, 1, at line 2, column 1
+IF, if, at line 2, column 2
+ID, i, at line 2, column 5
+COLON, :, at line 2, column 6
+INDENT, 2, at line 3, column 1
+RET, return, at line 3, column 3
+ID, i, at line 3, column 10
+MUL, *, at line 3, column 12
+ID, factorial, at line 3, column 14
+LPAR, (, at line 3, column 23
+ID, i, at line 3, column 24
+MINUS, -, at line 3, column 26
+INT, 1, at line 3, column 28
+RPAR, ), at line 3, column 29
+DEDENT, , at line 4, column 1
+RET, return, at line 4, column 2
+INT, 1, at line 4, column 9
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1

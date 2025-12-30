@@ -1,11 +1,5 @@
 import "stdlib/stdlib"
 
 fn main():
-	print(itoa(faktor(atoi(input()))))
-
-
-
-fn faktor(i):
-	if i:
-		return i * faktor(i-1)
-	return 1
+	print(itoa(factorial(atoi(input()))))
+	print("\n")

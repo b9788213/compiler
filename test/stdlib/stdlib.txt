@@ -1,4 +1,5 @@
 import "stdlib/casting"
+import "stdlib/math"
 
 fn print(s):
      asm

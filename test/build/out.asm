@@ -12,10 +12,14 @@ pop rdi
 call atoi
 push rax
 pop rdi
-call faktor
+call factorial
 push rax
 pop rdi
 call itoa
+push rax
+pop rdi
+call print
+mov rax, label_1
 push rax
 pop rdi
 call print
@@ -24,37 +28,6 @@ xor rax, rax
 mov rdi, rax
 mov rax, 60
 syscall
-faktor:
-push rbp
-mov rbp, rsp
-sub rsp, 16
-mov [rbp -8], rdi
-.label_1:
-mov rax, [rbp -8]
-test rax, rax
-jz .label_2
-mov rax, 1
-push rax
-mov rax, [rbp -8]
-pop rbx
-sub rax, rbx
-push rax
-pop rdi
-call faktor
-push rax
-mov rax, [rbp -8]
-pop rbx
-imul rax, rbx
-jmp .exit
-jmp .label_3
-.label_2:
-.label_3:
-mov rax, 1
-jmp .exit
-xor rax, rax
-.exit:
-leave
-ret
 print:
 push rbp
 mov rbp, rsp
@@ -220,6 +193,38 @@ xor rax, rax
 .exit:
 leave
 ret
+factorial:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+.label_2:
+mov rax, [rbp -8]
+test rax, rax
+jz .label_3
+mov rax, 1
+push rax
+mov rax, [rbp -8]
+pop rbx
+sub rax, rbx
+push rax
+pop rdi
+call factorial
+push rax
+mov rax, [rbp -8]
+pop rbx
+imul rax, rbx
+jmp .exit
+jmp .label_4
+.label_3:
+.label_4:
+mov rax, 1
+jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
 section .data
 section .rodata
+label_1: db 10, 0
 section .note.GNU-stack noalloc noexec nowrite progbits
