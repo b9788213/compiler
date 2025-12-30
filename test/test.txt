@@ -1,28 +1,11 @@
 import "stdlib/stdlib"
 
 fn main():
-	while 1:
-		print("bir operatör giriniz")
-		o = atoi(input())
+	print(itoa(faktor(atoi(input()))))
 
-		print("bir sayı giriniz: ")
-		n1 = atoi(input())
-		print("bir sayı giriniz: ")
-		n2 = atoi(input())
 
-		if o == 0:
-			return 0
 
-		elif o == 1:
-			print(itoa(n1 + n2))
-
-		elif o == 2:
-			print(itoa(n1 - n2))
-
-		elif o == 3:
-			print(itoa(n1 * n2))
-
-		else:
-			print(itoa(n1 / n2))
-		
-		print("\n")
+fn faktor(i):
+	if i:
+		return i * faktor(i-1)
+	return 1

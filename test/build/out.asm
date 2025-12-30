@@ -5,142 +5,56 @@ global main
 main:
 push rbp
 mov rbp, rsp
-sub rsp, 32
-.label_1:
-mov rax, 1
-jz .label_2
-mov rax, label_3
-push rax
-pop rdi
-call print
+sub rsp, 0
 call input
 push rax
 pop rdi
 call atoi
-mov [rbp -8], rax 
-mov rax, label_4
 push rax
 pop rdi
-call print
-call input
-push rax
-pop rdi
-call atoi
-mov [rbp -16], rax 
-mov rax, label_5
-push rax
-pop rdi
-call print
-call input
-push rax
-pop rdi
-call atoi
-mov [rbp -24], rax 
-.label_6:
-mov rax, 0
-push rax
-mov rax, [rbp -8]
-pop rbx
-cmp rax, rbx
-sete al
-movzx rax, al
-test rax, rax
-jz .label_7
-mov rax, 0
-jmp .exit
-jmp .label_11
-.label_7:
-mov rax, 1
-push rax
-mov rax, [rbp -8]
-pop rbx
-cmp rax, rbx
-sete al
-movzx rax, al
-test rax, rax
-jz .label_8
-mov rax, [rbp -24]
-push rax
-mov rax, [rbp -16]
-pop rbx
-add rax, rbx
+call faktor
 push rax
 pop rdi
 call itoa
 push rax
 pop rdi
 call print
-jmp .label_11
-.label_8:
-mov rax, 2
-push rax
-mov rax, [rbp -8]
-pop rbx
-cmp rax, rbx
-sete al
-movzx rax, al
-test rax, rax
-jz .label_9
-mov rax, [rbp -24]
-push rax
-mov rax, [rbp -16]
-pop rbx
-sub rax, rbx
-push rax
-pop rdi
-call itoa
-push rax
-pop rdi
-call print
-jmp .label_11
-.label_9:
-mov rax, 3
-push rax
-mov rax, [rbp -8]
-pop rbx
-cmp rax, rbx
-sete al
-movzx rax, al
-test rax, rax
-jz .label_10
-mov rax, [rbp -24]
-push rax
-mov rax, [rbp -16]
-pop rbx
-imul rax, rbx
-push rax
-pop rdi
-call itoa
-push rax
-pop rdi
-call print
-jmp .label_11
-.label_10:
-mov rax, [rbp -24]
-push rax
-mov rax, [rbp -16]
-pop rbx
-cqo
-idiv rbx
-push rax
-pop rdi
-call itoa
-push rax
-pop rdi
-call print
-.label_11:
-mov rax, label_12
-push rax
-pop rdi
-call print
-test rax, rax
-jmp .label_1
-.label_2:
 xor rax, rax
 .exit:
 mov rdi, rax
 mov rax, 60
 syscall
+faktor:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+.label_1:
+mov rax, [rbp -8]
+test rax, rax
+jz .label_2
+mov rax, 1
+push rax
+mov rax, [rbp -8]
+pop rbx
+sub rax, rbx
+push rax
+pop rdi
+call faktor
+push rax
+mov rax, [rbp -8]
+pop rbx
+imul rax, rbx
+jmp .exit
+jmp .label_3
+.label_2:
+.label_3:
+mov rax, 1
+jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
 print:
 push rbp
 mov rbp, rsp
@@ -308,8 +222,4 @@ leave
 ret
 section .data
 section .rodata
-label_3: db 98, 105, 114, 32, 111, 112, 101, 114, 97, 116, 195, 182, 114, 32, 103, 105, 114, 105, 110, 105, 122, 0
-label_4: db 98, 105, 114, 32, 115, 97, 121, 196, 177, 32, 103, 105, 114, 105, 110, 105, 122, 58, 32, 0
-label_5: db 98, 105, 114, 32, 115, 97, 121, 196, 177, 32, 103, 105, 114, 105, 110, 105, 122, 58, 32, 0
-label_12: db 10, 0
 section .note.GNU-stack noalloc noexec nowrite progbits

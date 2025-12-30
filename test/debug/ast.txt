@@ -1,6 +1,14 @@
 Program
 ├── Func(name='main', args=[])
-│   └── Unknown(While)
+│   └── Call(name='print')
+│       └── Call(name='itoa')
+│           └── Call(name='faktor')
+│               └── Call(name='atoi')
+│                   └── Call(name='input')
+├── Func(name='faktor', args=['i'])
+│   ├── Unknown(ConditionelStruct)
+│   └── Ret
+│       └── Int(1)
 ├── Func(name='print', args=['s'])
 │   └── Asm(call len
 mov rdx, rax
