@@ -51,11 +51,6 @@ class Ret:
 class Body:
     code: list = field(default_factory=list)
 
-@dataclass()
-class Program:
-    funcs: list[Func]  = field(default_factory=list)
-    statics: list[Id]  = field(default_factory=list)
-
 class Vars(dict[str, int]):
     def __getitem__(self, item):
         try: return super().__getitem__(item)
@@ -86,3 +81,9 @@ class ConditionelStruct:
 class While:
     cond: Comp
     body: Body
+
+
+@dataclass()
+class Program:
+    funcs: list[Func]  = field(default_factory=list)
+    statics: list[Id]  = field(default_factory=list)
