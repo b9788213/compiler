@@ -2,9 +2,11 @@ from typing import NoReturn
 from node import *
 from lexer import Token, lex
 from filemng import get_import
+from pathlib import Path
 
 class Parser:
-    def __init__(self, tokens: list[Token]):
+    def __init__(self, name: Path, tokens: list[Token]):
+        self.name = name
         self.tokens = tokens
         self.index: int = 0
         self.p = Program()
@@ -199,7 +201,7 @@ class Parser:
 
         return elements
 
-    def handle_import(self, name: str):
-        file = get_import(name)
+    def handle_import(self, impname: str):
+        file = get_import(self.name, impname)
         del self.tokens[-1] # EOF
         self.tokens.extend(lex(file))

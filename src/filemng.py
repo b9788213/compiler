@@ -22,5 +22,5 @@ def save(tokens, ast, asm):
     with open(astfile, "w", encoding="utf-8") as f: f.write(get_ast(ast))
     with open(outfile, 'w', encoding="utf-8") as f: f.write(asm)
 
-def get_import(name: str) -> str:
+def get_import(parent: Path, name: str) -> str:
     return (parent / name).with_suffix(".txt").read_text()
