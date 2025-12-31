@@ -1,5 +1,5 @@
-import stdlib.casting
-import stdlib.math
+import casting
+import math
 
 fn print(s):
      asm

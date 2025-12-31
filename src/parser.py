@@ -202,6 +202,12 @@ class Parser:
         return elements
 
     def handle_import(self, impname: str):
-        file = get_import(self.name, impname)
-        del self.tokens[-1] # EOF
-        self.tokens.extend(lex(file))
+        parent, file = get_import(self.name, impname)
+
+        tokens = list(lex(file))
+        ast = Parser(parent, tokens).parse()
+
+        self.p.funcs.extend(ast.funcs)
+        self.p.statics.extend(ast.statics)
+
+

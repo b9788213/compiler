@@ -1,49 +1,4 @@
 Program
-├── Func(name='main', args=[])
-│   ├── Call(name='print')
-│   │   └── Call(name='itoa')
-│   │       └── Call(name='factorial')
-│   │           └── Call(name='atoi')
-│   │               └── Call(name='input')
-│   └── Call(name='print')
-│       └── String(
-)
-├── Func(name='print', args=['s'])
-│   └── Asm(call len
-mov rdx, rax
-mov rsi, [rbp-8]
-mov rax, 1
-mov rdi, 1
-syscall
-jmp .exit)
-├── Func(name='input', args=[])
-│   └── Asm(mov rdi, 4096
-call alloc
-mov rsi, rax
-xor rax, rax
-xor rdi, rdi
-mov rdx, 4096
-syscall
-mov byte [rsi + rax - 1], 0
-mov rax, rsi
-jmp .exit)
-├── Func(name='len', args=['s'])
-│   └── Asm(xor rax, rax
-.loop:
-cmp byte [rdi + rax], 0
-je .exit
-inc rax
-jmp .loop)
-├── Func(name='alloc', args=['i'])
-│   └── Asm(mov rsi, rdi
-mov rax, 9
-xor rdi, rdi
-mov rdx, 0x3
-mov r10, 0x22
-mov r8, -1
-mov r9, 0
-syscall
-jmp .exit)
 ├── Func(name='atoi', args=['s'])
 │   └── Asm(xor rax, rax
 xor rcx, rcx
@@ -126,7 +81,52 @@ jmp .write_to_buffer
 mov byte [r8], 0
 mov rax, r12
 jmp .exit)
-└── Func(name='factorial', args=['i'])
-    ├── Unknown(ConditionelStruct)
-    └── Ret
-        └── Int(1)
+├── Func(name='factorial', args=['i'])
+│   ├── Unknown(ConditionelStruct)
+│   └── Ret
+│       └── Int(1)
+├── Func(name='print', args=['s'])
+│   └── Asm(call len
+mov rdx, rax
+mov rsi, [rbp-8]
+mov rax, 1
+mov rdi, 1
+syscall
+jmp .exit)
+├── Func(name='input', args=[])
+│   └── Asm(mov rdi, 4096
+call alloc
+mov rsi, rax
+xor rax, rax
+xor rdi, rdi
+mov rdx, 4096
+syscall
+mov byte [rsi + rax - 1], 0
+mov rax, rsi
+jmp .exit)
+├── Func(name='len', args=['s'])
+│   └── Asm(xor rax, rax
+.loop:
+cmp byte [rdi + rax], 0
+je .exit
+inc rax
+jmp .loop)
+├── Func(name='alloc', args=['i'])
+│   └── Asm(mov rsi, rdi
+mov rax, 9
+xor rdi, rdi
+mov rdx, 0x3
+mov r10, 0x22
+mov r8, -1
+mov r9, 0
+syscall
+jmp .exit)
+└── Func(name='main', args=[])
+    ├── Call(name='print')
+    │   └── Call(name='itoa')
+    │       └── Call(name='factorial')
+    │           └── Call(name='atoi')
+    │               └── Call(name='input')
+    └── Call(name='print')
+        └── String(
+)

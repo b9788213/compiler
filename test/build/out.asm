@@ -2,99 +2,6 @@ bits 64
 default rel
 section .text
 global main
-main:
-push rbp
-mov rbp, rsp
-sub rsp, 0
-call input
-push rax
-pop rdi
-call atoi
-push rax
-pop rdi
-call factorial
-push rax
-pop rdi
-call itoa
-push rax
-pop rdi
-call print
-mov rax, label_1
-push rax
-pop rdi
-call print
-xor rax, rax
-.exit:
-mov rdi, rax
-mov rax, 60
-syscall
-print:
-push rbp
-mov rbp, rsp
-sub rsp, 16
-mov [rbp -8], rdi
-call len
-mov rdx, rax
-mov rsi, [rbp-8]
-mov rax, 1
-mov rdi, 1
-syscall
-jmp .exit
-xor rax, rax
-.exit:
-leave
-ret
-input:
-push rbp
-mov rbp, rsp
-sub rsp, 0
-mov rdi, 4096
-call alloc
-mov rsi, rax
-xor rax, rax
-xor rdi, rdi
-mov rdx, 4096
-syscall
-mov byte [rsi + rax - 1], 0
-mov rax, rsi
-jmp .exit
-xor rax, rax
-.exit:
-leave
-ret
-len:
-push rbp
-mov rbp, rsp
-sub rsp, 16
-mov [rbp -8], rdi
-xor rax, rax
-.loop:
-cmp byte [rdi + rax], 0
-je .exit
-inc rax
-jmp .loop
-xor rax, rax
-.exit:
-leave
-ret
-alloc:
-push rbp
-mov rbp, rsp
-sub rsp, 16
-mov [rbp -8], rdi
-mov rsi, rdi
-mov rax, 9
-xor rdi, rdi
-mov rdx, 0x3
-mov r10, 0x22
-mov r8, -1
-mov r9, 0
-syscall
-jmp .exit
-xor rax, rax
-.exit:
-leave
-ret
 atoi:
 push rbp
 mov rbp, rsp
@@ -198,10 +105,10 @@ push rbp
 mov rbp, rsp
 sub rsp, 16
 mov [rbp -8], rdi
-.label_2:
+.label_1:
 mov rax, [rbp -8]
 test rax, rax
-jz .label_3
+jz .label_2
 mov rax, 1
 push rax
 mov rax, [rbp -8]
@@ -215,16 +122,109 @@ mov rax, [rbp -8]
 pop rbx
 imul rax, rbx
 jmp .exit
-jmp .label_4
+jmp .label_3
+.label_2:
 .label_3:
-.label_4:
 mov rax, 1
 jmp .exit
 xor rax, rax
 .exit:
 leave
 ret
+print:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+call len
+mov rdx, rax
+mov rsi, [rbp-8]
+mov rax, 1
+mov rdi, 1
+syscall
+jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
+input:
+push rbp
+mov rbp, rsp
+sub rsp, 0
+mov rdi, 4096
+call alloc
+mov rsi, rax
+xor rax, rax
+xor rdi, rdi
+mov rdx, 4096
+syscall
+mov byte [rsi + rax - 1], 0
+mov rax, rsi
+jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
+len:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+xor rax, rax
+.loop:
+cmp byte [rdi + rax], 0
+je .exit
+inc rax
+jmp .loop
+xor rax, rax
+.exit:
+leave
+ret
+alloc:
+push rbp
+mov rbp, rsp
+sub rsp, 16
+mov [rbp -8], rdi
+mov rsi, rdi
+mov rax, 9
+xor rdi, rdi
+mov rdx, 0x3
+mov r10, 0x22
+mov r8, -1
+mov r9, 0
+syscall
+jmp .exit
+xor rax, rax
+.exit:
+leave
+ret
+main:
+push rbp
+mov rbp, rsp
+sub rsp, 0
+call input
+push rax
+pop rdi
+call atoi
+push rax
+pop rdi
+call factorial
+push rax
+pop rdi
+call itoa
+push rax
+pop rdi
+call print
+mov rax, label_4
+push rax
+pop rdi
+call print
+xor rax, rax
+.exit:
+mov rdi, rax
+mov rax, 60
+syscall
 section .data
 section .rodata
-label_1: db 10, 0
+label_4: db 10, 0
 section .note.GNU-stack noalloc noexec nowrite progbits
