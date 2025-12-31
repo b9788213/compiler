@@ -22,7 +22,7 @@ class Parser:
     def expect(self, s):
         t = self.pop()
         if t.type != s: raise SyntaxError(f"Expected {s}, but got ({t}).")
-        return t
+        return t.value
 
     def check(self, s) -> bool:
         return self.peek().type == s
@@ -41,7 +41,8 @@ class Parser:
         while not self.match('EOF'):
 
             if self.match("IMPORT"):
-                self.handle_import(self.expect("STR").value)
+                path = "/".join(self.dot())
+                self.handle_import(path)
                 continue
 
             if self.match("FN"):
@@ -55,11 +56,11 @@ class Parser:
 
     #-----func-----
     def parse_func(self) -> Func:
-        f = Func(self.expect("ID").value)
+        f = Func(self.expect("ID"))
         self.currentf = f
 
         self.expect("LPAR")
-        f.args = self.parse_list(lambda: self.expect("ID").value)
+        f.args = self.parse_list(lambda: self.expect("ID"))
         self.expect("RPAR")
 
         f.body = self.getbody()
@@ -70,7 +71,7 @@ class Parser:
     def parse_stmt(self):
 
         if self.match("ASM"):
-            asms = [self.expect("STR").value]
+            asms = [self.expect("STR")]
 
             while self.peek().type == "STR": asms.append(self.pop().value)
 
@@ -107,7 +108,7 @@ class Parser:
 
         #Static decleration
         if self.match("STATIC"):
-            name = self.expect("ID").value
+            name = self.expect("ID")
             self.p.statics.append(Id(name))
             self.expect("EQ")
             return Assign(name, self.compare())
@@ -162,6 +163,14 @@ class Parser:
             return Id(name)
 
         self.error()
+
+    def dot(self):
+        ids = [self.expect("ID")]
+
+        while self.match("DOT"):
+            ids.append(self.expect("ID"))
+
+        return ids
 
     #-----call-----
     def parse_call(self, name: str):

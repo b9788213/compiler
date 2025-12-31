@@ -33,6 +33,8 @@ token_specification = (
     ('LT', r'<'),
     ('GT', r'>'),
 
+
+    ('DOT', r'\.'),
     ('COLON', r':'),
     ('COMMA', r','),
     ('LPAR', r'\('),

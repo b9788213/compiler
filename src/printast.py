@@ -1,5 +1,7 @@
 from node import *
 
+#TODO add if and while
+
 def get_ast(node, indent=0, markers=None):
     if markers is None:
         markers = []
