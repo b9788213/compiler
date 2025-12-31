@@ -215,7 +215,7 @@ call itoa
 push rax
 pop rdi
 call print
-mov rax, label_4
+lea rax, label_4
 push rax
 pop rdi
 call print

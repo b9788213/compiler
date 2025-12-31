@@ -145,7 +145,7 @@ class CodeGen:
         elif isinstance(expr, String):
             label = self.getlabel()
             self.strings[label] = expr.value
-            self.emit(f"mov rax, {label}")
+            self.emit(f"lea rax, {label}")
 
         elif isinstance(expr, Neg):
             self.gen_expr(expr.value)
