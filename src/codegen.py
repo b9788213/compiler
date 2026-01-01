@@ -59,7 +59,7 @@ class CodeGen:
         self.emit(f"sub rsp, {stack(f)}")
 
         for i, var in enumerate(f.args): #parametreleri stacke koy
-            self.emit(f"mov [rbp {f.vars[var]:+d}], {regs[i]}")
+            self.emit(f"mov {f.vars[var]}, {regs[i]}")
 
         self.gen_body(f.body)
 
@@ -85,7 +85,7 @@ class CodeGen:
                 if stmt.name in self.data.keys():
                     self.emit(f"mov [{self.data[stmt.name]}], rax")
                 else:
-                    self.emit(f"mov [rbp {self.currentf.vars[stmt.name]:+d}], rax ")
+                    self.emit(f"mov {self.currentf.vars[stmt.name]}, rax ")
 
             elif isinstance(stmt, Call):
                 self.call(stmt)
@@ -134,7 +134,7 @@ class CodeGen:
             if expr.name in self.data.keys():
                 self.emit(f"mov rax, [{self.data[expr.name]}]")
             else:
-                self.emit(f"mov rax, [rbp {self.currentf.vars[expr.name]:+d}]")
+                self.emit(f"mov rax, {self.currentf.vars[expr.name]}")
 
         elif isinstance(expr, Int):
             self.emit(f"mov rax, {expr.value}")
@@ -208,6 +208,6 @@ def stack(f: Func) -> int:
 
     for var in f.vars:
         offset -= 8
-        f.vars[var] = offset
+        f.vars[var] =  f"[rbp {offset:+d}]"
 
     return (size + 15) & ~15
