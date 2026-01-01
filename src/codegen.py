@@ -1,4 +1,5 @@
 import node as n
+import table as t
 
 regs = ("rdi", "rsi", "rdx", "rcx", "r8", "r9")
 
@@ -7,7 +8,7 @@ class CodeGen:
         self.p = p
         self.asm: list[str] = []
         self.data: dict[str, str] = {} #değişken ismi, label
-        self.currentf: n.Func =  None
+        self.currentf: t.Func =  None
         self.strings: dict[str, str] = {} # label, string
         self.isaligned: bool = True
         self.rand = 0
@@ -49,8 +50,8 @@ class CodeGen:
         return "\n".join(self.asm)
 
     def gen_func(self, f: n.Func):
-        f.vars.update(dict.fromkeys(f.args)) #parametreleri değişken yap
-        self.currentf = f
+        self.currentf = t.Func(f.name)
+
         self.isaligned = True
 
         self.emit(f"{f.name}:")

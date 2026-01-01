@@ -51,17 +51,11 @@ class Ret:
 class Body:
     code: list = field(default_factory=list)
 
-class Vars(dict[str, int]):
-    def __getitem__(self, item):
-        try: return super().__getitem__(item)
-        except Exception: raise KeyError(f"Cant find local variable {item}")
-
 @dataclass()
 class Func:
     name: Id
     args: list[str]  = field(default_factory=list)
     body: Body = field(default_factory=Body)
-    vars: Vars= field(default_factory=Vars)
 
 @dataclass()
 class Asm:
