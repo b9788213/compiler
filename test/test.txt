@@ -1,5 +1,5 @@
 import stdlib.stdlib
 
 fn main():
-	print(itoa(factorial(atoi(input()))))
-	print("\n")
+    print(itoa(factorial(atoi(input()))))
+    print("\n")

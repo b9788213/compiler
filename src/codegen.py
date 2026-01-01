@@ -1,13 +1,13 @@
-from node import *
+import node as n
 
 regs = ("rdi", "rsi", "rdx", "rcx", "r8", "r9")
 
 class CodeGen:
-    def __init__(self, p: Program):
+    def __init__(self, p: n.Program):
         self.p = p
         self.asm: list[str] = []
         self.data: dict[str, str] = {} #değişken ismi, label
-        self.currentf: Func =  None
+        self.currentf: n.Func =  None
         self.strings: dict[str, str] = {} # label, string
         self.isaligned: bool = True
         self.rand = 0
@@ -48,7 +48,7 @@ class CodeGen:
         self.emit("section .note.GNU-stack noalloc noexec nowrite progbits")
         return "\n".join(self.asm)
 
-    def gen_func(self, f: Func):
+    def gen_func(self, f: n.Func):
         f.vars.update(dict.fromkeys(f.args)) #parametreleri değişken yap
         self.currentf = f
         self.isaligned = True
@@ -73,13 +73,13 @@ class CodeGen:
             self.emit("leave")
             self.emit("ret")
 
-    def gen_body(self, b: Body):
+    def gen_body(self, b: n.Body):
         for stmt in b.code:
 
-            if isinstance(stmt, Asm):
+            if isinstance(stmt, n.Asm):
                 self.emit(stmt.value)
 
-            elif isinstance(stmt, Assign):
+            elif isinstance(stmt, n.Assign):
                 self.gen_expr(stmt.value)
 
                 if stmt.name in self.data.keys():
@@ -87,10 +87,10 @@ class CodeGen:
                 else:
                     self.emit(f"mov {self.currentf.vars[stmt.name]}, rax ")
 
-            elif isinstance(stmt, Call):
+            elif isinstance(stmt, n.Call):
                 self.call(stmt)
 
-            elif isinstance(stmt, ConditionelStruct):
+            elif isinstance(stmt, n.ConditionelStruct):
                 labels = []
                 for _ in stmt.ifs: labels.append(self.getlabel()) # if labels
                 labels.append(self.getlabel()) # else label
@@ -108,7 +108,7 @@ class CodeGen:
                 if stmt.elsebody: self.gen_body(stmt.elsebody)
                 self.emit(f".{endlab}:")
 
-            elif isinstance(stmt, While):
+            elif isinstance(stmt, n.While):
                 startlab = self.getlabel()
                 endlab = self.getlabel()
 
@@ -120,38 +120,38 @@ class CodeGen:
                 self.emit(f"jmp .{startlab}")
                 self.emit(f".{endlab}:")
 
-            elif isinstance(stmt, Ret):
+            elif isinstance(stmt, n.Ret):
                 self.gen_expr(stmt.value)
                 self.emit("jmp .exit")
                 break # gereksiz kısımları üretme
 
     def gen_expr(self, expr):
 
-        if isinstance(expr, Call):
+        if isinstance(expr, n.Call):
             self.call(expr)
 
-        elif isinstance(expr, Id):
+        elif isinstance(expr, n.Id):
             if expr.name in self.data.keys():
                 self.emit(f"mov rax, [{self.data[expr.name]}]")
             else:
                 self.emit(f"mov rax, {self.currentf.vars[expr.name]}")
 
-        elif isinstance(expr, Int):
+        elif isinstance(expr, n.Int):
             self.emit(f"mov rax, {expr.value}")
 
-        elif isinstance(expr, Float):
+        elif isinstance(expr, n.Float):
             raise NotImplementedError("Not implemented float")
 
-        elif isinstance(expr, String):
+        elif isinstance(expr, n.String):
             label = self.getlabel()
             self.strings[label] = expr.value
             self.emit(f"lea rax, {label}")
 
-        elif isinstance(expr, Neg):
+        elif isinstance(expr, n.Neg):
             self.gen_expr(expr.value)
             self.emit("neg rax")
 
-        elif isinstance(expr, BinOp):
+        elif isinstance(expr, n.BinOp):
             self.ready(expr)
 
             if expr.op == "PLUS":
@@ -165,7 +165,7 @@ class CodeGen:
                 self.emit("idiv rbx")
                 if expr.op == "MOD": self.emit("mov rax, rdx")
 
-        elif isinstance(expr, Comp):
+        elif isinstance(expr, n.Comp):
             self.ready(expr)
             self.emit("cmp rax, rbx")
 
@@ -184,7 +184,7 @@ class CodeGen:
         self.gen_expr(expr.left)
         self.emitstack("pop rbx")
 
-    def call(self, c: Call):
+    def call(self, c: n.Call):
         needed = regs[:len(c.args)]
         rev = needed[::-1]
 
@@ -202,7 +202,7 @@ class CodeGen:
         else:
             self.emit(f"call {c.name}")
 
-def stack(f: Func) -> int:
+def stack(f: n.Func) -> int:
     offset = 0
     size = len(f.vars) * 8
 
