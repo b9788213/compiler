@@ -1,5 +1,6 @@
 from typing import NoReturn
 import node as n
+import table as t
 from lexer import Token, lex
 from filemng import get_import
 from pathlib import Path
@@ -10,7 +11,6 @@ class Parser:
         self.tokens = tokens
         self.index: int = 0
         self.p = n.Program()
-        self.currentf: n.Func = None
 
     #-----Helpers-----
     def peek(self, n=0):
@@ -60,13 +60,18 @@ class Parser:
     def parse_func(self) -> n.Func:
         name = self.expect("ID")
 
-        
+        t.addFunc(name)
+        t.enterScope(name)
+
         f = n.Func(name)
         self.currentf = f
 
         self.expect("LPAR")
-        f.args = self.parse_list(lambda: self.expect("ID"))
+        args = self.parse_list(lambda: self.expect("ID"))
+        f.args = args
+        t.addVars(args)
         self.expect("RPAR")
+
 
         f.body = self.getbody()
 
@@ -114,7 +119,7 @@ class Parser:
         #Static decleration
         if self.match("STATIC"):
             name = self.expect("ID")
-            self.p.statics.append(Id(name))
+            self.p.statics.append(n.Id(name))
             self.expect("EQ")
             return n.Assign(name, self.compare())
 
@@ -165,7 +170,7 @@ class Parser:
         if self.check("ID"):
             name = self.pop().value
             if self.match("LPAR"): return self.parse_call(name)
-            return Id(name)
+            return n.Id(name)
 
         self.error()
 
