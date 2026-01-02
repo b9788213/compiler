@@ -15,6 +15,13 @@ funcs: list[Func] = []
 scope: Func
 statics: list[Var] = []
 
+def getStatic(name: str):
+    for v in statics:
+        if v.name == name:
+            return v.address
+    raise RuntimeError(f"cannot find static variable: {name}")
+
+
 def addStatic(name: str):
     statics.append(Var(name))
     print(f"added static: {name}")
@@ -27,6 +34,8 @@ def setStatic(name: str, val: str):
     for static in statics:
         if static.name == name:
             static.address = val
+            print(f"setted static {name} to {val}")
+            return
     raise RuntimeError(f"cannot find static variable: {name}")
 
 def addFunc(name: str):

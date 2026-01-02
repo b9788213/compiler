@@ -7,7 +7,6 @@ class CodeGen:
     def __init__(self, p: n.Program):
         self.p = p
         self.asm: list[str] = []
-        self.data: dict[str, str] = {} #değişken ismi, label
         self.strings: dict[str, str] = {} # label, string
         self.isaligned: bool = True
         self.rand = 0
@@ -36,8 +35,8 @@ class CodeGen:
             self.gen_func(f)
 
         self.emit("section .data")
-        for l in self.data.values():
-            self.emit(f"{l}: dq 0")
+        for l in t.statics:
+            self.emit(f"{l.name}: dq 0")
 
         self.emit("section .rodata")
         for l, s in self.strings.items():
@@ -81,8 +80,8 @@ class CodeGen:
             elif isinstance(stmt, n.Assign):
                 self.gen_expr(stmt.value)
 
-                if stmt.name in self.data.keys():
-                    self.emit(f"mov [{self.data[stmt.name]}], rax")
+                if stmt.name in (static.name for static in t.statics):
+                    self.emit(f"mov [{t.getStatic(stmt.name)}], rax")
                 else:
                     self.emit(f"mov {t.getVar(stmt.name)}, rax ")
 
@@ -130,8 +129,8 @@ class CodeGen:
             self.call(expr)
 
         elif isinstance(expr, n.Id):
-            if expr.name in self.data.keys():
-                self.emit(f"mov rax, [{self.data[expr.name]}]")
+            if expr.name in (static.name for static in t.statics):
+                self.emit(f"mov rax, [{t.getStatic(expr.name)}]")
             else:
                 self.emit(f"mov rax, {t.getVar(expr.name)}")
 

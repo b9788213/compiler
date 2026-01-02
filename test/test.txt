@@ -1,5 +1,13 @@
 import stdlib.stdlib
 
 fn main():
-    print(itoa(factorial(atoi(input()))))
+    s = itoa(factorial(atoi(input())))
+    print(s)
+    help(s)
+    print(str)
     print("\n")
+
+
+fn help(m):
+    global str = m
+    
