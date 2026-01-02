@@ -1,5 +1,5 @@
 from typing import NoReturn
-from node import *
+import node as n
 from lexer import Token, lex
 from filemng import get_import
 from pathlib import Path
@@ -9,8 +9,8 @@ class Parser:
         self.name = name
         self.tokens = tokens
         self.index: int = 0
-        self.p = Program()
-        self.currentf: Func = None
+        self.p = n.Program()
+        self.currentf: n.Func = None
 
     #-----Helpers-----
     def peek(self, n=0):
@@ -57,8 +57,11 @@ class Parser:
         return self.p
 
     #-----func-----
-    def parse_func(self) -> Func:
-        f = Func(self.expect("ID"))
+    def parse_func(self) -> n.Func:
+        name = self.expect("ID")
+
+        
+        f = n.Func(name)
         self.currentf = f
 
         self.expect("LPAR")
@@ -78,23 +81,23 @@ class Parser:
             while self.peek().type == "STR": asms.append(self.pop().value)
 
             self.expect("ASM")
-            return Asm("\n".join(asms))
+            return n.Asm("\n".join(asms))
 
         if self.match("IF"):
-            ifs = [ If(self.compare(), self.getbody()) ]
+            ifs = [n.If(self.compare(), self.getbody())]
             elsebody = None
 
             while self.match("ELIF"):
-                ifs.append(If(self.compare(), self.getbody()))
+                ifs.append(n.If(self.compare(), self.getbody()))
 
             if self.match("ELSE"):
                 elsebody = self.getbody()
 
-            if elsebody: return ConditionelStruct(ifs, elsebody)
-            return ConditionelStruct(ifs)
+            if elsebody: return n.ConditionelStruct(ifs, elsebody)
+            return n.ConditionelStruct(ifs)
 
         if self.match("WHILE"):
-            return While(self.compare(), self.getbody())
+            return n.While(self.compare(), self.getbody())
 
         if self.check("ID"):
             name = self.pop().value
@@ -106,17 +109,17 @@ class Parser:
             #assign and declaration
             if self.match("EQ"):
                 self.currentf.vars[name] = 0
-                return Assign(name, self.compare())
+                return n.Assign(name, self.compare())
 
         #Static decleration
         if self.match("STATIC"):
             name = self.expect("ID")
             self.p.statics.append(Id(name))
             self.expect("EQ")
-            return Assign(name, self.compare())
+            return n.Assign(name, self.compare())
 
         if self.match("RET"):
-            return Ret(self.compare())
+            return n.Ret(self.compare())
 
         self.error()
 
@@ -126,7 +129,7 @@ class Parser:
 
         while self.peek().type in ("EQEQ", "NEQ", "LEQ", "GEQ", "LT", "GT"):
             op = self.pop().type
-            node = Comp(op, node, self.expr())
+            node = n.Comp(op, node, self.expr())
         return node
 
     def expr(self):
@@ -134,7 +137,7 @@ class Parser:
 
         while self.peek().type in ("PLUS", "MINUS"):
             op = self.pop().type
-            node =  BinOp(op, node, self.term())
+            node =  n.BinOp(op, node, self.term())
         return node
 
     def term(self):
@@ -142,7 +145,7 @@ class Parser:
 
         while self.peek().type in ("MUL", "DIV", "MOD"):
             op = self.pop().type
-            node = BinOp(op, node, self.factor())
+            node = n.BinOp(op, node, self.factor())
         return node
 
     def factor(self):
@@ -151,13 +154,13 @@ class Parser:
             self.expect("RPAR")
             return node
 
-        if self.match("MINUS"): return Neg(self.factor())
+        if self.match("MINUS"): return n.Neg(self.factor())
 
-        if self.check("INT"): return Int(int(self.pop().value))
+        if self.check("INT"): return n.Int(int(self.pop().value))
 
-        if self.check("FLOAT"): return Float(float(self.pop().value))
+        if self.check("FLOAT"): return n.Float(float(self.pop().value))
 
-        if self.check("STR"): return String(self.pop().value)
+        if self.check("STR"): return n.String(self.pop().value)
 
         if self.check("ID"):
             name = self.pop().value
@@ -178,12 +181,12 @@ class Parser:
     def parse_call(self, name: str):
         args = self.parse_list(self.compare)
         self.expect("RPAR")
-        return Call(name, args)
+        return n.Call(name, args)
 
-    def getbody(self) -> Body:
+    def getbody(self) -> n.Body:
         self.expect("COLON")
         self.expect("INDENT")
-        b = Body()
+        b = n.Body()
 
         while not self.match("DEDENT"): b.code.append(self.parse_stmt())
 

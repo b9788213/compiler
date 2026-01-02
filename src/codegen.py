@@ -8,7 +8,7 @@ class CodeGen:
         self.p = p
         self.asm: list[str] = []
         self.data: dict[str, str] = {} #değişken ismi, label
-        self.currentf: t.Func =  None
+        self.f: t.Func =  None
         self.strings: dict[str, str] = {} # label, string
         self.isaligned: bool = True
         self.rand = 0
@@ -50,17 +50,16 @@ class CodeGen:
         return "\n".join(self.asm)
 
     def gen_func(self, f: n.Func):
-        self.currentf = t.Func(f.name)
-
+        self.f = t.Func(f.name)
         self.isaligned = True
 
         self.emit(f"{f.name}:")
         self.emit("push rbp") # rbp + return adress zaten 16 byte
         self.emit("mov rbp, rsp")
-        self.emit(f"sub rsp, {stack(f)}")
+        self.emit(f"sub rsp, {self.stack()}")
 
         for i, var in enumerate(f.args): #parametreleri stacke koy
-            self.emit(f"mov {f.vars[var]}, {regs[i]}")
+            self.emit(f"mov {self.f.getVar(var)}, {regs[i]}")
 
         self.gen_body(f.body)
 
@@ -86,7 +85,7 @@ class CodeGen:
                 if stmt.name in self.data.keys():
                     self.emit(f"mov [{self.data[stmt.name]}], rax")
                 else:
-                    self.emit(f"mov {self.currentf.vars[stmt.name]}, rax ")
+                    self.emit(f"mov {self.f.vars[stmt.name]}, rax ")
 
             elif isinstance(stmt, n.Call):
                 self.call(stmt)
@@ -135,7 +134,7 @@ class CodeGen:
             if expr.name in self.data.keys():
                 self.emit(f"mov rax, [{self.data[expr.name]}]")
             else:
-                self.emit(f"mov rax, {self.currentf.vars[expr.name]}")
+                self.emit(f"mov rax, {self.f.vars[expr.name]}")
 
         elif isinstance(expr, n.Int):
             self.emit(f"mov rax, {expr.value}")
@@ -203,12 +202,12 @@ class CodeGen:
         else:
             self.emit(f"call {c.name}")
 
-def stack(f: n.Func) -> int:
-    offset = 0
-    size = len(f.vars) * 8
+    def stack(self) -> int:
+        offset = 0
+        size = len(self.f.vars) * 8
 
-    for var in f.vars:
-        offset -= 8
-        f.vars[var] =  f"[rbp {offset:+d}]"
+        for var in self.f.vars:
+            offset -= 8
+            self.f.vars[var] = f"[rbp {offset:+d}]"
 
-    return (size + 15) & ~15
+        return (size + 15) & ~15
