@@ -12,7 +12,22 @@ class Func:
 
 
 funcs: list[Func] = []
-scope: Func = None
+scope: Func
+statics: list[Var] = []
+
+def addStatic(name: str):
+    statics.append(Var(name))
+    print(f"added static: {name}")
+
+def addStatics(names: list):
+    for name in names:
+        addStatics(name)
+
+def setStatic(name: str, val: str):
+    for static in statics:
+        if static.name == name:
+            static.address = val
+    raise RuntimeError(f"cannot find static variable: {name}")
 
 def addFunc(name: str):
     funcs.append(Func(name))
@@ -31,6 +46,11 @@ def addVar(name: str):
     for v in scope.vars:
         if v.name == name:
             return
+
+    for static in statics:
+        if static.name == name:
+            return
+
     scope.vars.append(Var(name))
     print(f"added var: {name}")
 
@@ -45,7 +65,6 @@ def setVar(name: str, val: str):
             print(f"settes {name} to {val}")
             return
     raise RuntimeError(f"Cannot find local variable: {name}")
-
 
 def getVar(name: str):
     for n in scope.vars:

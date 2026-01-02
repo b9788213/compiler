@@ -42,7 +42,6 @@ def get_ast(node, indent=0, markers=None):
     children = []
     if isinstance(node, Program):
         children.extend(node.funcs)
-        children.extend(node.statics)
     elif isinstance(node, Func):
         children.extend(node.body.code)
     elif isinstance(node, (BinOp, Comp)):

@@ -120,6 +120,7 @@ class Parser:
         if self.match("STATIC"):
             name = self.expect("ID")
             self.p.statics.append(n.Id(name))
+            t.addStatic(name)
             self.expect("EQ")
             return n.Assign(name, self.compare())
 
@@ -216,6 +217,5 @@ class Parser:
         ast = Parser(parent, tokens).parse()
 
         self.p.funcs.extend(ast.funcs)
-        self.p.statics.extend(ast.statics)
 
 

@@ -80,4 +80,3 @@ class While:
 @dataclass()
 class Program:
     funcs: list[Func]  = field(default_factory=list)
-    statics: list[Id]  = field(default_factory=list)

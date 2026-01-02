@@ -24,8 +24,8 @@ class CodeGen:
         return f"label_{self.rand}"
 
     def gen(self):
-        for s in self.p.statics: #staticleri kaydet
-            self.data[s.name] = self.getlabel()
+        for s in t.statics: #staticleri kaydet
+            t.setStatic(s.name, self.getlabel())
 
         self.emit("bits 64")
         self.emit("default rel")
