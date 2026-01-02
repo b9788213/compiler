@@ -121,21 +121,5 @@ mov r8, -1
 mov r9, 0
 syscall
 jmp .exit)
-├── Func(name='main', args=[])
-│   ├── Assign(name='s')
-│   │   └── Call(name='itoa')
-│   │       └── Call(name='factorial')
-│   │           └── Call(name='atoi')
-│   │               └── Call(name='input')
-│   ├── Call(name='print')
-│   │   └── Id(s)
-│   ├── Call(name='help')
-│   │   └── Id(s)
-│   ├── Call(name='print')
-│   │   └── Id(str)
-│   └── Call(name='print')
-│       └── String(
-)
-└── Func(name='help', args=['m'])
-    └── Assign(name='str')
-        └── Id(m)
+└── Func(name='main', args=[])
+    └── Unknown(While)
