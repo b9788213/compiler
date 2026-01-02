@@ -33,4 +33,5 @@ fn main():
             print("\n")
 
         else:
+            print(itoa(random()))
             return 0

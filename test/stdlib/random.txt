@@ -1,0 +1,7 @@
+fn random():
+    asm"
+    .retry:
+    rdrand rax
+    jnc .retry
+    jmp .exit
+    "asm

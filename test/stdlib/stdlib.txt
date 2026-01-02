@@ -1,5 +1,6 @@
 import casting
 import math
+import random
 
 fn print(s):
      asm

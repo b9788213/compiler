@@ -132,13 +132,27 @@ ID, n2, at line 31, column 33
 RPAR, ), at line 31, column 35
 RPAR, ), at line 31, column 36
 DEDENT, , at line 33, column 1
-DEDENT, , at line 33, column 1
-ELSE, else, at line 33, column 9
-COLON, :, at line 33, column 13
-INDENT, 12, at line 34, column 1
-RET, return, at line 34, column 13
-INT, 0, at line 34, column 20
+ID, print, at line 33, column 13
+LPAR, (, at line 33, column 18
+STR, 
+, at line 33, column 19
+RPAR, ), at line 33, column 23
 DEDENT, , at line 35, column 1
-DEDENT, , at line 35, column 1
-DEDENT, , at line 35, column 1
-EOF, , at line 35, column 1
+ELSE, else, at line 35, column 9
+COLON, :, at line 35, column 13
+INDENT, 12, at line 36, column 1
+ID, print, at line 36, column 13
+LPAR, (, at line 36, column 18
+ID, itoa, at line 36, column 19
+LPAR, (, at line 36, column 23
+ID, random, at line 36, column 24
+LPAR, (, at line 36, column 30
+RPAR, ), at line 36, column 31
+RPAR, ), at line 36, column 32
+RPAR, ), at line 36, column 33
+RET, return, at line 37, column 13
+INT, 0, at line 37, column 20
+DEDENT, , at line 38, column 1
+DEDENT, , at line 38, column 1
+DEDENT, , at line 38, column 1
+EOF, , at line 38, column 1

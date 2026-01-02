@@ -85,6 +85,13 @@ jmp .exit)
 │   ├── Unknown(ConditionelStruct)
 │   └── Ret
 │       └── Int(1)
+├── Func(name='random', args=[])
+│   └── Asm(
+    .retry:
+    rdrand rax
+    jnc .retry
+    jmp .exit
+    )
 ├── Func(name='print', args=['s'])
 │   └── Asm(call len
 mov rdx, rax
