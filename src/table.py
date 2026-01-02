@@ -71,7 +71,7 @@ def setVar(name: str, val: str):
     for n in scope.vars:
         if n.name == name:
             n.address = val
-            print(f"settes {name} to {val}")
+            print(f"setted {name} to {val}")
             return
     raise RuntimeError(f"Cannot find local variable: {name}")
 

@@ -36,7 +36,7 @@ class CodeGen:
 
         self.emit("section .data")
         for l in t.statics:
-            self.emit(f"{l.name}: dq 0")
+            self.emit(f"{l.address}: dq 0")
 
         self.emit("section .rodata")
         for l, s in self.strings.items():
