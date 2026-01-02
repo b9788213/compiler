@@ -8,7 +8,6 @@ class CodeGen:
         self.p = p
         self.asm: list[str] = []
         self.data: dict[str, str] = {} #değişken ismi, label
-        self.f: t.Func =  None
         self.strings: dict[str, str] = {} # label, string
         self.isaligned: bool = True
         self.rand = 0
@@ -50,7 +49,7 @@ class CodeGen:
         return "\n".join(self.asm)
 
     def gen_func(self, f: n.Func):
-        self.f = t.Func(f.name)
+        t.enterScope(f.name)
         self.isaligned = True
 
         self.emit(f"{f.name}:")
@@ -59,7 +58,7 @@ class CodeGen:
         self.emit(f"sub rsp, {self.stack()}")
 
         for i, var in enumerate(f.args): #parametreleri stacke koy
-            self.emit(f"mov {self.f.getVar(var)}, {regs[i]}")
+            self.emit(f"mov {t.getVar(var)}, {regs[i]}")
 
         self.gen_body(f.body)
 
@@ -85,7 +84,7 @@ class CodeGen:
                 if stmt.name in self.data.keys():
                     self.emit(f"mov [{self.data[stmt.name]}], rax")
                 else:
-                    self.emit(f"mov {self.f.vars[stmt.name]}, rax ")
+                    self.emit(f"mov {t.getVar(stmt.name)}, rax ")
 
             elif isinstance(stmt, n.Call):
                 self.call(stmt)
@@ -134,7 +133,7 @@ class CodeGen:
             if expr.name in self.data.keys():
                 self.emit(f"mov rax, [{self.data[expr.name]}]")
             else:
-                self.emit(f"mov rax, {self.f.vars[expr.name]}")
+                self.emit(f"mov rax, {t.getVar(expr.name)}")
 
         elif isinstance(expr, n.Int):
             self.emit(f"mov rax, {expr.value}")
@@ -204,10 +203,10 @@ class CodeGen:
 
     def stack(self) -> int:
         offset = 0
-        size = len(self.f.vars) * 8
+        size = len(t.scope.vars) * 8
 
-        for var in self.f.vars:
+        for var in t.scope.vars:
             offset -= 8
-            self.f.vars[var] = f"[rbp {offset:+d}]"
+            t.setVar(var.name, f"[rbp {offset:+d}]")
 
         return (size + 15) & ~15

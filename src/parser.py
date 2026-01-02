@@ -113,7 +113,7 @@ class Parser:
 
             #assign and declaration
             if self.match("EQ"):
-                self.currentf.vars[name] = 0
+                t.addVar(name)
                 return n.Assign(name, self.compare())
 
         #Static decleration
