@@ -91,17 +91,15 @@ class Parser:
 
         if self.match("IF"):
             ifs = [n.If(self.compare(), self.getbody())]
-            elsebody = None
 
             while self.match("ELIF"):
                 ifs.append(n.If(self.compare(), self.getbody()))
 
+            elsebody = None
             if self.match("ELSE"):
                 elsebody = self.getbody()
 
-            if elsebody:
-                return n.CondStruct(ifs, elsebody)
-            return n.CondStruct(ifs)
+            return n.CondStruct(ifs, elsebody)
 
         if self.match("WHILE"):
             return n.While(self.compare(), self.getbody())

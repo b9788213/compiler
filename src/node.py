@@ -84,7 +84,7 @@ class If:
 @dataclass()
 class CondStruct:
     ifs: list[If]
-    elsebody: Body | None = field(default_factory=None.__class__)
+    elsebody: Body | None
 
 
 @dataclass()
