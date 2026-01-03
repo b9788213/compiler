@@ -1,6 +1,7 @@
 import casting
 import math
 import random
+import mem
 
 fn print(s):
      asm
@@ -35,17 +36,4 @@ fn len(s):
     "je .exit"
     "inc rax"
     "jmp .loop"
-    asm
-
-fn alloc(i):
-    asm
-    "mov rsi, rdi"
-    "mov rax, 9"
-    "xor rdi, rdi"
-    "mov rdx, 0x3"
-    "mov r10, 0x22"
-    "mov r8, -1"
-    "mov r9, 0"
-    "syscall"
-    "jmp .exit"
     asm

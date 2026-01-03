@@ -18,13 +18,13 @@ Program
 │       └── Int(1)
 ├── Func(Id(name='random'), args=['max'])
 │   └── Asm
+├── Func(Id(name='alloc'), args=['i'])
+│   └── Asm
 ├── Func(Id(name='print'), args=['s'])
 │   └── Asm
 ├── Func(Id(name='input'), args=[])
 │   └── Asm
 ├── Func(Id(name='len'), args=['s'])
-│   └── Asm
-├── Func(Id(name='alloc'), args=['i'])
 │   └── Asm
 └── Func(Id(name='main'), args=[])
     ├── Assign(Id(name='n'))
