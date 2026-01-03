@@ -28,10 +28,7 @@ def get_ast(node, indent=0, markers=None):
     if indent > 0:
         prefix = ""
         for i in range(indent - 1):
-            if markers[i]:
-                prefix += "│   "
-            else:
-                prefix += "    "
+                prefix += "│   " if markers[i] else "    "
         prefix += "└── " if not markers[indent - 1] else "├── "
     else:
         prefix = ""
