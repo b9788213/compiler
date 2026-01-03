@@ -100,8 +100,8 @@ class Parser:
                 elsebody = self.getbody()
 
             if elsebody:
-                return n.ConditionelStruct(ifs, elsebody)
-            return n.ConditionelStruct(ifs)
+                return n.CondStruct(ifs, elsebody)
+            return n.CondStruct(ifs)
 
         if self.match("WHILE"):
             return n.While(self.compare(), self.getbody())

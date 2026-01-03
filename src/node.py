@@ -82,7 +82,7 @@ class If:
 
 
 @dataclass()
-class ConditionelStruct:
+class CondStruct:
     ifs: list[If]
     elsebody: Body | None = field(default_factory=None.__class__)
 

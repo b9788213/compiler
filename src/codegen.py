@@ -89,7 +89,7 @@ class CodeGen:
             elif isinstance(stmt, n.Call):
                 self.call(stmt)
 
-            elif isinstance(stmt, n.ConditionelStruct):
+            elif isinstance(stmt, n.CondStruct):
                 labels = []
                 for _ in stmt.ifs:
                     labels.append(self.getlabel())  # if labels
