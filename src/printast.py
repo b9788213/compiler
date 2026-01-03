@@ -34,9 +34,10 @@ def get_ast(node, indent=0, markers=None):
         if isinstance(n, While): return "While"
         if isinstance(n, ConditionelStruct): return "ConditionelStruct"
         if isinstance(n, If): return "If"
-        if isinstance(n, (Int, Float, String, Id)):
-            val = getattr(n, 'value', getattr(n, 'name', ''))
-            return f"{type(n).__name__}({val})"
+        if isinstance(n, Int): return f"Int({n.value})"
+        if isinstance(n, Float): return f"Float({n.value})"
+        if isinstance(n, String): return f"String({repr(n.value)})"
+        if isinstance(n, Id): return f"Id({n.name})"
         return f"Unknown({type(n).__name__})"
 
     lines.append(f"{prefix}{get_node_info(node)}")
