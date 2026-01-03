@@ -18,7 +18,9 @@ Program
 │       └── Int(1)
 ├── Func(Id(name='random'), args=['max'])
 │   └── Asm
-├── Func(Id(name='alloc'), args=['i'])
+├── Func(Id(name='alloc'), args=['size'])
+│   └── Asm
+├── Func(Id(name='free'), args=['ptr'])
 │   └── Asm
 ├── Func(Id(name='print'), args=['s'])
 │   └── Asm

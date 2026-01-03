@@ -4,36 +4,36 @@ import random
 import mem
 
 fn print(s):
-     asm
-     "call len"
-     "mov rdx, rax"
-     "mov rsi, [rbp-8]"
-     "mov rax, 1"
-     "mov rdi, 1"
-     "syscall"
-     "jmp .exit"
-     asm
+     asm"
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     "asm
 
 fn input():
-    asm
-    "mov rdi, 4096"
-    "call alloc"
-    "mov rsi, rax"
-    "xor rax, rax"
-    "xor rdi, rdi"
-    "mov rdx, 4096"
-    "syscall"
-    "mov byte [rsi + rax - 1], 0"
-    "mov rax, rsi"
-    "jmp .exit"
-    asm
+    asm"
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    "asm
 
 fn len(s):
-    asm
-    "xor rax, rax"
-    ".loop:"
-    "cmp byte [rdi + rax], 0"
-    "je .exit"
-    "inc rax"
-    "jmp .loop"
-    asm
+    asm"
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    "asm

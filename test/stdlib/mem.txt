@@ -1,12 +1,20 @@
-fn alloc(i):
-    asm
-    "mov rsi, rdi"
-    "mov rax, 9"
-    "xor rdi, rdi"
-    "mov rdx, 0x3"
-    "mov r10, 0x22"
-    "mov r8, -1"
-    "mov r9, 0"
-    "syscall"
-    "jmp .exit"
-    asm
+fn alloc(size):
+    asm"
+    mov rsi, rdi
+    mov rax, 9
+    xor rdi, rdi
+    mov rdx, 0x3
+    mov r10, 0x22
+    mov r8, -1
+    mov r9, 0
+    syscall
+    jmp .exit
+    "asm
+
+fn free(ptr):
+    asm"
+    xor rax, rax
+    cld
+    mov rcx, [rdi]
+    rep stosq
+    "asm
