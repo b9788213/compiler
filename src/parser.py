@@ -63,8 +63,7 @@ class Parser:
         t.addFunc(name)
         t.enterScope(name)
 
-        f = n.Func(name)
-        self.currentf = f
+        f = n.Func(n.Id(name))
 
         self.expect("LPAR")
         args = self.parse_list(lambda: self.expect("ID"))
@@ -114,14 +113,14 @@ class Parser:
             #assign and declaration
             if self.match("EQ"):
                 t.addVar(name)
-                return n.Assign(name, self.compare())
+                return n.Assign(n.Id(name), self.compare())
 
         #Static decleration
         if self.match("STATIC"):
             name = self.expect("ID")
             t.addStatic(name)
             self.expect("EQ")
-            return n.Assign(name, self.compare())
+            return n.Assign(n.Id(name), self.compare())
 
         if self.match("RET"):
             return n.Ret(self.compare())
@@ -186,7 +185,7 @@ class Parser:
     def parse_call(self, name: str):
         args = self.parse_list(self.compare)
         self.expect("RPAR")
-        return n.Call(name, args)
+        return n.Call(n.Id(name), args)
 
     def getbody(self) -> n.Body:
         self.expect("COLON")

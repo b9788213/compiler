@@ -48,10 +48,10 @@ class CodeGen:
         return "\n".join(self.asm)
 
     def gen_func(self, f: n.Func):
-        t.enterScope(f.name)
+        t.enterScope(f.name.name)
         self.isaligned = True
 
-        self.emit(f"{f.name}:")
+        self.emit(f"{f.name.name}:")
         self.emit("push rbp") # rbp + return adress zaten 16 byte
         self.emit("mov rbp, rsp")
         self.emit(f"sub rsp, {self.stack()}")
@@ -81,9 +81,9 @@ class CodeGen:
                 self.gen_expr(stmt.value)
 
                 if stmt.name in (static.name for static in t.statics):
-                    self.emit(f"mov [{t.getStatic(stmt.name)}], rax")
+                    self.emit(f"mov [{t.getStatic(stmt.name.name)}], rax")
                 else:
-                    self.emit(f"mov {t.getVar(stmt.name)}, rax ")
+                    self.emit(f"mov {t.getVar(stmt.name.name)}, rax ")
 
             elif isinstance(stmt, n.Call):
                 self.call(stmt)
@@ -195,12 +195,13 @@ class CodeGen:
 
         if not self.isaligned:
             self.emitstack("push 0")  # şimdi hizalı
-            self.emit(f"call {c.name}")  # 8 byte return adress
+            self.emit(f"call {c.name.name}")  # 8 byte return adress
             self.emitstack("add rsp, 8")
         else:
-            self.emit(f"call {c.name}")
+            self.emit(f"call {c.name.name}")
 
-    def stack(self) -> int:
+    @staticmethod
+    def stack() -> int:
         offset = 0
         size = len(t.scope.vars) * 8
 
