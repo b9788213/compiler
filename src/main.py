@@ -3,7 +3,7 @@ from filemng import src, save, parent
 from lexer import lex
 from parser import Parser
 
-tokens = list(lex(src))
+tokens = lex(src)
 
 ast = Parser(parent, tokens).parse()
 
