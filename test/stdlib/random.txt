@@ -1,7 +1,10 @@
-fn random():
+fn random(max):
     asm"
     .retry:
     rdrand rax
     jnc .retry
+    xor rdx, rdx
+    div rdi
+    mov rax, rdx
     jmp .exit
     "asm
