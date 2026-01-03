@@ -1,6 +1,8 @@
 import stdlib.stdlib
 
 fn main():
+    print(h("merhaba"))
+    print(str)
     while 1:
         print("bir operatör giriniz: ")
         o = atoi(input())
@@ -34,3 +36,6 @@ fn main():
 
         else:
             return 0
+fn h(s):
+    global str = s
+    return s

@@ -21,10 +21,8 @@ def getStatic(name: str):
             return v.address
     raise RuntimeError(f"cannot find static variable: {name}")
 
-
 def addStatic(name: str):
     statics.append(Var(name))
-    print(f"added static: {name}")
 
 def addStatics(names: list):
     for name in names:
@@ -34,20 +32,17 @@ def setStatic(name: str, val: str):
     for static in statics:
         if static.name == name:
             static.address = val
-            print(f"setted static {name} to {val}")
             return
     raise RuntimeError(f"cannot find static variable: {name}")
 
 def addFunc(name: str):
     funcs.append(Func(name))
-    print(f"added function: {name}")
 
 def enterScope(name: str):
     global scope
     for f in funcs:
         if f.name == name:
             scope = f
-            print(f"entered scope: {name}")
             return
     raise RuntimeError(f"cannot find function: {name}")
 
@@ -61,7 +56,6 @@ def addVar(name: str):
             return
 
     scope.vars.append(Var(name))
-    print(f"added var: {name}")
 
 def addVars(names: list):
     for name in names:
@@ -71,13 +65,11 @@ def setVar(name: str, val: str):
     for n in scope.vars:
         if n.name == name:
             n.address = val
-            print(f"setted {name} to {val}")
             return
     raise RuntimeError(f"Cannot find local variable: {name}")
 
 def getVar(name: str):
     for n in scope.vars:
         if n.name == name:
-
             return n.address
     raise RuntimeError(f"Cannot find local variable: {name}")

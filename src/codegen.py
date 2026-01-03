@@ -80,7 +80,7 @@ class CodeGen:
             elif isinstance(stmt, n.Assign):
                 self.gen_expr(stmt.value)
 
-                if stmt.name in (static.name for static in t.statics):
+                if stmt.name.name in (static.name for static in t.statics):
                     self.emit(f"mov [{t.getStatic(stmt.name.name)}], rax")
                 else:
                     self.emit(f"mov {t.getVar(stmt.name.name)}, rax ")
