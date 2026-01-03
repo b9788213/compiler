@@ -10,7 +10,8 @@ class Token(NamedTuple):
     column: int
 
     def __str__(self):
-        return f"{self.type}, {self.value}, at line {self.line}, column {self.column}"
+        return (f"{self.type}, {self.value},"
+                f" at line {self.line}, column {self.column}")
 
 
 token_specification = (
@@ -34,7 +35,6 @@ token_specification = (
     ('LT', r'<'),
     ('GT', r'>'),
 
-
     ('DOT', r'\.'),
     ('COLON', r':'),
     ('COMMA', r','),
@@ -46,11 +46,11 @@ token_specification = (
     ('EQ', r'='),
     ('ID', r'[A-Za-z_]\w*'),
 
-    ('PLUS',        r'\+'),
-    ('MINUS',       r'-'),
-    ('MUL',         r'\*'),
-    ('DIV',         r'/'),
-    ('MOD',         r'%'),
+    ('PLUS', r'\+'),
+    ('MINUS', r'-'),
+    ('MUL', r'\*'),
+    ('DIV', r'/'),
+    ('MOD', r'%'),
 
     ('NEWLINE', r'\n'),
     ('SKIP', r'[ \t]+'),
@@ -65,6 +65,7 @@ def lex(code: str) -> list[Token]:
     save_token(tokens)
     return tokens
 
+
 def _lex(code: str) -> Iterator[Token]:
     line_num = 1
     line_start = 0
@@ -73,7 +74,7 @@ def _lex(code: str) -> Iterator[Token]:
 
     for mo in re.finditer(tok_regex, code):
         kind = mo.lastgroup
-        value = mo.group()
+        val = mo.group()
         column = mo.start() - line_start + 1
 
         if kind == 'NEWLINE':
@@ -83,17 +84,17 @@ def _lex(code: str) -> Iterator[Token]:
             continue
 
         if at_line_start:
-            # Sadece boşluklardan oluşan veya boş satırları atlamak için ileriye bak
+            # boş satırları atlamak için ileriye bak
             next_newline = code.find('\n', mo.start())
             line_end = next_newline if next_newline != -1 else len(code)
             line_content = code[mo.start():line_end]
 
             if not line_content.strip():
-                # Eğer satır sadece boşluk veya boşsa, bu tokenı geç ve satır başına devam et
+                # Eğer satır boşsa, bu tokenı geç ve satır başına devam et
                 continue
 
             # Girinti miktarını hesapla (sadece SKIP ise değeri al, değilse 0)
-            indent_level = len(value) if kind == 'SKIP' else 0
+            indent_level = len(val) if kind == 'SKIP' else 0
 
             if indent_level > indent_stack[-1]:
                 indent_stack.append(indent_level)
@@ -104,18 +105,26 @@ def _lex(code: str) -> Iterator[Token]:
                 yield Token('DEDENT', '', line_num, column)
 
             at_line_start = False
-            if kind == 'SKIP': continue
+            if kind == 'SKIP':
+                continue
 
         if kind == 'MISMATCH':
-            raise RuntimeError(f'Hata: {value!r} geçersiz karakter (Satır {line_num}, Sütun {column})')
+            raise RuntimeError(f'Hata: {val!r} geçersiz karakter '
+                               f'(Satır {line_num}, Sütun {column})')
 
-        if kind == 'SKIP': # Normal boşlukları atla
+        if kind == 'SKIP':  # Normal boşlukları atla
             continue
 
-        if kind == 'STR':
-            value = value[1:-1].encode('utf-8').decode('unicode_escape').encode('latin-1').decode('utf-8') # tırnakları at, escapeleri çöz
+        if kind == 'STR':  # tırnakları at, escapeleri çöz
+            val = (
+                val[1:-1]
+                .encode('utf-8')
+                .decode('unicode_escape')
+                .encode('latin-1')
+                .decode('utf-8')
+            )
 
-        yield Token(kind, value, line_num, column)
+        yield Token(kind, val, line_num, column)
 
     # Dosya sonunda kalan girintileri kapat
     while len(indent_stack) > 1:

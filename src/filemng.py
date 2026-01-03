@@ -17,14 +17,16 @@ astfile = debug_dir / "ast.txt"
 
 src = infile.read_text(encoding="utf-8")
 
+
 def save(ast, asm):
     astfile.write_text(get_ast(ast), encoding="utf-8")
     outfile.write_text(asm, encoding="utf-8")
 
-def save_token(tokens):
 
+def save_token(tokens):
     with open(tokenfile, "a", encoding="utf-8") as f:
         f.write("\n".join(str(t) for t in tokens))
+
 
 def get_import(p: Path, name: str):
     file = (p / name).with_suffix(".txt")

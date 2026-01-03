@@ -1,19 +1,22 @@
 from dataclasses import dataclass, field
 
+
 @dataclass()
 class Var:
     name: str
     address: str = ""
 
+
 @dataclass()
 class Func:
     name: str
-    vars: list[Var] =  field(default_factory=list)
+    vars: list[Var] = field(default_factory=list)
 
 
 funcs: list[Func] = []
-scope: Func
+scope: Func = None
 statics: list[Var] = []
+
 
 def getStatic(name: str):
     for v in statics:
@@ -21,12 +24,15 @@ def getStatic(name: str):
             return v.address
     raise RuntimeError(f"cannot find static variable: {name}")
 
+
 def addStatic(name: str):
     statics.append(Var(name))
+
 
 def addStatics(names: list):
     for name in names:
         addStatics(name)
+
 
 def setStatic(name: str, val: str):
     for static in statics:
@@ -35,8 +41,10 @@ def setStatic(name: str, val: str):
             return
     raise RuntimeError(f"cannot find static variable: {name}")
 
+
 def addFunc(name: str):
     funcs.append(Func(name))
+
 
 def enterScope(name: str):
     global scope
@@ -45,6 +53,7 @@ def enterScope(name: str):
             scope = f
             return
     raise RuntimeError(f"cannot find function: {name}")
+
 
 def addVar(name: str):
     for v in scope.vars:
@@ -57,9 +66,11 @@ def addVar(name: str):
 
     scope.vars.append(Var(name))
 
+
 def addVars(names: list):
     for name in names:
         addVar(name)
+
 
 def setVar(name: str, val: str):
     for n in scope.vars:
@@ -67,6 +78,7 @@ def setVar(name: str, val: str):
             n.address = val
             return
     raise RuntimeError(f"Cannot find local variable: {name}")
+
 
 def getVar(name: str):
     for n in scope.vars:

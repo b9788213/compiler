@@ -3,11 +3,12 @@ import table as t
 
 regs = ("rdi", "rsi", "rdx", "rcx", "r8", "r9")
 
+
 class CodeGen:
     def __init__(self, p: n.Program):
         self.p = p
         self.asm: list[str] = []
-        self.strings: dict[str, str] = {} # label, string
+        self.strings: dict[str, str] = {}  # label, string
         self.isaligned: bool = True
         self.rand = 0
 
@@ -23,7 +24,7 @@ class CodeGen:
         return f"label_{self.rand}"
 
     def gen(self):
-        for s in t.statics: #staticleri kaydet
+        for s in t.statics:  # staticleri kaydet
             t.setStatic(s.name, self.getlabel())
 
         self.emit("bits 64")
@@ -35,14 +36,14 @@ class CodeGen:
             self.gen_func(f)
 
         self.emit("section .data")
-        for l in t.statics:
-            self.emit(f"{l.address}: dq 0")
+        for static in t.statics:
+            self.emit(f"{static.address}: dq 0")
 
         self.emit("section .rodata")
-        for l, s in self.strings.items():
-            bytes_val = s.encode('utf-8')
+        for lab, s in self.strings.items():
+            bytes_val = s.encode("utf-8")
             ascii_val = ", ".join(str(b) for b in bytes_val)
-            self.emit(f"{l}: db {ascii_val}, 0")
+            self.emit(f"{lab}: db {ascii_val}, 0")
 
         self.emit("section .note.GNU-stack noalloc noexec nowrite progbits")
         return "\n".join(self.asm)
@@ -52,16 +53,16 @@ class CodeGen:
         self.isaligned = True
 
         self.emit(f"{f.name.name}:")
-        self.emit("push rbp") # rbp + return adress zaten 16 byte
+        self.emit("push rbp")  # rbp + return adress zaten 16 byte
         self.emit("mov rbp, rsp")
         self.emit(f"sub rsp, {self.stack()}")
 
-        for i, var in enumerate(f.args): #parametreleri stacke koy
+        for i, var in enumerate(f.args):  # parametreleri stacke koy
             self.emit(f"mov {t.getVar(var)}, {regs[i]}")
 
         self.gen_body(f.body)
 
-        self.emit("xor rax, rax") # return yoksa 0 döndür
+        self.emit("xor rax, rax")  # return yoksa 0 döndür
         self.emit(".exit:")
         if f.name == "main":
             self.emit("mov rdi, rax")
@@ -90,20 +91,22 @@ class CodeGen:
 
             elif isinstance(stmt, n.ConditionelStruct):
                 labels = []
-                for _ in stmt.ifs: labels.append(self.getlabel()) # if labels
-                labels.append(self.getlabel()) # else label
+                for _ in stmt.ifs:
+                    labels.append(self.getlabel())  # if labels
+                labels.append(self.getlabel())  # else label
                 endlab = self.getlabel()
 
                 for i, if_ in enumerate(stmt.ifs):
                     self.emit(f".{labels[i]}:")
-                    self.gen_expr(if_.cond) # değer rax'ta
+                    self.gen_expr(if_.cond)  # değer rax'ta
                     self.emit("test rax, rax")
                     self.emit(f"jz .{labels[i+1]}")
                     self.gen_body(if_.body)
                     self.emit(f"jmp .{endlab}")
 
                 self.emit(f".{labels[-1]}:")
-                if stmt.elsebody: self.gen_body(stmt.elsebody)
+                if stmt.elsebody:
+                    self.gen_body(stmt.elsebody)
                 self.emit(f".{endlab}:")
 
             elif isinstance(stmt, n.While):
@@ -121,7 +124,7 @@ class CodeGen:
             elif isinstance(stmt, n.Ret):
                 self.gen_expr(stmt.value)
                 self.emit("jmp .exit")
-                break # gereksiz kısımları üretme
+                break  # gereksiz kısımları üretme
 
     def gen_expr(self, expr):
 
@@ -161,18 +164,25 @@ class CodeGen:
             elif expr.op in ("DIV", "MOD"):
                 self.emit("cqo")
                 self.emit("idiv rbx")
-                if expr.op == "MOD": self.emit("mov rax, rdx")
+                if expr.op == "MOD":
+                    self.emit("mov rax, rdx")
 
         elif isinstance(expr, n.Comp):
             self.ready(expr)
             self.emit("cmp rax, rbx")
 
-            if expr.op == "EQEQ": self.emit("sete al")
-            if expr.op == "NEQ": self.emit("setne al")
-            if expr.op == "LEQ": self.emit("setle al")
-            if expr.op == "GEQ": self.emit("setge al")
-            if expr.op == "LT": self.emit("setl al")
-            if expr.op == "GT": self.emit("setg al")
+            if expr.op == "EQEQ":
+                self.emit("sete al")
+            if expr.op == "NEQ":
+                self.emit("setne al")
+            if expr.op == "LEQ":
+                self.emit("setle al")
+            if expr.op == "GEQ":
+                self.emit("setge al")
+            if expr.op == "LT":
+                self.emit("setl al")
+            if expr.op == "GT":
+                self.emit("setg al")
 
             self.emit("movzx rax, al")
 
@@ -183,7 +193,7 @@ class CodeGen:
         self.emitstack("pop rbx")
 
     def call(self, c: n.Call):
-        needed = regs[:len(c.args)]
+        needed = regs[: len(c.args)]
         rev = needed[::-1]
 
         for arg in c.args:
