@@ -1,132 +1,99 @@
 Program
-├── Func(name='atoi', args=['s'])
-│   └── Asm(xor rax, rax
-xor rcx, rcx
-movzx rdx, byte [rdi]
-cmp dl, '-'
-je .prepare_negative
-cmp dl, '+'
-jne .atoi_loop
-inc rcx
-jmp .atoi_loop
-.prepare_negative:
-inc rcx
-.neg_loop:
-movzx rdx, byte [rdi + rcx]
-test dl, dl
-jz .apply_neg
-cmp dl, '0'
-jl .apply_neg
-cmp dl, '9'
-jg .apply_neg
-sub dl, '0'
-imul rax, 10
-add rax, rdx
-inc rcx
-jmp .neg_loop
-.apply_neg:
-neg rax
-jmp .exit
-.atoi_loop:
-movzx rdx, byte [rdi + rcx]
-test dl, dl
-jz .exit
-cmp dl, '0'
-jl .exit
-cmp dl, '9'
-jg .exit
-sub dl, '0'
-imul rax, 10
-add rax, rdx
-inc rcx
-jmp .atoi_loop)
-├── Func(name='itoa', args=['i'])
-│   └── Asm(mov rdi, 4096
-call alloc 
-mov r8, rax
-mov r12, rax
-mov rax, [rbp-8]
-mov rbx, 10
-xor rcx, rcx
-cmp rax, 0
-jge .is_zero
-neg rax
-mov byte [r8], '-'
-inc r8
-.is_zero:
-test rax, rax
-jnz .loop
-mov rdx, '0'
-push rdx
-inc rcx
-jmp .write_to_buffer
-.loop:
-test rax, rax
-jz .write_to_buffer
-cqo
-idiv rbx
-add rdx, '0'
-push rdx
-inc rcx
-jmp .loop
-.write_to_buffer:
-test rcx, rcx
-jz .done
-pop rdx
-mov [r8], dl
-inc r8
-dec rcx
-jmp .write_to_buffer
-.done:
-mov byte [r8], 0
-mov rax, r12
-jmp .exit)
-├── Func(name='factorial', args=['i'])
-│   ├── Unknown(ConditionelStruct)
+├── Func(atoi, args=['s'])
+│   └── Asm
+├── Func(itoa, args=['i'])
+│   └── Asm
+├── Func(factorial, args=['i'])
+│   ├── ConditionelStruct
+│   │   └── If
+│   │       ├── Id(i)
+│   │       └── Ret
+│   │           └── BinOp(MUL)
+│   │               ├── Id(i)
+│   │               └── Call(factorial)
+│   │                   └── BinOp(MINUS)
+│   │                       ├── Id(i)
+│   │                       └── Int(1)
 │   └── Ret
 │       └── Int(1)
-├── Func(name='random', args=[])
-│   └── Asm(
-    .retry:
-    rdrand rax
-    jnc .retry
-    jmp .exit
-    )
-├── Func(name='print', args=['s'])
-│   └── Asm(call len
-mov rdx, rax
-mov rsi, [rbp-8]
-mov rax, 1
-mov rdi, 1
-syscall
-jmp .exit)
-├── Func(name='input', args=[])
-│   └── Asm(mov rdi, 4096
-call alloc
-mov rsi, rax
-xor rax, rax
-xor rdi, rdi
-mov rdx, 4096
-syscall
-mov byte [rsi + rax - 1], 0
-mov rax, rsi
-jmp .exit)
-├── Func(name='len', args=['s'])
-│   └── Asm(xor rax, rax
-.loop:
-cmp byte [rdi + rax], 0
-je .exit
-inc rax
-jmp .loop)
-├── Func(name='alloc', args=['i'])
-│   └── Asm(mov rsi, rdi
-mov rax, 9
-xor rdi, rdi
-mov rdx, 0x3
-mov r10, 0x22
-mov r8, -1
-mov r9, 0
-syscall
-jmp .exit)
-└── Func(name='main', args=[])
-    └── Unknown(While)
+├── Func(random, args=[])
+│   └── Asm
+├── Func(print, args=['s'])
+│   └── Asm
+├── Func(input, args=[])
+│   └── Asm
+├── Func(len, args=['s'])
+│   └── Asm
+├── Func(alloc, args=['i'])
+│   └── Asm
+└── Func(main, args=[])
+    └── While
+        ├── Int(1)
+        ├── Call(print)
+        │   └── String(bir operatör giriniz: )
+        ├── Assign(o)
+        │   └── Call(atoi)
+        │       └── Call(input)
+        └── ConditionelStruct
+            ├── If
+            │   ├── Id(o)
+            │   ├── Call(print)
+            │   │   └── String(bir sayı giriniz: )
+            │   ├── Assign(n1)
+            │   │   └── Call(atoi)
+            │   │       └── Call(input)
+            │   ├── Call(print)
+            │   │   └── String(bir sayı giriniz: )
+            │   ├── Assign(n2)
+            │   │   └── Call(atoi)
+            │   │       └── Call(input)
+            │   ├── ConditionelStruct
+            │   │   ├── If
+            │   │   │   ├── Comp(EQEQ)
+            │   │   │   │   ├── Id(o)
+            │   │   │   │   └── Int(1)
+            │   │   │   ├── Call(print)
+            │   │   │   │   └── String(toplamı: )
+            │   │   │   └── Call(print)
+            │   │   │       └── Call(itoa)
+            │   │   │           └── BinOp(PLUS)
+            │   │   │               ├── Id(n1)
+            │   │   │               └── Id(n2)
+            │   │   ├── If
+            │   │   │   ├── Comp(EQEQ)
+            │   │   │   │   ├── Id(o)
+            │   │   │   │   └── Int(2)
+            │   │   │   ├── Call(print)
+            │   │   │   │   └── String(farkı: )
+            │   │   │   └── Call(print)
+            │   │   │       └── Call(itoa)
+            │   │   │           └── BinOp(MINUS)
+            │   │   │               ├── Id(n1)
+            │   │   │               └── Id(n2)
+            │   │   ├── If
+            │   │   │   ├── Comp(EQEQ)
+            │   │   │   │   ├── Id(o)
+            │   │   │   │   └── Int(3)
+            │   │   │   ├── Call(print)
+            │   │   │   │   └── String(çarpımı: )
+            │   │   │   └── Call(print)
+            │   │   │       └── Call(itoa)
+            │   │   │           └── BinOp(MUL)
+            │   │   │               ├── Id(n1)
+            │   │   │               └── Id(n2)
+            │   │   └── If
+            │   │       ├── Comp(EQEQ)
+            │   │       │   ├── Id(o)
+            │   │       │   └── Int(4)
+            │   │       ├── Call(print)
+            │   │       │   └── String(bölümü: )
+            │   │       └── Call(print)
+            │   │           └── Call(itoa)
+            │   │               └── BinOp(DIV)
+            │   │                   ├── Id(n1)
+            │   │                   └── Id(n2)
+            │   └── Call(print)
+            │       └── String(
+)
+            └── Ret
+                └── Int(0)

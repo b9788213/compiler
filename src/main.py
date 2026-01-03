@@ -9,4 +9,4 @@ ast = Parser(parent, tokens).parse()
 
 asm = CodeGen(ast).gen()
 
-save(tokens, ast, asm)
+save(ast, asm)

@@ -1,5 +1,6 @@
 import re
 from typing import NamedTuple, Iterator
+from filemng import save_token
 
 
 class Token(NamedTuple):
@@ -59,7 +60,12 @@ token_specification = (
 tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
 
 
-def lex(code: str) -> Iterator[Token]:
+def lex(code: str) -> list[Token]:
+    tokens = list(_lex(code))
+    save_token(tokens)
+    return tokens
+
+def _lex(code: str) -> Iterator[Token]:
     line_num = 1
     line_start = 0
     indent_stack = [0]
