@@ -35,7 +35,7 @@ from constants import (
     MOD,
     EOF,
     INDENT,
-    DEDENT,
+    DEDENT, MISMATCH, SKIP,
 )
 
 
@@ -82,8 +82,8 @@ TOKEN_SPEC = (
     (DIV, r"/"),
     (MOD, r"%"),
     (NL, r"\n"),
-    ("SKIP", r"[ \t]+"),
-    ("MISMATCH", r"."),
+    (SKIP, r"[ \t]+"),
+    (MISMATCH, r"."),
 )
 
 REGEX = "|".join("(?P<%s>%s)" % pair for pair in TOKEN_SPEC)
@@ -123,7 +123,7 @@ def _lex(code: str) -> Iterator[Token]:
                 continue
 
             # Girinti miktarını hesapla (sadece SKIP ise değeri al, değilse 0)
-            indent_level = len(val) if kind == "SKIP" else 0
+            indent_level = len(val) if kind == SKIP else 0
 
             if indent_level > indent_stack[-1]:
                 indent_stack.append(indent_level)
@@ -134,16 +134,16 @@ def _lex(code: str) -> Iterator[Token]:
                 yield Token(DEDENT, "", line_num, column)
 
             at_line_start = False
-            if kind == "SKIP":
+            if kind == SKIP:
                 continue
 
-        if kind == "MISMATCH":
+        if kind == MISMATCH:
             raise RuntimeError(
                 f"Hata: {val!r} geçersiz karakter "
                 f"(Satır {line_num}, Sütun {column})"
             )
 
-        if kind == "SKIP":  # Normal boşlukları atla
+        if kind == SKIP:  # Normal boşlukları atla
             continue
 
         if kind == STR:  # tırnakları at, escapeleri çöz
