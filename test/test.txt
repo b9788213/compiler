@@ -1,17 +1,2 @@
-import stdlib.stdlib
-
 fn main():
-    n = random(100)
-    while 1:
-        print("bir sayı giriniz: ")
-        i = atoi(input())
-
-        if i == n:
-            print("sayıyı bildiniz\n")
-            return 0
-
-        elif i < n:
-            print("daha büyük\n")
-
-        else:
-            print("daha küçük\n")
+    s = "merhan\nba"

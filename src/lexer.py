@@ -46,7 +46,7 @@ class Token(NamedTuple):
     column: int
 
     def __str__(self):
-        return (f"{self.type}, {self.val},"
+        return (f"{self.type}, {repr(self.val)},"
                 f" at line {self.line}, column {self.column}")
 
 

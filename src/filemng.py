@@ -15,6 +15,8 @@ outfile = build_dir / "out.asm"
 tokenfile = debug_dir / "tokens.txt"
 astfile = debug_dir / "ast.txt"
 
+tokenfile.write_text("") # dosyayı sıfırla
+
 src = infile.read_text(encoding="utf-8")
 
 
