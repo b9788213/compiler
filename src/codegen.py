@@ -1,5 +1,6 @@
 import node as n
 import table as t
+import constants as c
 
 regs = ("rdi", "rsi", "rdx", "rcx", "r8", "r9")
 
@@ -155,34 +156,32 @@ class CodeGen:
         elif isinstance(expr, n.BinOp):
             self.ready(expr)
 
-            if expr.op == "PLUS":
-                self.emit("add rax, rbx")
-            elif expr.op == "MINUS":
-                self.emit("sub rax, rbx")
-            elif expr.op == "MUL":
-                self.emit("imul rax, rbx")
-            elif expr.op in ("DIV", "MOD"):
-                self.emit("cqo")
-                self.emit("idiv rbx")
-                if expr.op == "MOD":
+            match expr.op:
+                case  c.PLUS:
+                    self.emit("add rax, rbx")
+                case  c.MINUS:
+                    self.emit("sub rax, rbx")
+                case  c.MUL:
+                    self.emit("imul rax, rbx")
+                case c.DIV:
+                    self.emit("cqo")
+                    self.emit("idiv rbx")
+                case c.MOD:
+                    self.emit("cqo")
+                    self.emit("idiv rbx")
                     self.emit("mov rax, rdx")
 
         elif isinstance(expr, n.Comp):
             self.ready(expr)
             self.emit("cmp rax, rbx")
 
-            if expr.op == "EQEQ":
-                self.emit("sete al")
-            if expr.op == "NEQ":
-                self.emit("setne al")
-            if expr.op == "LEQ":
-                self.emit("setle al")
-            if expr.op == "GEQ":
-                self.emit("setge al")
-            if expr.op == "LT":
-                self.emit("setl al")
-            if expr.op == "GT":
-                self.emit("setg al")
+            match expr.op:
+                case c.EQEQ: self.emit("sete al")
+                case c.NEQ: self.emit("setne al")
+                case c.LEQ: self.emit("setle al")
+                case c.GEQ: self.emit("setge al")
+                case c.LT: self.emit("setl al")
+                case c.GT: self.emit("setg al")
 
             self.emit("movzx rax, al")
 
@@ -193,22 +192,21 @@ class CodeGen:
         self.emitstack("pop rbx")
 
     def call(self, c: n.Call):
-        needed = regs[: len(c.args)]
-        rev = needed[::-1]
+        need = regs[: len(c.args)][::-1]
 
         for arg in c.args:
             self.gen_expr(arg)
             self.emitstack("push rax")
 
         for i in range(len(c.args)):
-            self.emitstack(f"pop {rev[i]}")
+            self.emitstack(f"pop {need[i]}")
 
-        if not self.isaligned:
-            self.emitstack("push 0")  # şimdi hizalı
-            self.emit(f"call {c.name.name}")  # 8 byte return adress
-            self.emitstack("add rsp, 8")
-        else:
+        if self.isaligned:
             self.emit(f"call {c.name.name}")
+        else:
+            self.emitstack("sub rsp, 8")  # şimdi hizalı
+            self.emit(f"call {c.name.name}")
+            self.emitstack("add rsp, 8")
 
     @staticmethod
     def stack() -> int:
