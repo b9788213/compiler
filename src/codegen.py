@@ -83,7 +83,7 @@ class CodeGen:
                 self.gen_expr(stmt.value)
 
                 if stmt.name.name in t.getstatics():
-                    self.emit(f"mov [{t.getStatic(stmt.name.name)}], rax")
+                    self.emit(f"mov {t.getStatic(stmt.name.name)}, rax")
                 else:
                     self.emit(f"mov {t.getVar(stmt.name.name)}, rax ")
 
@@ -134,7 +134,7 @@ class CodeGen:
 
             case n.Id():
                 if expr.name in t.getstatics():
-                    self.emit(f"mov rax, [{t.getStatic(expr.name)}]")
+                    self.emit(f"mov rax, {t.getStatic(expr.name)}")
                 else:
                     self.emit(f"mov rax, {t.getVar(expr.name)}")
 

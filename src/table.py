@@ -21,7 +21,7 @@ statics: list[Var] = []
 def getStatic(name: str):
     for v in statics:
         if v.name == name:
-            return v.address
+            return f"[{v.address}]"
     raise RuntimeError(f"cannot find static variable: {name}")
 
 def getstatics():
