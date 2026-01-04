@@ -9,7 +9,26 @@ from constants import (
     EOF,
     ID,
     IMPORT,
-    RET, MINUS, RPAR, LPAR, INT, FLOAT, STR, DOT, COLON, INDENT, DEDENT, COMMA, EQ, STATIC, WHILE, ELSE, ELIF, IF, ASM
+    RET,
+    MINUS,
+    RPAR,
+    LPAR,
+    INT,
+    FLOAT,
+    STR,
+    DOT,
+    COLON,
+    INDENT,
+    DEDENT,
+    COMMA,
+    EQ,
+    STATIC,
+    WHILE,
+    ELSE,
+    ELIF,
+    IF,
+    ASM,
+    COMPARE, EXPR, TERM,
 )
 
 
@@ -102,9 +121,7 @@ class Parser:
             while self.match(ELIF):
                 ifs.append(n.If(self.compare(), self.getbody()))
 
-            elsebody = None
-            if self.match(ELSE):
-                elsebody = self.getbody()
+            elsebody = self.getbody() if self.match(ELSE) else None
 
             return n.CondStruct(ifs, elsebody)
 
@@ -139,7 +156,7 @@ class Parser:
     def compare(self):
         node = self.expr()
 
-        while self.peek().type in ("EQEQ", "NEQ", "LEQ", "GEQ", "LT", "GT"):
+        while self.peek().type in COMPARE:
             op = self.pop().type
             node = n.Comp(op, node, self.expr())
         return node
@@ -147,7 +164,7 @@ class Parser:
     def expr(self):
         node = self.term()
 
-        while self.peek().type in ("PLUS", "MINUS"):
+        while self.peek().type in EXPR:
             op = self.pop().type
             node = n.BinOp(op, node, self.term())
         return node
@@ -155,7 +172,7 @@ class Parser:
     def term(self):
         node = self.factor()
 
-        while self.peek().type in ("MUL", "DIV", "MOD"):
+        while self.peek().type in TERM:
             op = self.pop().type
             node = n.BinOp(op, node, self.factor())
         return node
@@ -180,9 +197,7 @@ class Parser:
 
         if self.check(ID):
             name = self.pop().value
-            if self.match(LPAR):
-                return self.parse_call(name)
-            return n.Id(name)
+            return self.parse_call(name) if self.match(LPAR) else n.Id(name)
 
         self.error()
 

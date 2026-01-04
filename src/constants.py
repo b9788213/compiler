@@ -21,6 +21,8 @@ GEQ = "GEQ"
 LT = "LT"
 GT = "GT"
 
+COMPARE = (EQEQ, NEQ, LEQ, GEQ, LT, GT)
+
 DOT = "DOT"
 COLON = "COLON"
 COMMA = "COMMA"
@@ -34,9 +36,14 @@ INT = "INT"
 
 PLUS = "PLUS"
 MINUS = "MINUS"
+
+EXPR = (PLUS, MINUS)
+
 MUL = "MUL"
 DIV = "DIV"
 MOD = "MOD"
+
+TERM = (MUL, DIV, MOD)
 
 INDENT = "INDENT"
 DEDENT = "DEDENT"

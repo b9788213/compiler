@@ -45,7 +45,8 @@ class Token(NamedTuple):
 
     def __str__(self):
         return (
-            f"{self.type}, {self.value}," f" at line {self.line}, column {self.column}"
+            f"{self.type}, {self.value},"
+            f"" f" at line {self.line}, column {self.column}"
         )
 
 
@@ -115,7 +116,7 @@ def _lex(code: str) -> Iterator[Token]:
             # boş satırları atlamak için ileriye bak
             next_newline = code.find("\n", mo.start())
             line_end = next_newline if next_newline != -1 else len(code)
-            line_content = code[mo.start() : line_end]
+            line_content = code[mo.start():line_end]
 
             if not line_content.strip():
                 # Eğer satır boşsa, bu tokenı geç ve satır başına devam et
