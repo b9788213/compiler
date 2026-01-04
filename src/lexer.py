@@ -33,6 +33,7 @@ from constants import (
     DIV,
     NL,
     MOD,
+    EOF, INDENT, DEDENT
 )
 
 
@@ -125,11 +126,11 @@ def _lex(code: str) -> Iterator[Token]:
 
             if indent_level > indent_stack[-1]:
                 indent_stack.append(indent_level)
-                yield Token("INDENT", str(indent_level), line_num, column)
+                yield Token(INDENT, str(indent_level), line_num, column)
 
             while indent_level < indent_stack[-1]:
                 indent_stack.pop()
-                yield Token("DEDENT", "", line_num, column)
+                yield Token(DEDENT, "", line_num, column)
 
             at_line_start = False
             if kind == "SKIP":
@@ -144,7 +145,7 @@ def _lex(code: str) -> Iterator[Token]:
         if kind == "SKIP":  # Normal boşlukları atla
             continue
 
-        if kind == "STR":  # tırnakları at, escapeleri çöz
+        if kind == STR:  # tırnakları at, escapeleri çöz
             val = (
                 val[1:-1]
                 .encode("utf-8")
@@ -158,6 +159,6 @@ def _lex(code: str) -> Iterator[Token]:
     # Dosya sonunda kalan girintileri kapat
     while len(indent_stack) > 1:
         indent_stack.pop()
-        yield Token("DEDENT", "", line_num, 1)
+        yield Token(DEDENT, "", line_num, 1)
 
-    yield Token("EOF", "", line_num, 1)
+    yield Token(EOF, "", line_num, 1)

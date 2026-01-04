@@ -38,4 +38,8 @@ MUL = "MUL"
 DIV = "DIV"
 MOD = "MOD"
 
+INDENT = "INDENT"
+DEDENT = "DEDENT"
+
 NL = "NL"
+EOF = "EOF"
