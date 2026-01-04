@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 
 
-@dataclass()
+@dataclass
 class Var:
     name: str
     address: str = ""
 
 
-@dataclass()
+@dataclass
 class Func:
     name: str
     vars: list[Var] = field(default_factory=list)
