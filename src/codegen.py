@@ -128,62 +128,62 @@ class CodeGen:
                 break  # gereksiz kısımları üretme
 
     def gen_expr(self, expr):
+        match expr:
+            case n.Call():
+                self.call(expr)
 
-        if isinstance(expr, n.Call):
-            self.call(expr)
+            case n.Id():
+                if expr.name in (static.name for static in t.statics):
+                    self.emit(f"mov rax, [{t.getStatic(expr.name)}]")
+                else:
+                    self.emit(f"mov rax, {t.getVar(expr.name)}")
 
-        elif isinstance(expr, n.Id):
-            if expr.name in (static.name for static in t.statics):
-                self.emit(f"mov rax, [{t.getStatic(expr.name)}]")
-            else:
-                self.emit(f"mov rax, {t.getVar(expr.name)}")
+            case n.Int():
+                self.emit(f"mov rax, {expr.value}")
 
-        elif isinstance(expr, n.Int):
-            self.emit(f"mov rax, {expr.value}")
+            case n.Float():
+                raise NotImplementedError("Not implemented float")
 
-        elif isinstance(expr, n.Float):
-            raise NotImplementedError("Not implemented float")
+            case n.String():
+                label = self.getlabel()
+                self.strings[label] = expr.value
+                self.emit(f"lea rax, {label}")
 
-        elif isinstance(expr, n.String):
-            label = self.getlabel()
-            self.strings[label] = expr.value
-            self.emit(f"lea rax, {label}")
+            case n.Neg():
+                self.gen_expr(expr.value)
+                self.emit("neg rax")
 
-        elif isinstance(expr, n.Neg):
-            self.gen_expr(expr.value)
-            self.emit("neg rax")
+            case n.BinOp():
+                self.ready(expr)
 
-        elif isinstance(expr, n.BinOp):
-            self.ready(expr)
+                match expr.op:
+                    case  c.PLUS:
+                        self.emit("add rax, rbx")
+                    case  c.MINUS:
+                        self.emit("sub rax, rbx")
+                    case  c.MUL:
+                        self.emit("imul rax, rbx")
+                    case c.DIV:
+                        self.emit("cqo")
+                        self.emit("idiv rbx")
+                    case c.MOD:
+                        self.emit("cqo")
+                        self.emit("idiv rbx")
+                        self.emit("mov rax, rdx")
 
-            match expr.op:
-                case  c.PLUS:
-                    self.emit("add rax, rbx")
-                case  c.MINUS:
-                    self.emit("sub rax, rbx")
-                case  c.MUL:
-                    self.emit("imul rax, rbx")
-                case c.DIV:
-                    self.emit("cqo")
-                    self.emit("idiv rbx")
-                case c.MOD:
-                    self.emit("cqo")
-                    self.emit("idiv rbx")
-                    self.emit("mov rax, rdx")
+            case n.Comp():
+                self.ready(expr)
+                self.emit("cmp rax, rbx")
 
-        elif isinstance(expr, n.Comp):
-            self.ready(expr)
-            self.emit("cmp rax, rbx")
+                match expr.op:
+                    case c.EQEQ: self.emit("sete al")
+                    case c.NEQ: self.emit("setne al")
+                    case c.LEQ: self.emit("setle al")
+                    case c.GEQ: self.emit("setge al")
+                    case c.LT: self.emit("setl al")
+                    case c.GT: self.emit("setg al")
 
-            match expr.op:
-                case c.EQEQ: self.emit("sete al")
-                case c.NEQ: self.emit("setne al")
-                case c.LEQ: self.emit("setle al")
-                case c.GEQ: self.emit("setge al")
-                case c.LT: self.emit("setl al")
-                case c.GT: self.emit("setg al")
-
-            self.emit("movzx rax, al")
+                self.emit("movzx rax, al")
 
     def ready(self, expr):
         self.gen_expr(expr.right)
