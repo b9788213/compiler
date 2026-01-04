@@ -73,14 +73,13 @@ class Parser:
             if self.match(IMPORT):
                 path = "/".join(self.dot())
                 self.handle_import(path)
-                continue
 
-            if self.match(FN):
+            elif self.match(FN):
                 f = self.parse_func()
                 self.p.funcs.append(f)
-                continue
 
-            self.error()
+            else:
+                self.error()
 
         return self.p
 
@@ -131,16 +130,16 @@ class Parser:
         if self.check(ID):
             name = self.pop().value
 
-            # call
+            # Call
             if self.match(LPAR):
                 return self.parse_call(name)
 
-            # assign and declaration
+            # Assign and Declaration
             if self.match(EQ):
                 t.addVar(name)
                 return n.Assign(n.Id(name), self.compare())
 
-        # Static decleration
+        # Static Decleration
         if self.match(STATIC):
             name = self.expect(ID)
             t.addStatic(name)
@@ -152,7 +151,7 @@ class Parser:
 
         self.error()
 
-    # -----presedence-----
+    # -----Presedence-----
     def compare(self):
         node = self.expr()
 
@@ -201,7 +200,7 @@ class Parser:
 
         self.error()
 
-    def dot(self):
+    def dot(self) -> list:
         ids = [self.expect(ID)]
 
         while self.match(DOT):
@@ -210,7 +209,7 @@ class Parser:
         return ids
 
     # -----call-----
-    def parse_call(self, name: str):
+    def parse_call(self, name: str) -> n.Call:
         args = self.parse_list(self.compare)
         self.expect(RPAR)
         return n.Call(n.Id(name), args)
