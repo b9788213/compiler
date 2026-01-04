@@ -75,54 +75,53 @@ class CodeGen:
 
     def gen_body(self, b: n.Body):
         for stmt in b.code:
+            match stmt:
+                case n.Asm():
+                    self.emit(stmt.value)
 
-            if isinstance(stmt, n.Asm):
-                self.emit(stmt.value)
+                case n.Assign():
+                    self.gen_expr(stmt.value)
+                    self.emit(f"mov {t.getStatic(stmt.id.id) if t.instatics(stmt.id.id) else t.getVar(stmt.id.id)}, rax")
 
-            elif isinstance(stmt, n.Assign):
-                self.gen_expr(stmt.value)
+                case n.Call():
+                    self.call(stmt)
 
-                self.emit(f"mov {t.getStatic(stmt.id.id) if t.instatics(stmt.id.id) else t.getVar(stmt.id.id)}, rax")
+                case n.CondStruct():
+                    labels = []
+                    for _ in stmt.ifs:
+                        labels.append(self.getlabel())  # if labels
+                    labels.append(self.getlabel())  # else label
+                    endlab = self.getlabel()
 
-            elif isinstance(stmt, n.Call):
-                self.call(stmt)
+                    for i, if_ in enumerate(stmt.ifs):
+                        self.emit(f".{labels[i]}:")
+                        self.gen_expr(if_.cond)  # değer rax'ta
+                        self.emit("test rax, rax")
+                        self.emit(f"jz .{labels[i+1]}")
+                        self.gen_body(if_.body)
+                        self.emit(f"jmp .{endlab}")
 
-            elif isinstance(stmt, n.CondStruct):
-                labels = []
-                for _ in stmt.ifs:
-                    labels.append(self.getlabel())  # if labels
-                labels.append(self.getlabel())  # else label
-                endlab = self.getlabel()
+                    self.emit(f".{labels[-1]}:")
+                    if stmt.elsebody:
+                        self.gen_body(stmt.elsebody)
+                    self.emit(f".{endlab}:")
 
-                for i, if_ in enumerate(stmt.ifs):
-                    self.emit(f".{labels[i]}:")
-                    self.gen_expr(if_.cond)  # değer rax'ta
+                case n.While():
+                    startlab = self.getlabel()
+                    endlab = self.getlabel()
+
+                    self.emit(f".{startlab}:")
+                    self.gen_expr(stmt.cond)
                     self.emit("test rax, rax")
-                    self.emit(f"jz .{labels[i+1]}")
-                    self.gen_body(if_.body)
-                    self.emit(f"jmp .{endlab}")
+                    self.emit(f"jz .{endlab}")
+                    self.gen_body(stmt.body)
+                    self.emit(f"jmp .{startlab}")
+                    self.emit(f".{endlab}:")
 
-                self.emit(f".{labels[-1]}:")
-                if stmt.elsebody:
-                    self.gen_body(stmt.elsebody)
-                self.emit(f".{endlab}:")
-
-            elif isinstance(stmt, n.While):
-                startlab = self.getlabel()
-                endlab = self.getlabel()
-
-                self.emit(f".{startlab}:")
-                self.gen_expr(stmt.cond)
-                self.emit("test rax, rax")
-                self.emit(f"jz .{endlab}")
-                self.gen_body(stmt.body)
-                self.emit(f"jmp .{startlab}")
-                self.emit(f".{endlab}:")
-
-            elif isinstance(stmt, n.Ret):
-                self.gen_expr(stmt.value)
-                self.emit("jmp .exit")
-                break  # gereksiz kısımları üretme
+                case n.Ret():
+                    self.gen_expr(stmt.value)
+                    self.emit("jmp .exit")
+                    break  # gereksiz kısımları üretme
 
     def gen_expr(self, expr):
         match expr:
