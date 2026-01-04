@@ -82,10 +82,7 @@ class CodeGen:
             elif isinstance(stmt, n.Assign):
                 self.gen_expr(stmt.value)
 
-                if t.instatics(stmt.id.id):
-                    self.emit(f"mov {t.getStatic(stmt.id.id)}, rax")
-                else:
-                    self.emit(f"mov {t.getVar(stmt.id.id)}, rax ")
+                self.emit(f"mov {t.getStatic(stmt.id.id) if t.instatics(stmt.id.id) else t.getVar(stmt.id.id)}, rax")
 
             elif isinstance(stmt, n.Call):
                 self.call(stmt)
