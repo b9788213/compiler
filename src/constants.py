@@ -1,42 +1,41 @@
-from enum import Enum, auto
 
 
-class TokenType(Enum):
-    STR = auto()
+STR = "STR"
 
-    ASM = auto()
-    FN = auto()
-    RET = auto()
-    IMP = auto()
-    STATIC = auto()
+ASM = "ASM"
+FN = "FN"
+RET = "RET"
+IMPORT = "IMPORT"
+STATIC = "STATIC"
 
-    WHILE = auto()
+WHILE = "WHILE"
 
-    IF = auto()
-    ELIF = auto()
-    ELSE = auto()
+IF = "IF"
+ELIF = "ELIF"
+ELSE = "ELSE"
 
-    EQEQ = auto()
-    NEQ = auto()
-    LEQ = auto()
-    GEQ = auto()
-    LT = auto()
-    GT = auto()
+EQEQ = "EQEQ"
+NEQ = "NEQ"
+LEQ = "LEQ"
+GEQ = "GEQ"
+LT = "LT"
+GT = "GT"
 
-    DOT = auto()
-    COLON = auto()
-    COMMA = auto()
-    LPAR = auto()
-    RPAR = auto()
-    EQ = auto()
+DOT = "DOT"
+COLON = "COLON"
+COMMA = "COMMA"
+LPAR = "LPAR"
+RPAR = "RPAR"
+EQ = "EQ"
 
-    ID = auto()
-    FLOAT = auto()
-    INT = auto()
+ID = "ID"
+FLOAT = "FLOAT"
+INT = "INT"
 
-    PLUS = auto()
-    MINUS = auto()
-    MUL = auto()
-    DIV = auto()
+PLUS = "PLUS"
+MINUS = "MINUS"
+MUL = "MUL"
+DIV = "DIV"
+MOD = "MOD"
 
-    NL = auto()
+NL = "NL"

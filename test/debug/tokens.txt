@@ -30280,4 +30280,1884 @@ STR,
     , at line 5, column 8
 ASM, asm, at line 5, column 73
 DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+DOT, ., at line 1, column 14
+ID, stdlib, at line 1, column 15
+FN, fn, at line 3, column 1
+ID, main, at line 3, column 4
+LPAR, (, at line 3, column 8
+RPAR, ), at line 3, column 9
+COLON, :, at line 3, column 10
+INDENT, 4, at line 4, column 1
+ID, n, at line 4, column 5
+EQ, =, at line 4, column 7
+ID, random, at line 4, column 9
+LPAR, (, at line 4, column 15
+INT, 100, at line 4, column 16
+RPAR, ), at line 4, column 19
+WHILE, while, at line 5, column 5
+INT, 1, at line 5, column 11
+COLON, :, at line 5, column 12
+INDENT, 8, at line 6, column 1
+ID, print, at line 6, column 9
+LPAR, (, at line 6, column 14
+STR, bir sayı giriniz: , at line 6, column 15
+RPAR, ), at line 6, column 35
+ID, i, at line 7, column 9
+EQ, =, at line 7, column 11
+ID, atoi, at line 7, column 13
+LPAR, (, at line 7, column 17
+ID, input, at line 7, column 18
+LPAR, (, at line 7, column 23
+RPAR, ), at line 7, column 24
+RPAR, ), at line 7, column 25
+IF, if, at line 9, column 9
+ID, i, at line 9, column 12
+EQEQ, ==, at line 9, column 14
+ID, n, at line 9, column 17
+COLON, :, at line 9, column 18
+INDENT, 12, at line 10, column 1
+ID, print, at line 10, column 13
+LPAR, (, at line 10, column 18
+STR, sayıyı bildiniz
+, at line 10, column 19
+RPAR, ), at line 10, column 38
+RET, return, at line 11, column 13
+INT, 0, at line 11, column 20
+DEDENT, , at line 13, column 1
+ELIF, elif, at line 13, column 9
+ID, i, at line 13, column 14
+LT, <, at line 13, column 16
+ID, n, at line 13, column 18
+COLON, :, at line 13, column 19
+INDENT, 12, at line 14, column 1
+ID, print, at line 14, column 13
+LPAR, (, at line 14, column 18
+STR, daha büyük
+, at line 14, column 19
+RPAR, ), at line 14, column 33
+DEDENT, , at line 16, column 1
+ELSE, else, at line 16, column 9
+COLON, :, at line 16, column 13
+INDENT, 12, at line 17, column 1
+ID, print, at line 17, column 13
+LPAR, (, at line 17, column 18
+STR, daha küçük
+, at line 17, column 19
+RPAR, ), at line 17, column 33
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+EOF, , at line 17, column 1IMPORT, import, at line 1, column 1
+ID, casting, at line 1, column 8
+IMPORT, import, at line 2, column 1
+ID, math, at line 2, column 8
+IMPORT, import, at line 3, column 1
+ID, random, at line 3, column 8
+IMPORT, import, at line 4, column 1
+ID, mem, at line 4, column 8
+FN, fn, at line 6, column 1
+ID, print, at line 6, column 4
+LPAR, (, at line 6, column 9
+ID, s, at line 6, column 10
+RPAR, ), at line 6, column 11
+COLON, :, at line 6, column 12
+INDENT, 5, at line 7, column 1
+ASM, asm, at line 7, column 6
+STR, 
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     , at line 7, column 9
+ASM, asm, at line 7, column 131
+DEDENT, , at line 9, column 1
+FN, fn, at line 9, column 1
+ID, input, at line 9, column 4
+LPAR, (, at line 9, column 9
+RPAR, ), at line 9, column 10
+COLON, :, at line 9, column 11
+INDENT, 4, at line 10, column 1
+ASM, asm, at line 10, column 5
+STR, 
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    , at line 10, column 8
+ASM, asm, at line 10, column 192
+DEDENT, , at line 12, column 1
+FN, fn, at line 12, column 1
+ID, len, at line 12, column 4
+LPAR, (, at line 12, column 7
+ID, s, at line 12, column 8
+RPAR, ), at line 12, column 9
+COLON, :, at line 12, column 10
+INDENT, 4, at line 13, column 1
+ASM, asm, at line 13, column 5
+STR, 
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    , at line 13, column 8
+ASM, asm, at line 13, column 110
+DEDENT, , at line 14, column 1
+EOF, , at line 14, column 1FN, fn, at line 1, column 1
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
+INDENT, 5, at line 2, column 1
+ASM, asm, at line 2, column 6
+STR, 
+     xor rax, rax
+     xor rcx, rcx
+     movzx rdx, byte [rdi]
+     cmp dl, '-'
+     je .prepare_negative
+     cmp dl, '+'
+     jne .atoi_loop
+     inc rcx
+     jmp .atoi_loop
+     .prepare_negative:
+     inc rcx
+     .neg_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .apply_neg
+     cmp dl, '0'
+     jl .apply_neg
+     cmp dl, '9'
+     jg .apply_neg
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .neg_loop
+     .apply_neg:
+     neg rax
+     jmp .exit
+     .atoi_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .exit
+     cmp dl, '0'
+     jl .exit
+     cmp dl, '9'
+     jg .exit
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .atoi_loop
+     , at line 2, column 9
+ASM, asm, at line 2, column 746
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, itoa, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, i, at line 4, column 9
+RPAR, ), at line 4, column 10
+COLON, :, at line 4, column 11
+INDENT, 5, at line 5, column 1
+ASM, asm, at line 5, column 6
+STR, 
+     mov rdi, 4096
+     call alloc
+     mov r8, rax
+     mov r12, rax
+     mov rax, [rbp-8]
+     mov rbx, 10
+     xor rcx, rcx
+     cmp rax, 0
+     jge .is_zero
+     neg rax
+     mov byte [r8], '-'
+     inc r8
+     .is_zero:
+     test rax, rax
+     jnz .loop
+     mov rdx, '0'
+     push rdx
+     inc rcx
+     jmp .write_to_buffer
+     .loop:
+     test rax, rax
+     jz .write_to_buffer
+     cqo
+     idiv rbx
+     add rdx, '0'
+     push rdx
+     inc rcx
+     jmp .loop
+     .write_to_buffer:
+     test rcx, rcx
+     jz .done
+     pop rdx
+     mov [r8], dl
+     inc r8
+     dec rcx
+     jmp .write_to_buffer
+     .done:
+     mov byte [r8], 0
+     mov rax, r12
+     jmp .exit
+     , at line 5, column 9
+ASM, asm, at line 5, column 691
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, factorial, at line 1, column 4
+LPAR, (, at line 1, column 13
+ID, i, at line 1, column 14
+RPAR, ), at line 1, column 15
+COLON, :, at line 1, column 16
+INDENT, 1, at line 2, column 1
+IF, if, at line 2, column 2
+ID, i, at line 2, column 5
+COLON, :, at line 2, column 6
+INDENT, 2, at line 3, column 1
+RET, return, at line 3, column 3
+ID, i, at line 3, column 10
+MUL, *, at line 3, column 12
+ID, factorial, at line 3, column 14
+LPAR, (, at line 3, column 23
+ID, i, at line 3, column 24
+MINUS, -, at line 3, column 26
+INT, 1, at line 3, column 28
+RPAR, ), at line 3, column 29
+DEDENT, , at line 4, column 1
+RET, return, at line 4, column 2
+INT, 1, at line 4, column 9
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, random, at line 1, column 4
+LPAR, (, at line 1, column 10
+ID, max, at line 1, column 11
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    .retry:
+    rdrand rax
+    jnc .retry
+    xor rdx, rdx
+    div rdi
+    mov rax, rdx
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 117
+DEDENT, , at line 3, column 1
+EOF, , at line 3, column 1FN, fn, at line 1, column 1
+ID, alloc, at line 1, column 4
+LPAR, (, at line 1, column 9
+ID, size, at line 1, column 10
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    mov rsi, rdi
+    mov rax, 9
+    xor rdi, rdi
+    mov rdx, 0x3
+    mov r10, 0x22
+    mov r8, -1
+    mov r9, 0
+    syscall
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 154
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, free, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, ptr, at line 4, column 9
+RPAR, ), at line 4, column 12
+COLON, :, at line 4, column 13
+INDENT, 4, at line 5, column 1
+ASM, asm, at line 5, column 5
+STR, 
+    xor rax, rax
+    cld
+    mov rcx, [rdi]
+    rep stosq
+    , at line 5, column 8
+ASM, asm, at line 5, column 73
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+DOT, ., at line 1, column 14
+ID, stdlib, at line 1, column 15
+FN, fn, at line 3, column 1
+ID, main, at line 3, column 4
+LPAR, (, at line 3, column 8
+RPAR, ), at line 3, column 9
+COLON, :, at line 3, column 10
+INDENT, 4, at line 4, column 1
+ID, n, at line 4, column 5
+EQ, =, at line 4, column 7
+ID, random, at line 4, column 9
+LPAR, (, at line 4, column 15
+INT, 100, at line 4, column 16
+RPAR, ), at line 4, column 19
+WHILE, while, at line 5, column 5
+INT, 1, at line 5, column 11
+COLON, :, at line 5, column 12
+INDENT, 8, at line 6, column 1
+ID, print, at line 6, column 9
+LPAR, (, at line 6, column 14
+STR, bir sayı giriniz: , at line 6, column 15
+RPAR, ), at line 6, column 35
+ID, i, at line 7, column 9
+EQ, =, at line 7, column 11
+ID, atoi, at line 7, column 13
+LPAR, (, at line 7, column 17
+ID, input, at line 7, column 18
+LPAR, (, at line 7, column 23
+RPAR, ), at line 7, column 24
+RPAR, ), at line 7, column 25
+IF, if, at line 9, column 9
+ID, i, at line 9, column 12
+EQEQ, ==, at line 9, column 14
+ID, n, at line 9, column 17
+COLON, :, at line 9, column 18
+INDENT, 12, at line 10, column 1
+ID, print, at line 10, column 13
+LPAR, (, at line 10, column 18
+STR, sayıyı bildiniz
+, at line 10, column 19
+RPAR, ), at line 10, column 38
+RET, return, at line 11, column 13
+INT, 0, at line 11, column 20
+DEDENT, , at line 13, column 1
+ELIF, elif, at line 13, column 9
+ID, i, at line 13, column 14
+LT, <, at line 13, column 16
+ID, n, at line 13, column 18
+COLON, :, at line 13, column 19
+INDENT, 12, at line 14, column 1
+ID, print, at line 14, column 13
+LPAR, (, at line 14, column 18
+STR, daha büyük
+, at line 14, column 19
+RPAR, ), at line 14, column 33
+DEDENT, , at line 16, column 1
+ELSE, else, at line 16, column 9
+COLON, :, at line 16, column 13
+INDENT, 12, at line 17, column 1
+ID, print, at line 17, column 13
+LPAR, (, at line 17, column 18
+STR, daha küçük
+, at line 17, column 19
+RPAR, ), at line 17, column 33
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+EOF, , at line 17, column 1IMPORT, import, at line 1, column 1
+ID, casting, at line 1, column 8
+IMPORT, import, at line 2, column 1
+ID, math, at line 2, column 8
+IMPORT, import, at line 3, column 1
+ID, random, at line 3, column 8
+IMPORT, import, at line 4, column 1
+ID, mem, at line 4, column 8
+FN, fn, at line 6, column 1
+ID, print, at line 6, column 4
+LPAR, (, at line 6, column 9
+ID, s, at line 6, column 10
+RPAR, ), at line 6, column 11
+COLON, :, at line 6, column 12
+INDENT, 5, at line 7, column 1
+ASM, asm, at line 7, column 6
+STR, 
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     , at line 7, column 9
+ASM, asm, at line 7, column 131
+DEDENT, , at line 9, column 1
+FN, fn, at line 9, column 1
+ID, input, at line 9, column 4
+LPAR, (, at line 9, column 9
+RPAR, ), at line 9, column 10
+COLON, :, at line 9, column 11
+INDENT, 4, at line 10, column 1
+ASM, asm, at line 10, column 5
+STR, 
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    , at line 10, column 8
+ASM, asm, at line 10, column 192
+DEDENT, , at line 12, column 1
+FN, fn, at line 12, column 1
+ID, len, at line 12, column 4
+LPAR, (, at line 12, column 7
+ID, s, at line 12, column 8
+RPAR, ), at line 12, column 9
+COLON, :, at line 12, column 10
+INDENT, 4, at line 13, column 1
+ASM, asm, at line 13, column 5
+STR, 
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    , at line 13, column 8
+ASM, asm, at line 13, column 110
+DEDENT, , at line 14, column 1
+EOF, , at line 14, column 1FN, fn, at line 1, column 1
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
+INDENT, 5, at line 2, column 1
+ASM, asm, at line 2, column 6
+STR, 
+     xor rax, rax
+     xor rcx, rcx
+     movzx rdx, byte [rdi]
+     cmp dl, '-'
+     je .prepare_negative
+     cmp dl, '+'
+     jne .atoi_loop
+     inc rcx
+     jmp .atoi_loop
+     .prepare_negative:
+     inc rcx
+     .neg_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .apply_neg
+     cmp dl, '0'
+     jl .apply_neg
+     cmp dl, '9'
+     jg .apply_neg
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .neg_loop
+     .apply_neg:
+     neg rax
+     jmp .exit
+     .atoi_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .exit
+     cmp dl, '0'
+     jl .exit
+     cmp dl, '9'
+     jg .exit
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .atoi_loop
+     , at line 2, column 9
+ASM, asm, at line 2, column 746
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, itoa, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, i, at line 4, column 9
+RPAR, ), at line 4, column 10
+COLON, :, at line 4, column 11
+INDENT, 5, at line 5, column 1
+ASM, asm, at line 5, column 6
+STR, 
+     mov rdi, 4096
+     call alloc
+     mov r8, rax
+     mov r12, rax
+     mov rax, [rbp-8]
+     mov rbx, 10
+     xor rcx, rcx
+     cmp rax, 0
+     jge .is_zero
+     neg rax
+     mov byte [r8], '-'
+     inc r8
+     .is_zero:
+     test rax, rax
+     jnz .loop
+     mov rdx, '0'
+     push rdx
+     inc rcx
+     jmp .write_to_buffer
+     .loop:
+     test rax, rax
+     jz .write_to_buffer
+     cqo
+     idiv rbx
+     add rdx, '0'
+     push rdx
+     inc rcx
+     jmp .loop
+     .write_to_buffer:
+     test rcx, rcx
+     jz .done
+     pop rdx
+     mov [r8], dl
+     inc r8
+     dec rcx
+     jmp .write_to_buffer
+     .done:
+     mov byte [r8], 0
+     mov rax, r12
+     jmp .exit
+     , at line 5, column 9
+ASM, asm, at line 5, column 691
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, factorial, at line 1, column 4
+LPAR, (, at line 1, column 13
+ID, i, at line 1, column 14
+RPAR, ), at line 1, column 15
+COLON, :, at line 1, column 16
+INDENT, 1, at line 2, column 1
+IF, if, at line 2, column 2
+ID, i, at line 2, column 5
+COLON, :, at line 2, column 6
+INDENT, 2, at line 3, column 1
+RET, return, at line 3, column 3
+ID, i, at line 3, column 10
+MUL, *, at line 3, column 12
+ID, factorial, at line 3, column 14
+LPAR, (, at line 3, column 23
+ID, i, at line 3, column 24
+MINUS, -, at line 3, column 26
+INT, 1, at line 3, column 28
+RPAR, ), at line 3, column 29
+DEDENT, , at line 4, column 1
+RET, return, at line 4, column 2
+INT, 1, at line 4, column 9
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, random, at line 1, column 4
+LPAR, (, at line 1, column 10
+ID, max, at line 1, column 11
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    .retry:
+    rdrand rax
+    jnc .retry
+    xor rdx, rdx
+    div rdi
+    mov rax, rdx
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 117
+DEDENT, , at line 3, column 1
+EOF, , at line 3, column 1FN, fn, at line 1, column 1
+ID, alloc, at line 1, column 4
+LPAR, (, at line 1, column 9
+ID, size, at line 1, column 10
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    mov rsi, rdi
+    mov rax, 9
+    xor rdi, rdi
+    mov rdx, 0x3
+    mov r10, 0x22
+    mov r8, -1
+    mov r9, 0
+    syscall
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 154
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, free, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, ptr, at line 4, column 9
+RPAR, ), at line 4, column 12
+COLON, :, at line 4, column 13
+INDENT, 4, at line 5, column 1
+ASM, asm, at line 5, column 5
+STR, 
+    xor rax, rax
+    cld
+    mov rcx, [rdi]
+    rep stosq
+    , at line 5, column 8
+ASM, asm, at line 5, column 73
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+DOT, ., at line 1, column 14
+ID, stdlib, at line 1, column 15
+FN, fn, at line 3, column 1
+ID, main, at line 3, column 4
+LPAR, (, at line 3, column 8
+RPAR, ), at line 3, column 9
+COLON, :, at line 3, column 10
+INDENT, 4, at line 4, column 1
+ID, n, at line 4, column 5
+EQ, =, at line 4, column 7
+ID, random, at line 4, column 9
+LPAR, (, at line 4, column 15
+INT, 100, at line 4, column 16
+RPAR, ), at line 4, column 19
+WHILE, while, at line 5, column 5
+INT, 1, at line 5, column 11
+COLON, :, at line 5, column 12
+INDENT, 8, at line 6, column 1
+ID, print, at line 6, column 9
+LPAR, (, at line 6, column 14
+STR, bir sayı giriniz: , at line 6, column 15
+RPAR, ), at line 6, column 35
+ID, i, at line 7, column 9
+EQ, =, at line 7, column 11
+ID, atoi, at line 7, column 13
+LPAR, (, at line 7, column 17
+ID, input, at line 7, column 18
+LPAR, (, at line 7, column 23
+RPAR, ), at line 7, column 24
+RPAR, ), at line 7, column 25
+IF, if, at line 9, column 9
+ID, i, at line 9, column 12
+EQEQ, ==, at line 9, column 14
+ID, n, at line 9, column 17
+COLON, :, at line 9, column 18
+INDENT, 12, at line 10, column 1
+ID, print, at line 10, column 13
+LPAR, (, at line 10, column 18
+STR, sayıyı bildiniz
+, at line 10, column 19
+RPAR, ), at line 10, column 38
+RET, return, at line 11, column 13
+INT, 0, at line 11, column 20
+DEDENT, , at line 13, column 1
+ELIF, elif, at line 13, column 9
+ID, i, at line 13, column 14
+LT, <, at line 13, column 16
+ID, n, at line 13, column 18
+COLON, :, at line 13, column 19
+INDENT, 12, at line 14, column 1
+ID, print, at line 14, column 13
+LPAR, (, at line 14, column 18
+STR, daha büyük
+, at line 14, column 19
+RPAR, ), at line 14, column 33
+DEDENT, , at line 16, column 1
+ELSE, else, at line 16, column 9
+COLON, :, at line 16, column 13
+INDENT, 12, at line 17, column 1
+ID, print, at line 17, column 13
+LPAR, (, at line 17, column 18
+STR, daha küçük
+, at line 17, column 19
+RPAR, ), at line 17, column 33
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+EOF, , at line 17, column 1IMPORT, import, at line 1, column 1
+ID, casting, at line 1, column 8
+IMPORT, import, at line 2, column 1
+ID, math, at line 2, column 8
+IMPORT, import, at line 3, column 1
+ID, random, at line 3, column 8
+IMPORT, import, at line 4, column 1
+ID, mem, at line 4, column 8
+FN, fn, at line 6, column 1
+ID, print, at line 6, column 4
+LPAR, (, at line 6, column 9
+ID, s, at line 6, column 10
+RPAR, ), at line 6, column 11
+COLON, :, at line 6, column 12
+INDENT, 5, at line 7, column 1
+ASM, asm, at line 7, column 6
+STR, 
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     , at line 7, column 9
+ASM, asm, at line 7, column 131
+DEDENT, , at line 9, column 1
+FN, fn, at line 9, column 1
+ID, input, at line 9, column 4
+LPAR, (, at line 9, column 9
+RPAR, ), at line 9, column 10
+COLON, :, at line 9, column 11
+INDENT, 4, at line 10, column 1
+ASM, asm, at line 10, column 5
+STR, 
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    , at line 10, column 8
+ASM, asm, at line 10, column 192
+DEDENT, , at line 12, column 1
+FN, fn, at line 12, column 1
+ID, len, at line 12, column 4
+LPAR, (, at line 12, column 7
+ID, s, at line 12, column 8
+RPAR, ), at line 12, column 9
+COLON, :, at line 12, column 10
+INDENT, 4, at line 13, column 1
+ASM, asm, at line 13, column 5
+STR, 
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    , at line 13, column 8
+ASM, asm, at line 13, column 110
+DEDENT, , at line 14, column 1
+EOF, , at line 14, column 1FN, fn, at line 1, column 1
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
+INDENT, 5, at line 2, column 1
+ASM, asm, at line 2, column 6
+STR, 
+     xor rax, rax
+     xor rcx, rcx
+     movzx rdx, byte [rdi]
+     cmp dl, '-'
+     je .prepare_negative
+     cmp dl, '+'
+     jne .atoi_loop
+     inc rcx
+     jmp .atoi_loop
+     .prepare_negative:
+     inc rcx
+     .neg_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .apply_neg
+     cmp dl, '0'
+     jl .apply_neg
+     cmp dl, '9'
+     jg .apply_neg
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .neg_loop
+     .apply_neg:
+     neg rax
+     jmp .exit
+     .atoi_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .exit
+     cmp dl, '0'
+     jl .exit
+     cmp dl, '9'
+     jg .exit
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .atoi_loop
+     , at line 2, column 9
+ASM, asm, at line 2, column 746
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, itoa, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, i, at line 4, column 9
+RPAR, ), at line 4, column 10
+COLON, :, at line 4, column 11
+INDENT, 5, at line 5, column 1
+ASM, asm, at line 5, column 6
+STR, 
+     mov rdi, 4096
+     call alloc
+     mov r8, rax
+     mov r12, rax
+     mov rax, [rbp-8]
+     mov rbx, 10
+     xor rcx, rcx
+     cmp rax, 0
+     jge .is_zero
+     neg rax
+     mov byte [r8], '-'
+     inc r8
+     .is_zero:
+     test rax, rax
+     jnz .loop
+     mov rdx, '0'
+     push rdx
+     inc rcx
+     jmp .write_to_buffer
+     .loop:
+     test rax, rax
+     jz .write_to_buffer
+     cqo
+     idiv rbx
+     add rdx, '0'
+     push rdx
+     inc rcx
+     jmp .loop
+     .write_to_buffer:
+     test rcx, rcx
+     jz .done
+     pop rdx
+     mov [r8], dl
+     inc r8
+     dec rcx
+     jmp .write_to_buffer
+     .done:
+     mov byte [r8], 0
+     mov rax, r12
+     jmp .exit
+     , at line 5, column 9
+ASM, asm, at line 5, column 691
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, factorial, at line 1, column 4
+LPAR, (, at line 1, column 13
+ID, i, at line 1, column 14
+RPAR, ), at line 1, column 15
+COLON, :, at line 1, column 16
+INDENT, 1, at line 2, column 1
+IF, if, at line 2, column 2
+ID, i, at line 2, column 5
+COLON, :, at line 2, column 6
+INDENT, 2, at line 3, column 1
+RET, return, at line 3, column 3
+ID, i, at line 3, column 10
+MUL, *, at line 3, column 12
+ID, factorial, at line 3, column 14
+LPAR, (, at line 3, column 23
+ID, i, at line 3, column 24
+MINUS, -, at line 3, column 26
+INT, 1, at line 3, column 28
+RPAR, ), at line 3, column 29
+DEDENT, , at line 4, column 1
+RET, return, at line 4, column 2
+INT, 1, at line 4, column 9
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, random, at line 1, column 4
+LPAR, (, at line 1, column 10
+ID, max, at line 1, column 11
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    .retry:
+    rdrand rax
+    jnc .retry
+    xor rdx, rdx
+    div rdi
+    mov rax, rdx
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 117
+DEDENT, , at line 3, column 1
+EOF, , at line 3, column 1FN, fn, at line 1, column 1
+ID, alloc, at line 1, column 4
+LPAR, (, at line 1, column 9
+ID, size, at line 1, column 10
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    mov rsi, rdi
+    mov rax, 9
+    xor rdi, rdi
+    mov rdx, 0x3
+    mov r10, 0x22
+    mov r8, -1
+    mov r9, 0
+    syscall
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 154
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, free, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, ptr, at line 4, column 9
+RPAR, ), at line 4, column 12
+COLON, :, at line 4, column 13
+INDENT, 4, at line 5, column 1
+ASM, asm, at line 5, column 5
+STR, 
+    xor rax, rax
+    cld
+    mov rcx, [rdi]
+    rep stosq
+    , at line 5, column 8
+ASM, asm, at line 5, column 73
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+DOT, ., at line 1, column 14
+ID, stdlib, at line 1, column 15
+NL, 
+, at line 1, column 21
+NL, 
+, at line 1, column 22
+FN, fn, at line 1, column 23
+ID, main, at line 1, column 26
+LPAR, (, at line 1, column 30
+RPAR, ), at line 1, column 31
+COLON, :, at line 1, column 32
+NL, 
+, at line 1, column 33
+ID, n, at line 1, column 38
+EQ, =, at line 1, column 40
+ID, random, at line 1, column 42
+LPAR, (, at line 1, column 48
+INT, 100, at line 1, column 49
+RPAR, ), at line 1, column 52
+NL, 
+, at line 1, column 53
+WHILE, while, at line 1, column 58
+INT, 1, at line 1, column 64
+COLON, :, at line 1, column 65
+NL, 
+, at line 1, column 66
+ID, print, at line 1, column 75
+LPAR, (, at line 1, column 80
+STR, bir sayı giriniz: , at line 1, column 81
+RPAR, ), at line 1, column 101
+NL, 
+, at line 1, column 102
+ID, i, at line 1, column 111
+EQ, =, at line 1, column 113
+ID, atoi, at line 1, column 115
+LPAR, (, at line 1, column 119
+ID, input, at line 1, column 120
+LPAR, (, at line 1, column 125
+RPAR, ), at line 1, column 126
+RPAR, ), at line 1, column 127
+NL, 
+, at line 1, column 128
+NL, 
+, at line 1, column 129
+IF, if, at line 1, column 138
+ID, i, at line 1, column 141
+EQEQ, ==, at line 1, column 143
+ID, n, at line 1, column 146
+COLON, :, at line 1, column 147
+NL, 
+, at line 1, column 148
+ID, print, at line 1, column 161
+LPAR, (, at line 1, column 166
+STR, sayıyı bildiniz
+, at line 1, column 167
+RPAR, ), at line 1, column 186
+NL, 
+, at line 1, column 187
+RET, return, at line 1, column 200
+INT, 0, at line 1, column 207
+NL, 
+, at line 1, column 208
+NL, 
+, at line 1, column 209
+ELIF, elif, at line 1, column 218
+ID, i, at line 1, column 223
+LT, <, at line 1, column 225
+ID, n, at line 1, column 227
+COLON, :, at line 1, column 228
+NL, 
+, at line 1, column 229
+ID, print, at line 1, column 242
+LPAR, (, at line 1, column 247
+STR, daha büyük
+, at line 1, column 248
+RPAR, ), at line 1, column 262
+NL, 
+, at line 1, column 263
+NL, 
+, at line 1, column 264
+ELSE, else, at line 1, column 273
+COLON, :, at line 1, column 277
+NL, 
+, at line 1, column 278
+ID, print, at line 1, column 291
+LPAR, (, at line 1, column 296
+STR, daha küçük
+, at line 1, column 297
+RPAR, ), at line 1, column 311
+EOF, , at line 1, column 1IMPORT, import, at line 1, column 1
+ID, casting, at line 1, column 8
+NL, 
+, at line 1, column 15
+IMPORT, import, at line 1, column 16
+ID, math, at line 1, column 23
+NL, 
+, at line 1, column 27
+IMPORT, import, at line 1, column 28
+ID, random, at line 1, column 35
+NL, 
+, at line 1, column 41
+IMPORT, import, at line 1, column 42
+ID, mem, at line 1, column 49
+NL, 
+, at line 1, column 52
+NL, 
+, at line 1, column 53
+FN, fn, at line 1, column 54
+ID, print, at line 1, column 57
+LPAR, (, at line 1, column 62
+ID, s, at line 1, column 63
+RPAR, ), at line 1, column 64
+COLON, :, at line 1, column 65
+NL, 
+, at line 1, column 66
+ASM, asm, at line 1, column 72
+STR, 
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     , at line 1, column 75
+ASM, asm, at line 1, column 197
+NL, 
+, at line 1, column 200
+NL, 
+, at line 1, column 201
+FN, fn, at line 1, column 202
+ID, input, at line 1, column 205
+LPAR, (, at line 1, column 210
+RPAR, ), at line 1, column 211
+COLON, :, at line 1, column 212
+NL, 
+, at line 1, column 213
+ASM, asm, at line 1, column 218
+STR, 
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    , at line 1, column 221
+ASM, asm, at line 1, column 405
+NL, 
+, at line 1, column 408
+NL, 
+, at line 1, column 409
+FN, fn, at line 1, column 410
+ID, len, at line 1, column 413
+LPAR, (, at line 1, column 416
+ID, s, at line 1, column 417
+RPAR, ), at line 1, column 418
+COLON, :, at line 1, column 419
+NL, 
+, at line 1, column 420
+ASM, asm, at line 1, column 425
+STR, 
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    , at line 1, column 428
+ASM, asm, at line 1, column 530
+NL, 
+, at line 1, column 533
+EOF, , at line 1, column 1FN, fn, at line 1, column 1
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
+NL, 
+, at line 1, column 12
+ASM, asm, at line 1, column 18
+STR, 
+     xor rax, rax
+     xor rcx, rcx
+     movzx rdx, byte [rdi]
+     cmp dl, '-'
+     je .prepare_negative
+     cmp dl, '+'
+     jne .atoi_loop
+     inc rcx
+     jmp .atoi_loop
+     .prepare_negative:
+     inc rcx
+     .neg_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .apply_neg
+     cmp dl, '0'
+     jl .apply_neg
+     cmp dl, '9'
+     jg .apply_neg
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .neg_loop
+     .apply_neg:
+     neg rax
+     jmp .exit
+     .atoi_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .exit
+     cmp dl, '0'
+     jl .exit
+     cmp dl, '9'
+     jg .exit
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .atoi_loop
+     , at line 1, column 21
+ASM, asm, at line 1, column 758
+NL, 
+, at line 1, column 761
+NL, 
+, at line 1, column 762
+FN, fn, at line 1, column 763
+ID, itoa, at line 1, column 766
+LPAR, (, at line 1, column 770
+ID, i, at line 1, column 771
+RPAR, ), at line 1, column 772
+COLON, :, at line 1, column 773
+NL, 
+, at line 1, column 774
+ASM, asm, at line 1, column 780
+STR, 
+     mov rdi, 4096
+     call alloc
+     mov r8, rax
+     mov r12, rax
+     mov rax, [rbp-8]
+     mov rbx, 10
+     xor rcx, rcx
+     cmp rax, 0
+     jge .is_zero
+     neg rax
+     mov byte [r8], '-'
+     inc r8
+     .is_zero:
+     test rax, rax
+     jnz .loop
+     mov rdx, '0'
+     push rdx
+     inc rcx
+     jmp .write_to_buffer
+     .loop:
+     test rax, rax
+     jz .write_to_buffer
+     cqo
+     idiv rbx
+     add rdx, '0'
+     push rdx
+     inc rcx
+     jmp .loop
+     .write_to_buffer:
+     test rcx, rcx
+     jz .done
+     pop rdx
+     mov [r8], dl
+     inc r8
+     dec rcx
+     jmp .write_to_buffer
+     .done:
+     mov byte [r8], 0
+     mov rax, r12
+     jmp .exit
+     , at line 1, column 783
+ASM, asm, at line 1, column 1465
+EOF, , at line 1, column 1IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+DOT, ., at line 1, column 14
+ID, stdlib, at line 1, column 15
+FN, fn, at line 3, column 1
+ID, main, at line 3, column 4
+LPAR, (, at line 3, column 8
+RPAR, ), at line 3, column 9
+COLON, :, at line 3, column 10
+INDENT, 4, at line 4, column 1
+ID, n, at line 4, column 5
+EQ, =, at line 4, column 7
+ID, random, at line 4, column 9
+LPAR, (, at line 4, column 15
+INT, 100, at line 4, column 16
+RPAR, ), at line 4, column 19
+WHILE, while, at line 5, column 5
+INT, 1, at line 5, column 11
+COLON, :, at line 5, column 12
+INDENT, 8, at line 6, column 1
+ID, print, at line 6, column 9
+LPAR, (, at line 6, column 14
+STR, bir sayı giriniz: , at line 6, column 15
+RPAR, ), at line 6, column 35
+ID, i, at line 7, column 9
+EQ, =, at line 7, column 11
+ID, atoi, at line 7, column 13
+LPAR, (, at line 7, column 17
+ID, input, at line 7, column 18
+LPAR, (, at line 7, column 23
+RPAR, ), at line 7, column 24
+RPAR, ), at line 7, column 25
+IF, if, at line 9, column 9
+ID, i, at line 9, column 12
+EQEQ, ==, at line 9, column 14
+ID, n, at line 9, column 17
+COLON, :, at line 9, column 18
+INDENT, 12, at line 10, column 1
+ID, print, at line 10, column 13
+LPAR, (, at line 10, column 18
+STR, sayıyı bildiniz
+, at line 10, column 19
+RPAR, ), at line 10, column 38
+RET, return, at line 11, column 13
+INT, 0, at line 11, column 20
+DEDENT, , at line 13, column 1
+ELIF, elif, at line 13, column 9
+ID, i, at line 13, column 14
+LT, <, at line 13, column 16
+ID, n, at line 13, column 18
+COLON, :, at line 13, column 19
+INDENT, 12, at line 14, column 1
+ID, print, at line 14, column 13
+LPAR, (, at line 14, column 18
+STR, daha büyük
+, at line 14, column 19
+RPAR, ), at line 14, column 33
+DEDENT, , at line 16, column 1
+ELSE, else, at line 16, column 9
+COLON, :, at line 16, column 13
+INDENT, 12, at line 17, column 1
+ID, print, at line 17, column 13
+LPAR, (, at line 17, column 18
+STR, daha küçük
+, at line 17, column 19
+RPAR, ), at line 17, column 33
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+EOF, , at line 17, column 1IMPORT, import, at line 1, column 1
+ID, casting, at line 1, column 8
+IMPORT, import, at line 2, column 1
+ID, math, at line 2, column 8
+IMPORT, import, at line 3, column 1
+ID, random, at line 3, column 8
+IMPORT, import, at line 4, column 1
+ID, mem, at line 4, column 8
+FN, fn, at line 6, column 1
+ID, print, at line 6, column 4
+LPAR, (, at line 6, column 9
+ID, s, at line 6, column 10
+RPAR, ), at line 6, column 11
+COLON, :, at line 6, column 12
+INDENT, 5, at line 7, column 1
+ASM, asm, at line 7, column 6
+STR, 
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     , at line 7, column 9
+ASM, asm, at line 7, column 131
+DEDENT, , at line 9, column 1
+FN, fn, at line 9, column 1
+ID, input, at line 9, column 4
+LPAR, (, at line 9, column 9
+RPAR, ), at line 9, column 10
+COLON, :, at line 9, column 11
+INDENT, 4, at line 10, column 1
+ASM, asm, at line 10, column 5
+STR, 
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    , at line 10, column 8
+ASM, asm, at line 10, column 192
+DEDENT, , at line 12, column 1
+FN, fn, at line 12, column 1
+ID, len, at line 12, column 4
+LPAR, (, at line 12, column 7
+ID, s, at line 12, column 8
+RPAR, ), at line 12, column 9
+COLON, :, at line 12, column 10
+INDENT, 4, at line 13, column 1
+ASM, asm, at line 13, column 5
+STR, 
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    , at line 13, column 8
+ASM, asm, at line 13, column 110
+DEDENT, , at line 14, column 1
+EOF, , at line 14, column 1FN, fn, at line 1, column 1
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
+INDENT, 5, at line 2, column 1
+ASM, asm, at line 2, column 6
+STR, 
+     xor rax, rax
+     xor rcx, rcx
+     movzx rdx, byte [rdi]
+     cmp dl, '-'
+     je .prepare_negative
+     cmp dl, '+'
+     jne .atoi_loop
+     inc rcx
+     jmp .atoi_loop
+     .prepare_negative:
+     inc rcx
+     .neg_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .apply_neg
+     cmp dl, '0'
+     jl .apply_neg
+     cmp dl, '9'
+     jg .apply_neg
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .neg_loop
+     .apply_neg:
+     neg rax
+     jmp .exit
+     .atoi_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .exit
+     cmp dl, '0'
+     jl .exit
+     cmp dl, '9'
+     jg .exit
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .atoi_loop
+     , at line 2, column 9
+ASM, asm, at line 2, column 746
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, itoa, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, i, at line 4, column 9
+RPAR, ), at line 4, column 10
+COLON, :, at line 4, column 11
+INDENT, 5, at line 5, column 1
+ASM, asm, at line 5, column 6
+STR, 
+     mov rdi, 4096
+     call alloc
+     mov r8, rax
+     mov r12, rax
+     mov rax, [rbp-8]
+     mov rbx, 10
+     xor rcx, rcx
+     cmp rax, 0
+     jge .is_zero
+     neg rax
+     mov byte [r8], '-'
+     inc r8
+     .is_zero:
+     test rax, rax
+     jnz .loop
+     mov rdx, '0'
+     push rdx
+     inc rcx
+     jmp .write_to_buffer
+     .loop:
+     test rax, rax
+     jz .write_to_buffer
+     cqo
+     idiv rbx
+     add rdx, '0'
+     push rdx
+     inc rcx
+     jmp .loop
+     .write_to_buffer:
+     test rcx, rcx
+     jz .done
+     pop rdx
+     mov [r8], dl
+     inc r8
+     dec rcx
+     jmp .write_to_buffer
+     .done:
+     mov byte [r8], 0
+     mov rax, r12
+     jmp .exit
+     , at line 5, column 9
+ASM, asm, at line 5, column 691
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, factorial, at line 1, column 4
+LPAR, (, at line 1, column 13
+ID, i, at line 1, column 14
+RPAR, ), at line 1, column 15
+COLON, :, at line 1, column 16
+INDENT, 1, at line 2, column 1
+IF, if, at line 2, column 2
+ID, i, at line 2, column 5
+COLON, :, at line 2, column 6
+INDENT, 2, at line 3, column 1
+RET, return, at line 3, column 3
+ID, i, at line 3, column 10
+MUL, *, at line 3, column 12
+ID, factorial, at line 3, column 14
+LPAR, (, at line 3, column 23
+ID, i, at line 3, column 24
+MINUS, -, at line 3, column 26
+INT, 1, at line 3, column 28
+RPAR, ), at line 3, column 29
+DEDENT, , at line 4, column 1
+RET, return, at line 4, column 2
+INT, 1, at line 4, column 9
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, random, at line 1, column 4
+LPAR, (, at line 1, column 10
+ID, max, at line 1, column 11
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    .retry:
+    rdrand rax
+    jnc .retry
+    xor rdx, rdx
+    div rdi
+    mov rax, rdx
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 117
+DEDENT, , at line 3, column 1
+EOF, , at line 3, column 1FN, fn, at line 1, column 1
+ID, alloc, at line 1, column 4
+LPAR, (, at line 1, column 9
+ID, size, at line 1, column 10
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    mov rsi, rdi
+    mov rax, 9
+    xor rdi, rdi
+    mov rdx, 0x3
+    mov r10, 0x22
+    mov r8, -1
+    mov r9, 0
+    syscall
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 154
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, free, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, ptr, at line 4, column 9
+RPAR, ), at line 4, column 12
+COLON, :, at line 4, column 13
+INDENT, 4, at line 5, column 1
+ASM, asm, at line 5, column 5
+STR, 
+    xor rax, rax
+    cld
+    mov rcx, [rdi]
+    rep stosq
+    , at line 5, column 8
+ASM, asm, at line 5, column 73
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1IMPORT, import, at line 1, column 1
+ID, stdlib, at line 1, column 8
+DOT, ., at line 1, column 14
+ID, stdlib, at line 1, column 15
+FN, fn, at line 3, column 1
+ID, main, at line 3, column 4
+LPAR, (, at line 3, column 8
+RPAR, ), at line 3, column 9
+COLON, :, at line 3, column 10
+INDENT, 4, at line 4, column 1
+ID, n, at line 4, column 5
+EQ, =, at line 4, column 7
+ID, random, at line 4, column 9
+LPAR, (, at line 4, column 15
+INT, 100, at line 4, column 16
+RPAR, ), at line 4, column 19
+WHILE, while, at line 5, column 5
+INT, 1, at line 5, column 11
+COLON, :, at line 5, column 12
+INDENT, 8, at line 6, column 1
+ID, print, at line 6, column 9
+LPAR, (, at line 6, column 14
+STR, bir sayı giriniz: , at line 6, column 15
+RPAR, ), at line 6, column 35
+ID, i, at line 7, column 9
+EQ, =, at line 7, column 11
+ID, atoi, at line 7, column 13
+LPAR, (, at line 7, column 17
+ID, input, at line 7, column 18
+LPAR, (, at line 7, column 23
+RPAR, ), at line 7, column 24
+RPAR, ), at line 7, column 25
+IF, if, at line 9, column 9
+ID, i, at line 9, column 12
+EQEQ, ==, at line 9, column 14
+ID, n, at line 9, column 17
+COLON, :, at line 9, column 18
+INDENT, 12, at line 10, column 1
+ID, print, at line 10, column 13
+LPAR, (, at line 10, column 18
+STR, sayıyı bildiniz
+, at line 10, column 19
+RPAR, ), at line 10, column 38
+RET, return, at line 11, column 13
+INT, 0, at line 11, column 20
+DEDENT, , at line 13, column 1
+ELIF, elif, at line 13, column 9
+ID, i, at line 13, column 14
+LT, <, at line 13, column 16
+ID, n, at line 13, column 18
+COLON, :, at line 13, column 19
+INDENT, 12, at line 14, column 1
+ID, print, at line 14, column 13
+LPAR, (, at line 14, column 18
+STR, daha büyük
+, at line 14, column 19
+RPAR, ), at line 14, column 33
+DEDENT, , at line 16, column 1
+ELSE, else, at line 16, column 9
+COLON, :, at line 16, column 13
+INDENT, 12, at line 17, column 1
+ID, print, at line 17, column 13
+LPAR, (, at line 17, column 18
+STR, daha küçük
+, at line 17, column 19
+RPAR, ), at line 17, column 33
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+DEDENT, , at line 17, column 1
+EOF, , at line 17, column 1IMPORT, import, at line 1, column 1
+ID, casting, at line 1, column 8
+IMPORT, import, at line 2, column 1
+ID, math, at line 2, column 8
+IMPORT, import, at line 3, column 1
+ID, random, at line 3, column 8
+IMPORT, import, at line 4, column 1
+ID, mem, at line 4, column 8
+FN, fn, at line 6, column 1
+ID, print, at line 6, column 4
+LPAR, (, at line 6, column 9
+ID, s, at line 6, column 10
+RPAR, ), at line 6, column 11
+COLON, :, at line 6, column 12
+INDENT, 5, at line 7, column 1
+ASM, asm, at line 7, column 6
+STR, 
+     call len
+     mov rdx, rax
+     mov rsi, [rbp-8]
+     mov rax, 1
+     mov rdi, 1
+     syscall
+     jmp .exit
+     , at line 7, column 9
+ASM, asm, at line 7, column 131
+DEDENT, , at line 9, column 1
+FN, fn, at line 9, column 1
+ID, input, at line 9, column 4
+LPAR, (, at line 9, column 9
+RPAR, ), at line 9, column 10
+COLON, :, at line 9, column 11
+INDENT, 4, at line 10, column 1
+ASM, asm, at line 10, column 5
+STR, 
+    mov rdi, 4096
+    call alloc
+    mov rsi, rax
+    xor rax, rax
+    xor rdi, rdi
+    mov rdx, 4096
+    syscall
+    mov byte [rsi + rax - 1], 0
+    mov rax, rsi
+    jmp .exit
+    , at line 10, column 8
+ASM, asm, at line 10, column 192
+DEDENT, , at line 12, column 1
+FN, fn, at line 12, column 1
+ID, len, at line 12, column 4
+LPAR, (, at line 12, column 7
+ID, s, at line 12, column 8
+RPAR, ), at line 12, column 9
+COLON, :, at line 12, column 10
+INDENT, 4, at line 13, column 1
+ASM, asm, at line 13, column 5
+STR, 
+    xor rax, rax
+    .loop:
+    cmp byte [rdi + rax], 0
+    je .exit
+    inc rax
+    jmp .loop
+    , at line 13, column 8
+ASM, asm, at line 13, column 110
+DEDENT, , at line 14, column 1
+EOF, , at line 14, column 1FN, fn, at line 1, column 1
+ID, atoi, at line 1, column 4
+LPAR, (, at line 1, column 8
+ID, s, at line 1, column 9
+RPAR, ), at line 1, column 10
+COLON, :, at line 1, column 11
+INDENT, 5, at line 2, column 1
+ASM, asm, at line 2, column 6
+STR, 
+     xor rax, rax
+     xor rcx, rcx
+     movzx rdx, byte [rdi]
+     cmp dl, '-'
+     je .prepare_negative
+     cmp dl, '+'
+     jne .atoi_loop
+     inc rcx
+     jmp .atoi_loop
+     .prepare_negative:
+     inc rcx
+     .neg_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .apply_neg
+     cmp dl, '0'
+     jl .apply_neg
+     cmp dl, '9'
+     jg .apply_neg
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .neg_loop
+     .apply_neg:
+     neg rax
+     jmp .exit
+     .atoi_loop:
+     movzx rdx, byte [rdi + rcx]
+     test dl, dl
+     jz .exit
+     cmp dl, '0'
+     jl .exit
+     cmp dl, '9'
+     jg .exit
+     sub dl, '0'
+     imul rax, 10
+     add rax, rdx
+     inc rcx
+     jmp .atoi_loop
+     , at line 2, column 9
+ASM, asm, at line 2, column 746
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, itoa, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, i, at line 4, column 9
+RPAR, ), at line 4, column 10
+COLON, :, at line 4, column 11
+INDENT, 5, at line 5, column 1
+ASM, asm, at line 5, column 6
+STR, 
+     mov rdi, 4096
+     call alloc
+     mov r8, rax
+     mov r12, rax
+     mov rax, [rbp-8]
+     mov rbx, 10
+     xor rcx, rcx
+     cmp rax, 0
+     jge .is_zero
+     neg rax
+     mov byte [r8], '-'
+     inc r8
+     .is_zero:
+     test rax, rax
+     jnz .loop
+     mov rdx, '0'
+     push rdx
+     inc rcx
+     jmp .write_to_buffer
+     .loop:
+     test rax, rax
+     jz .write_to_buffer
+     cqo
+     idiv rbx
+     add rdx, '0'
+     push rdx
+     inc rcx
+     jmp .loop
+     .write_to_buffer:
+     test rcx, rcx
+     jz .done
+     pop rdx
+     mov [r8], dl
+     inc r8
+     dec rcx
+     jmp .write_to_buffer
+     .done:
+     mov byte [r8], 0
+     mov rax, r12
+     jmp .exit
+     , at line 5, column 9
+ASM, asm, at line 5, column 691
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, factorial, at line 1, column 4
+LPAR, (, at line 1, column 13
+ID, i, at line 1, column 14
+RPAR, ), at line 1, column 15
+COLON, :, at line 1, column 16
+INDENT, 1, at line 2, column 1
+IF, if, at line 2, column 2
+ID, i, at line 2, column 5
+COLON, :, at line 2, column 6
+INDENT, 2, at line 3, column 1
+RET, return, at line 3, column 3
+ID, i, at line 3, column 10
+MUL, *, at line 3, column 12
+ID, factorial, at line 3, column 14
+LPAR, (, at line 3, column 23
+ID, i, at line 3, column 24
+MINUS, -, at line 3, column 26
+INT, 1, at line 3, column 28
+RPAR, ), at line 3, column 29
+DEDENT, , at line 4, column 1
+RET, return, at line 4, column 2
+INT, 1, at line 4, column 9
+DEDENT, , at line 5, column 1
+EOF, , at line 5, column 1FN, fn, at line 1, column 1
+ID, random, at line 1, column 4
+LPAR, (, at line 1, column 10
+ID, max, at line 1, column 11
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    .retry:
+    rdrand rax
+    jnc .retry
+    xor rdx, rdx
+    div rdi
+    mov rax, rdx
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 117
+DEDENT, , at line 3, column 1
+EOF, , at line 3, column 1FN, fn, at line 1, column 1
+ID, alloc, at line 1, column 4
+LPAR, (, at line 1, column 9
+ID, size, at line 1, column 10
+RPAR, ), at line 1, column 14
+COLON, :, at line 1, column 15
+INDENT, 4, at line 2, column 1
+ASM, asm, at line 2, column 5
+STR, 
+    mov rsi, rdi
+    mov rax, 9
+    xor rdi, rdi
+    mov rdx, 0x3
+    mov r10, 0x22
+    mov r8, -1
+    mov r9, 0
+    syscall
+    jmp .exit
+    , at line 2, column 8
+ASM, asm, at line 2, column 154
+DEDENT, , at line 4, column 1
+FN, fn, at line 4, column 1
+ID, free, at line 4, column 4
+LPAR, (, at line 4, column 8
+ID, ptr, at line 4, column 9
+RPAR, ), at line 4, column 12
+COLON, :, at line 4, column 13
+INDENT, 4, at line 5, column 1
+ASM, asm, at line 5, column 5
+STR, 
+    xor rax, rax
+    cld
+    mov rcx, [rdi]
+    rep stosq
+    , at line 5, column 8
+ASM, asm, at line 5, column 73
+DEDENT, , at line 5, column 1
 EOF, , at line 5, column 1
