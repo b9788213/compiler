@@ -24,6 +24,8 @@ def getStatic(name: str):
             return v.address
     raise RuntimeError(f"cannot find static variable: {name}")
 
+def getstatics():
+    return (static.name for static in statics)
 
 def addStatic(name: str):
     statics.append(Var(name))
