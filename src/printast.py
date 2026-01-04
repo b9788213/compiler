@@ -56,35 +56,35 @@ def get_ast(node, indent=0, markers=None):
 
     lines.append(f"{prefix}{get_node_info(node)}")
 
-    # Alt düğümleri (children) topla
-    children = []
+    # Alt düğümleri (childs) topla
+    childs = []
     match node:
         case Program():
-            children.extend(node.funcs)
+            childs.extend(node.funcs)
         case Func():
-            children.extend(node.body.code)
+            childs.extend(node.body.code)
         case BinOp(), Comp():
-            children.append(node.left)
-            children.append(node.right)
+            childs.append(node.left)
+            childs.append(node.right)
         case Assign():
-            children.append(node.val)
+            childs.append(node.val)
         case Call():
-            children.extend(node.args)
+            childs.extend(node.args)
         case Neg(), Ret():
-            children.append(node.val)
+            childs.append(node.val)
         case While():
-            children.append(node.cond)
-            children.extend(node.body.code)
+            childs.append(node.cond)
+            childs.extend(node.body.code)
         case CondStruct():
-            children.extend(node.ifs)
-            children.extend(node.elsebody.code) if node.elsebody else None
+            childs.extend(node.ifs)
+            childs.extend(node.elsebody.code) if node.elsebody else None
         case If():
-            children.append(node.cond)
-            children.extend(node.body.code)
+            childs.append(node.cond)
+            childs.extend(node.body.code)
 
     # Çocukları recursive olarak işle
-    for i, child in enumerate(children):
-        is_last = i == len(children) - 1
+    for i, child in enumerate(childs):
+        is_last = i == len(childs) - 1
         # Alt dallara markers bilgisini aktar (son dal mı değil mi)
         lines.append(get_ast(child, indent + 1, markers + [not is_last]))
 
