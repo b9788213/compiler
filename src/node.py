@@ -4,7 +4,7 @@ from typing import Any
 
 @dataclass()
 class Id:
-    name: str
+    id: str
 
 
 @dataclass()
@@ -24,7 +24,7 @@ class String:
 
 @dataclass()
 class Assign:
-    name: Id
+    id: Id
     value: Any
 
 
@@ -49,7 +49,7 @@ class Comp:
 
 @dataclass()
 class Call:
-    name: Id
+    id: Id
     args: list
 
 
@@ -65,7 +65,7 @@ class Body:
 
 @dataclass()
 class Func:
-    name: Id
+    id: Id
     args: list[str] = field(default_factory=list)
     body: Body = field(default_factory=Body)
 

@@ -1,50 +1,50 @@
 Program
-├── Func(Id(name='atoi'), args=['s'])
+├── Func(Id(id='atoi'), args=['s'])
 │   └── Asm
-├── Func(Id(name='itoa'), args=['i'])
+├── Func(Id(id='itoa'), args=['i'])
 │   └── Asm
-├── Func(Id(name='factorial'), args=['i'])
+├── Func(Id(id='factorial'), args=['i'])
 │   ├── CondStruct
 │   │   └── If
 │   │       ├── Id(i)
 │   │       └── Ret
 │   │           └── BinOp(MUL)
 │   │               ├── Id(i)
-│   │               └── Call(Id(name='factorial'))
+│   │               └── Call(Id(id='factorial'))
 │   │                   └── BinOp(MINUS)
 │   │                       ├── Id(i)
 │   │                       └── Int(1)
 │   └── Ret
 │       └── Int(1)
-├── Func(Id(name='random'), args=['max'])
+├── Func(Id(id='random'), args=['max'])
 │   └── Asm
-├── Func(Id(name='alloc'), args=['size'])
+├── Func(Id(id='alloc'), args=['size'])
 │   └── Asm
-├── Func(Id(name='free'), args=['ptr'])
+├── Func(Id(id='free'), args=['ptr'])
 │   └── Asm
-├── Func(Id(name='print'), args=['s'])
+├── Func(Id(id='print'), args=['s'])
 │   └── Asm
-├── Func(Id(name='input'), args=[])
+├── Func(Id(id='input'), args=[])
 │   └── Asm
-├── Func(Id(name='len'), args=['s'])
+├── Func(Id(id='len'), args=['s'])
 │   └── Asm
-└── Func(Id(name='main'), args=[])
-    ├── Assign(Id(name='n'))
-    │   └── Call(Id(name='random'))
+└── Func(Id(id='main'), args=[])
+    ├── Assign(Id(id='n'))
+    │   └── Call(Id(id='random'))
     │       └── Int(100)
     └── While
         ├── Int(1)
-        ├── Call(Id(name='print'))
+        ├── Call(Id(id='print'))
         │   └── String('bir sayı giriniz: ')
-        ├── Assign(Id(name='i'))
-        │   └── Call(Id(name='atoi'))
-        │       └── Call(Id(name='input'))
+        ├── Assign(Id(id='i'))
+        │   └── Call(Id(id='atoi'))
+        │       └── Call(Id(id='input'))
         └── CondStruct
             ├── If
             │   ├── Comp(EQEQ)
             │   │   ├── Id(i)
             │   │   └── Id(n)
-            │   ├── Call(Id(name='print'))
+            │   ├── Call(Id(id='print'))
             │   │   └── String('sayıyı bildiniz\n')
             │   └── Ret
             │       └── Int(0)
@@ -52,7 +52,7 @@ Program
             │   ├── Comp(LT)
             │   │   ├── Id(i)
             │   │   └── Id(n)
-            │   └── Call(Id(name='print'))
+            │   └── Call(Id(id='print'))
             │       └── String('daha büyük\n')
-            └── Call(Id(name='print'))
+            └── Call(Id(id='print'))
                 └── String('daha küçük\n')

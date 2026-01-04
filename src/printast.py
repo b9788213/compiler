@@ -38,11 +38,11 @@ def get_ast(node, indent=0, markers=None):
         match n:
             case Asm(): return "Asm"
             case Program(): return "Program"
-            case Func(): return f"Func({n.name}, args={n.args})"
+            case Func(): return f"Func({n.id}, args={n.args})"
             case BinOp(): return f"BinOp({n.op})"
             case Comp(): return f"Comp({n.op})"
-            case Assign(): return f"Assign({n.name})"
-            case Call(): return f"Call({n.name})"
+            case Assign(): return f"Assign({n.id})"
+            case Call(): return f"Call({n.id})"
             case Neg(): return "Neg(-)"
             case Ret(): return "Ret"
             case While(): return "While"
@@ -51,7 +51,7 @@ def get_ast(node, indent=0, markers=None):
             case Int(): return f"Int({n.value})"
             case Float(): return f"Float({n.value})"
             case String(): return f"String({repr(n.value)})"
-            case Id(): return f"Id({n.name})"
+            case Id(): return f"Id({n.id})"
         return f"Unknown({type(n).__name__})"
 
     lines.append(f"{prefix}{get_node_info(node)}")

@@ -50,10 +50,10 @@ class CodeGen:
         return "\n".join(self.asm)
 
     def gen_func(self, f: n.Func):
-        t.enterScope(f.name.name)
+        t.enterScope(f.id.id)
         self.isaligned = True
 
-        self.emit(f"{f.name.name}:")
+        self.emit(f"{f.id.id}:")
         self.emit("push rbp")  # rbp + return adress zaten 16 byte
         self.emit("mov rbp, rsp")
         self.emit(f"sub rsp, {self.stack()}")
@@ -65,7 +65,7 @@ class CodeGen:
 
         self.emit("xor rax, rax")  # return yoksa 0 döndür
         self.emit(".exit:")
-        if f.name == "main":
+        if f.id == "main":
             self.emit("mov rdi, rax")
             self.emit("mov rax, 60")
             self.emit("syscall")
@@ -82,10 +82,10 @@ class CodeGen:
             elif isinstance(stmt, n.Assign):
                 self.gen_expr(stmt.value)
 
-                if t.instatics(stmt.name.name):
-                    self.emit(f"mov {t.getStatic(stmt.name.name)}, rax")
+                if t.instatics(stmt.id.id):
+                    self.emit(f"mov {t.getStatic(stmt.id.id)}, rax")
                 else:
-                    self.emit(f"mov {t.getVar(stmt.name.name)}, rax ")
+                    self.emit(f"mov {t.getVar(stmt.id.id)}, rax ")
 
             elif isinstance(stmt, n.Call):
                 self.call(stmt)
@@ -133,10 +133,7 @@ class CodeGen:
                 self.call(expr)
 
             case n.Id():
-                if t.instatics(expr.name):
-                    self.emit(f"mov rax, {t.getStatic(expr.name)}")
-                else:
-                    self.emit(f"mov rax, {t.getVar(expr.name)}")
+                self.emit(f"mov rax, {t.getStatic(expr.id) if t.instatics(expr.id) else t.getVar(expr.id)}")
 
             case n.Int():
                 self.emit(f"mov rax, {expr.value}")
@@ -202,10 +199,10 @@ class CodeGen:
             self.emitstack(f"pop {need[i]}")
 
         if self.isaligned:
-            self.emit(f"call {c.name.name}")
+            self.emit(f"call {c.id.id}")
         else:
             self.emitstack("sub rsp, 8")  # şimdi hizalı
-            self.emit(f"call {c.name.name}")
+            self.emit(f"call {c.id.id}")
             self.emitstack("add rsp, 8")
 
     @staticmethod
