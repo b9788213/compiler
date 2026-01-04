@@ -58,28 +58,29 @@ def get_ast(node, indent=0, markers=None):
 
     # Alt düğümleri (children) topla
     children = []
-    if isinstance(node, Program):
-        children.extend(node.funcs)
-    elif isinstance(node, Func):
-        children.extend(node.body.code)
-    elif isinstance(node, (BinOp, Comp)):
-        children.append(node.left)
-        children.append(node.right)
-    elif isinstance(node, Assign):
-        children.append(node.val)
-    elif isinstance(node, Call):
-        children.extend(node.args)
-    elif isinstance(node, (Neg, Ret)):
-        children.append(node.val)
-    elif isinstance(node, While):
-        children.append(node.cond)
-        children.extend(node.body.code)
-    elif isinstance(node, CondStruct):
-        children.extend(node.ifs)
-        children.extend(node.elsebody.code) if node.elsebody else None
-    elif isinstance(node, If):
-        children.append(node.cond)
-        children.extend(node.body.code)
+    match node:
+        case Program():
+            children.extend(node.funcs)
+        case Func():
+            children.extend(node.body.code)
+        case BinOp(), Comp():
+            children.append(node.left)
+            children.append(node.right)
+        case Assign():
+            children.append(node.val)
+        case Call():
+            children.extend(node.args)
+        case Neg(), Ret():
+            children.append(node.val)
+        case While():
+            children.append(node.cond)
+            children.extend(node.body.code)
+        case CondStruct():
+            children.extend(node.ifs)
+            children.extend(node.elsebody.code) if node.elsebody else None
+        case If():
+            children.append(node.cond)
+            children.extend(node.body.code)
 
     # Çocukları recursive olarak işle
     for i, child in enumerate(children):
