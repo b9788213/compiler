@@ -30,8 +30,7 @@ def addStatic(name: str):
 
 
 def addStatics(names: list):
-    for name in names:
-        addStatics(name)
+    addStatics([name for name in names])
 
 
 def setStatic(name: str, val: str):
