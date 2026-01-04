@@ -138,10 +138,8 @@ def _lex(code: str) -> Iterator[Token]:
                 continue
 
         if kind == MISMATCH:
-            raise RuntimeError(
-                f"Hata: {val!r} geçersiz karakter "
-                f"(Satır {line_num}, Sütun {column})"
-            )
+            raise RuntimeError(f"geçersiz karakter: {val!r}"
+                               f"(Satır {line_num}, Sütun {column})")
 
         if kind == SKIP:  # Normal boşlukları atla
             continue
