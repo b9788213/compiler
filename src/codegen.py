@@ -77,10 +77,10 @@ class CodeGen:
         for stmt in b.code:
             match stmt:
                 case n.Asm():
-                    self.emit(stmt.value)
+                    self.emit(stmt.val)
 
                 case n.Assign():
-                    self.gen_expr(stmt.value)
+                    self.gen_expr(stmt.val)
                     self.emit(f"mov {t.getStatic(stmt.id.id) if t.instatics(stmt.id.id) else t.getVar(stmt.id.id)}, rax")
 
                 case n.Call():
@@ -119,7 +119,7 @@ class CodeGen:
                     self.emit(f".{endlab}:")
 
                 case n.Ret():
-                    self.gen_expr(stmt.value)
+                    self.gen_expr(stmt.val)
                     self.emit("jmp .exit")
                     break  # gereksiz kısımları üretme
 
@@ -132,18 +132,18 @@ class CodeGen:
                 self.emit(f"mov rax, {t.getStatic(expr.id) if t.instatics(expr.id) else t.getVar(expr.id)}")
 
             case n.Int():
-                self.emit(f"mov rax, {expr.value}")
+                self.emit(f"mov rax, {expr.val}")
 
             case n.Float():
                 raise NotImplementedError("Not implemented float")
 
             case n.String():
                 label = self.getlabel()
-                self.strings[label] = expr.value
+                self.strings[label] = expr.val
                 self.emit(f"lea rax, {label}")
 
             case n.Neg():
-                self.gen_expr(expr.value)
+                self.gen_expr(expr.val)
                 self.emit("neg rax")
 
             case n.BinOp():

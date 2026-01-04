@@ -9,23 +9,23 @@ class Id:
 
 @dataclass
 class Int:
-    value: int
+    val: int
 
 
 @dataclass
 class Float:
-    value: float
+    val: float
 
 
 @dataclass
 class String:
-    value: str
+    val: str
 
 
 @dataclass
 class Assign:
     id: Id
-    value: Any
+    val: Any
 
 
 @dataclass
@@ -37,7 +37,7 @@ class BinOp:
 
 @dataclass
 class Neg:
-    value: Any
+    val: Any
 
 
 @dataclass
@@ -55,7 +55,7 @@ class Call:
 
 @dataclass
 class Ret:
-    value: Any
+    val: Any
 
 
 @dataclass
@@ -72,7 +72,7 @@ class Func:
 
 @dataclass
 class Asm:
-    value: str
+    val: str
 
 
 @dataclass

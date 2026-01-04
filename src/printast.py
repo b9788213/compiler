@@ -48,9 +48,9 @@ def get_ast(node, indent=0, markers=None):
             case While(): return "While"
             case CondStruct(): return "CondStruct"
             case If(): return "If"
-            case Int(): return f"Int({n.value})"
-            case Float(): return f"Float({n.value})"
-            case String(): return f"String({repr(n.value)})"
+            case Int(): return f"Int({n.val})"
+            case Float(): return f"Float({n.val})"
+            case String(): return f"String({repr(n.val)})"
             case Id(): return f"Id({n.id})"
         return f"Unknown({type(n).__name__})"
 
@@ -66,11 +66,11 @@ def get_ast(node, indent=0, markers=None):
         children.append(node.left)
         children.append(node.right)
     elif isinstance(node, Assign):
-        children.append(node.value)
+        children.append(node.val)
     elif isinstance(node, Call):
         children.extend(node.args)
     elif isinstance(node, (Neg, Ret)):
-        children.append(node.value)
+        children.append(node.val)
     elif isinstance(node, While):
         children.append(node.cond)
         children.extend(node.body.code)
