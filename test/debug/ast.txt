@@ -1,4 +1,4 @@
 Program
 └── Func(Id(id='main'), args=[])
     └── Assign(Id(id='s'))
-        └── String('merhan\nba')
+        └── String('merhaba')

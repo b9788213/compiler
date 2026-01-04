@@ -1,2 +1,2 @@
 fn main():
-    s = "merhan\nba"
+    s = "merhaba"

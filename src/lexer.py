@@ -146,7 +146,8 @@ def _lex(code: str) -> Iterator[Token]:
 
         if kind == STR:  # tırnakları at, escapeleri çöz
             val = (
-                val[1:-1]
+                val.replace(f"\n{" " * indent_level}", "\n")
+                [1:-1]
                 .encode("utf-8")
                 .decode("unicode_escape")
                 .encode("latin-1")
