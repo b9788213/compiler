@@ -33,24 +33,24 @@ from constants import (
     DIV,
     NL,
     MOD,
-    EOF, INDENT, DEDENT
+    EOF,
+    INDENT,
+    DEDENT,
 )
 
 
 class Token(NamedTuple):
     type: str
-    value: str
+    val: str
     line: int
     column: int
 
     def __str__(self):
-        return (
-            f"{self.type}, {self.value},"
-            f"" f" at line {self.line}, column {self.column}"
-        )
+        return (f"{self.type}, {self.val},"
+                f" at line {self.line}, column {self.column}")
 
 
-token_specification = (
+TOKEN_SPEC = (
     (STR, r'"(?:\\.|[^"\\])*"'),
     (ASM, r"\basm\b"),
     (FN, r"\bfn\b"),
@@ -86,7 +86,7 @@ token_specification = (
     ("MISMATCH", r"."),
 )
 
-tok_regex = "|".join("(?P<%s>%s)" % pair for pair in token_specification)
+REGEX = "|".join("(?P<%s>%s)" % pair for pair in TOKEN_SPEC)
 
 
 def lex(code: str) -> list[Token]:
@@ -101,7 +101,7 @@ def _lex(code: str) -> Iterator[Token]:
     indent_stack = [0]
     at_line_start = True
 
-    for mo in re.finditer(tok_regex, code):
+    for mo in re.finditer(REGEX, code):
         kind = mo.lastgroup
         val = mo.group()
         column = mo.start() - line_start + 1

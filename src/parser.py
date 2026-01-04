@@ -52,7 +52,7 @@ class Parser:
         t = self.pop()
         if t.type != s:
             raise SyntaxError(f"Expected {s}, but got ({t}).")
-        return t.value
+        return t.val
 
     def check(self, s) -> bool:
         return self.peek().type == s
@@ -109,7 +109,7 @@ class Parser:
             asms = [self.expect(STR)]
 
             while self.peek().type == STR:
-                asms.append(self.pop().value)
+                asms.append(self.pop().val)
 
             self.expect(ASM)
             return n.Asm("\n".join(asms))
@@ -128,7 +128,7 @@ class Parser:
             return n.While(self.compare(), self.getbody())
 
         if self.check(ID):
-            name = self.pop().value
+            name = self.pop().val
 
             # Call
             if self.match(LPAR):
@@ -186,16 +186,16 @@ class Parser:
             return n.Neg(self.factor())
 
         if self.check(INT):
-            return n.Int(int(self.pop().value))
+            return n.Int(int(self.pop().val))
 
         if self.check(FLOAT):
-            return n.Float(float(self.pop().value))
+            return n.Float(float(self.pop().val))
 
         if self.check(STR):
-            return n.String(self.pop().value)
+            return n.String(self.pop().val)
 
         if self.check(ID):
-            name = self.pop().value
+            name = self.pop().val
             return self.parse_call(name) if self.match(LPAR) else n.Id(name)
 
         self.error()
