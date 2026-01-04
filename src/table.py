@@ -18,14 +18,16 @@ scope: Func = None
 statics: list[Var] = []
 
 
+def instatics(name: str) -> bool:
+    return name in (static.name for static in statics)
+
+
 def getStatic(name: str):
     for v in statics:
         if v.name == name:
             return f"[{v.address}]"
     raise RuntimeError(f"cannot find static variable: {name}")
 
-def getstatics():
-    return (static.name for static in statics)
 
 def addStatic(name: str):
     statics.append(Var(name))
