@@ -34,7 +34,8 @@ def addStatic(name: str):
 
 
 def addStatics(names: list):
-    addStatics([name for name in names])
+    for name in names:
+        addStatic(name)
 
 
 def setStatic(name: str, val: str):
