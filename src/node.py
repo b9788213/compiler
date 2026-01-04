@@ -2,97 +2,97 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
-@dataclass()
+@dataclass
 class Id:
     id: str
 
 
-@dataclass()
+@dataclass
 class Int:
     value: int
 
 
-@dataclass()
+@dataclass
 class Float:
     value: float
 
 
-@dataclass()
+@dataclass
 class String:
     value: str
 
 
-@dataclass()
+@dataclass
 class Assign:
     id: Id
     value: Any
 
 
-@dataclass()
+@dataclass
 class BinOp:
     op: str
     left: Any
     right: Any
 
 
-@dataclass()
+@dataclass
 class Neg:
     value: Any
 
 
-@dataclass()
+@dataclass
 class Comp:
     op: str
     left: Any
     right: Any
 
 
-@dataclass()
+@dataclass
 class Call:
     id: Id
     args: list
 
 
-@dataclass()
+@dataclass
 class Ret:
     value: Any
 
 
-@dataclass()
+@dataclass
 class Body:
     code: list = field(default_factory=list)
 
 
-@dataclass()
+@dataclass
 class Func:
     id: Id
     args: list[str] = field(default_factory=list)
     body: Body = field(default_factory=Body)
 
 
-@dataclass()
+@dataclass
 class Asm:
     value: str
 
 
-@dataclass()
+@dataclass
 class If:
     cond: Comp
     body: Body = field(default_factory=Body)
 
 
-@dataclass()
+@dataclass
 class CondStruct:
     ifs: list[If]
     elsebody: Body | None
 
 
-@dataclass()
+@dataclass
 class While:
     cond: Comp
     body: Body
 
 
-@dataclass()
+@dataclass
 class Program:
     funcs: list[Func] = field(default_factory=list)
