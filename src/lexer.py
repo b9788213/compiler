@@ -118,7 +118,7 @@ def lex(code: str) -> list[Token]:
                     # Eğer satır boşsa, bu tokenı geç ve satır başına devam et
                     continue
 
-                # Girinti miktarını hesapla (sadece SKIP ise değeri al, değilse 0)
+                # Girinti miktarını hesapla
                 indent_level = len(val) if kind == SKIP else 0
 
                 if indent_level > indent_stack[-1]:
