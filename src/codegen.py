@@ -31,7 +31,12 @@ class CodeGen:
         self.emit("bits 64")
         self.emit("default rel")
         self.emit("section .text")
-        self.emit("global main")
+        self.emit("global _start")
+        self.emit("_start:")
+        self.emit("call main")
+        self.emit("mov rax, rdi")
+        self.emit("mov rax, 60")
+        self.emit("syscall")
 
         for f in self.p.funcs:
             self.gen_func(f)
@@ -65,13 +70,8 @@ class CodeGen:
 
         self.emit("xor rax, rax")  # return yoksa 0 döndür
         self.emit(".exit:")
-        if f.id.id == "main":
-            self.emit("mov rdi, rax")
-            self.emit("mov rax, 60")
-            self.emit("syscall")
-        else:
-            self.emit("leave")
-            self.emit("ret")
+        self.emit("leave")
+        self.emit("ret")
 
     def gen_body(self, b: n.Body):
         for stmt in b.code:

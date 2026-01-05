@@ -1,4 +1,26 @@
 Program
+├── Func(Id(id='atoi'), args=['s'])
+│   └── Asm
+├── Func(Id(id='itoa'), args=['i'])
+│   └── Asm
+├── Func(Id(id='factorial'), args=['i'])
+│   ├── CondStruct
+│   │   └── If
+│   │       ├── Id(i)
+│   │       └── Ret
+│   └── Ret
+├── Func(Id(id='random'), args=['max'])
+│   └── Asm
+├── Func(Id(id='alloc'), args=['size'])
+│   └── Asm
+├── Func(Id(id='free'), args=['ptr'])
+│   └── Asm
+├── Func(Id(id='print'), args=['s'])
+│   └── Asm
+├── Func(Id(id='input'), args=[])
+│   └── Asm
+├── Func(Id(id='len'), args=['s'])
+│   └── Asm
 └── Func(Id(id='main'), args=[])
-    └── Assign(Id(id='s'))
-        └── String('merhaba')
+    └── Call(Id(id='print'))
+        └── String('merhaba\n')
