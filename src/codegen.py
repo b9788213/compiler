@@ -28,15 +28,17 @@ class CodeGen:
         for s in t.statics:  # staticleri kaydet
             t.setStatic(s.name, self.getlabel())
 
-        self.emit("bits 64")
-        self.emit("default rel")
-        self.emit("section .text")
-        self.emit("global _start")
-        self.emit("_start:")
-        self.emit("call main")
-        self.emit("mov rax, rdi")
-        self.emit("mov rax, 60")
-        self.emit("syscall")
+        self.emit("""
+        bits 64
+        default rel
+        section .text
+        global _start
+        _start:
+        call main
+        mov rdi, rax
+        mov rax, 60
+        syscall
+        """)
 
         for f in self.p.funcs:
             self.gen_func(f)
