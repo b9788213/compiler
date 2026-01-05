@@ -83,7 +83,11 @@ class CodeGen:
 
                 case n.Assign():
                     self.gen_expr(stmt.val)
-                    self.emit(f"mov {t.getStatic(stmt.id.id) if t.instatics(stmt.id.id) else t.getVar(stmt.id.id)}, rax")
+
+                    if t.instatics(stmt.id.id):
+                        self.emit(f"mov {t.getStatic(stmt.id.id)}, rax")
+                    else:
+                        self.emit(f"mov {t.getVar(stmt.id.id)}, rax")
 
                 case n.Call():
                     self.call(stmt)
@@ -131,7 +135,10 @@ class CodeGen:
                 self.call(expr)
 
             case n.Id():
-                self.emit(f"mov rax, {t.getStatic(expr.id) if t.instatics(expr.id) else t.getVar(expr.id)}")
+                if t.instatics(expr.id):
+                    self.emit(f"mov rax, {t.getStatic(expr.id)}")
+                else:
+                    self.emit(f"mov rax, {t.getVar(expr.id)}")
 
             case n.Int():
                 self.emit(f"mov rax, {expr.val}")
