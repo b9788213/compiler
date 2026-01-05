@@ -241,7 +241,6 @@ class Parser:
     def handle_import(self, impname: str):
         parent, file = get_import(self.name, impname)
 
-        tokens = lex(file)
-        ast = Parser(parent, tokens).parse()
+        ast = Parser(parent, lex(file)).parse()
 
         self.p.funcs.extend(ast.funcs)

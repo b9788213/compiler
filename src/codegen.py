@@ -22,7 +22,7 @@ class CodeGen:
 
     def getlabel(self):
         self.rand += 1
-        return f"label_{self.rand}"
+        return f"_l{self.rand}"
 
     def gen(self):
         for s in t.statics:  # staticleri kaydet
@@ -65,7 +65,7 @@ class CodeGen:
 
         self.emit("xor rax, rax")  # return yoksa 0 döndür
         self.emit(".exit:")
-        if f.id == "main":
+        if f.id.id == "main":
             self.emit("mov rdi, rax")
             self.emit("mov rax, 60")
             self.emit("syscall")
