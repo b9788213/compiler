@@ -19,8 +19,7 @@ from node import (
 
 
 def get_ast(node, indent=0, markers=None):
-    if markers is None:
-        markers = []
+    markers = [] if markers is None else markers
 
     lines = []
 
@@ -28,7 +27,7 @@ def get_ast(node, indent=0, markers=None):
     if indent > 0:
         prefix = ""
         for i in range(indent - 1):
-                prefix += "│   " if markers[i] else "    "
+            prefix += "│   " if markers[i] else "    "
         prefix += "└── " if not markers[indent - 1] else "├── "
     else:
         prefix = ""
